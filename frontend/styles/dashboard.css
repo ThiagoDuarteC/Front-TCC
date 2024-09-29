@@ -1,0 +1,259 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+*{
+    margin: 0;
+    border: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', arial;
+}
+
+html{
+    background-color: #E3EAF2;
+}
+
+main{
+    display: flex;
+    column-gap: 4vw;
+    background-color: #E3EAF2;
+}
+
+/* Estilo da sidebar */
+.side-bar {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    border-radius: 49px;
+    width: 8vw; /* Fixar a largura */
+    height: 95vh;
+    padding: 15px;
+    margin-left: 1vw; /* Margem consistente */
+    margin-top: 3vh;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.192);
+    position: fixed; /* Fixar a posição da sidebar */
+    top: 0;
+    left: 0;
+}
+
+/* Estilo dos ícones (botões) */
+.side-bar img {
+    width: 4vw;
+    cursor: pointer;
+    transition: transform 0.2s; /* Transição suave */
+}
+
+/* Adiciona um efeito de hover */
+.side-bar img:hover {
+    transform: scale(1.1); /* Aumenta o tamanho ao passar o mouse */
+}
+
+.dashboard{
+    display: flex;
+    flex-direction: column;
+    row-gap: 5vh;
+    margin-left: 10vw; /* Adicionar margem para compensar a sidebar fixa */
+}
+
+.dashboard-header{
+    width: calc(100vw - 10vw); /* Ajustar largura para compensar a sidebar */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 7vh;
+}
+
+.perfil-wrapper{
+    margin-right: 5vw;
+    font-size: 1.4rem;
+    font-weight: 600;
+}
+
+.dashboard-header img{
+    width: 3.5vw;
+    cursor: pointer;
+}
+
+.dashboard-header h1 { /*Dashboard*/
+    width: 280px;
+    height: 27px;
+    flex-shrink: 0;
+    color: #000; 
+    font-family: 'Montserrat', sans-serif; 
+    font-size: 46px; 
+    font-style: normal; 
+    font-weight: 600; 
+    line-height: normal; 
+    margin-left: 2vw;
+}
+
+.saldos-content{
+    display: flex;
+    column-gap: 4vw;
+    width: calc(100vw - 10vw); /* Ajustar largura */
+    margin-left: 2vw;
+}
+
+.valores-card{
+    width: 25vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    border: 1px solid #0d12ad70;
+    border-radius: 33px;
+    box-shadow: 0 4px 3px -2px #0d12ad70;
+    background-color: #dae8f7;
+}
+
+.valores-card h1,span{
+    font-size: 1.4rem;
+    font-weight: 600;
+}
+
+.valores-card h1{
+    color: #100DAB;
+}
+
+.valores-card img{
+    width: 5vw;
+    height: 10vh;
+}
+
+.categorias-planejamentos{
+    display: flex;
+    column-gap: 5vw;
+    margin-left: 2vw;
+}
+
+.categorias{
+    width: 45,2vw;
+    display: flex;
+    flex-direction: column;
+    row-gap: 2vh;
+}
+
+.categorias h2 {
+    display: flex;
+    width: 319px;
+    height: 25px;
+    flex-direction: column;
+    justify-content: flex-end;
+    margin-left: 17vh;
+    flex-shrink: 0;
+    color: #000;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+
+.despesas-categorias{
+    width:39vw;
+    padding: 10px 0px;
+    row-gap: 0.5rem;
+    background-color: #dae8f7;
+    border: 1px solid #0d12ad70;
+    border-radius: 33px;
+    box-shadow: 0 4px 3px -2px #0d12ad70;
+    display: flex;
+    flex-direction: column;
+    align-self: flex-end;
+}
+
+.despesas-categorias h3{
+    align-self: center;
+    font-size: 1.5rem;
+    color: #100DAB;
+}
+
+.despesa{
+    display: flex;
+    justify-content: space-between;
+    align-self: center;
+    height: fit-content;
+    width: 80%;
+    display: flex;
+    padding: 2px 20px;
+    border: 2px solid #0D13AD;
+    border-radius: 46px;
+}
+
+.planejamentos{
+    width: 45,2vw;
+    display: flex;
+    flex-direction: column;
+    row-gap: 2vh;
+}
+
+.planejamentos h2{
+    display: flex;
+    width: 319px;
+    height: 25px;
+    flex-direction: column;
+    justify-content: flex-end;
+    margin-left: 17vh;
+    flex-shrink: 0;
+    color: #000;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.metas-planejamentos{
+    width:39vw;
+    padding: 10px 0;
+    row-gap: 0.5rem;
+    background-color: #dae8f7;
+    border: 1px solid #0d12ad70;
+    border-radius: 33px;
+    box-shadow: 0 4px 3px -2px #0d12ad70;
+    display: flex;
+    flex-direction: column;
+    align-self: flex-end;
+    overflow: auto;
+}
+
+.metas-planejamentos h3{
+    align-self: center;
+    font-size: 1.5rem;
+    color: #100DAB;
+} 
+
+.meta{
+    display: flex;
+    justify-content: space-between;
+    align-self: center;
+    height: fit-content;
+    width: 80%;
+    display: flex;
+    padding: 2px 20px;
+    border: 2px solid #0D13AD;
+    border-radius: 46px;
+}
+
+.perfil-info {
+    display: flex;
+    align-items: center;
+    margin-left: 0; /* Remove qualquer margem à esquerda */
+    padding-left: 69vw; /* Adiciona um espaçamento à esquerda */
+    margin-top: -40px;
+}
+
+.perfil-img {
+    width: 70px;  /* Ajuste o tamanho do ícone, se necessário */
+    height: 70px;
+    border-radius: 50%;
+    cursor: pointer;
+    margin-left: 8px; /* Espaçamento entre o ícone e o nome */
+}
+
+#nomeUsuarioDisplay {
+    margin-left: 10px; /* Espaçamento entre o nome e o ícone */
+}

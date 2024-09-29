@@ -1,0 +1,177 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root {
+    --font-corpo: 'Montserrat', arial;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--font-corpo);
+}
+
+body {
+    background-color: #DDEBF8;
+    overflow: hidden;
+}
+
+.logo {
+    position: relative;
+    height: 50px;
+    background-color: #0D13AD;
+    padding: 30px;
+}
+
+.logo > img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100px;
+    height: auto;
+}
+
+.container-cadas {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+}
+
+.img-box {
+    width: 50%;
+    height: 100%;
+    background-color: #DDEBF8;
+    padding: 20px;
+    padding-bottom: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.img-box .main-img {
+    max-width: 100%;
+    height: auto;
+}
+
+.content-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    height: 100%;
+}
+
+.content-box .form-box {
+    width: 50%; 
+}
+
+.content-box .form-box h2 {
+    color: #0c0f5e;
+    font-weight: 600;
+    font-size: 2em;
+    text-transform: uppercase;
+    padding-bottom: 5px;
+    text-align: center;
+}
+
+.line {
+    display: block;
+    width: 230px;
+    height: 2px;
+    background-color: #0D13AD;
+    margin: auto;
+    margin-bottom: 30px;
+}
+
+.content-box .form-box .input-box {
+    margin-bottom: 20px;
+}
+
+.content-box .form-box .input-box input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px;
+    outline: none;
+    font-weight: 400;
+    border: none;
+    font-size: 17px;
+    color: #32324f;
+    background-color: #ecf2f7;
+    border-radius: 5px;
+}
+
+.content-box .form-box .input-box span {
+    font-size: 16px;
+    margin-bottom: 5px;
+    display: inline-block;
+    color: #32324f;
+    font-weight: 400;
+}
+
+.content-box .form-box .input-box input::placeholder {
+    color: #a9adb6;
+}
+
+.content-box .form-box .input-box input[type=submit] {
+    display: block;
+    background: #0D13AD;
+    color: #fff;
+    outline: none;
+    border: none;
+    border-radius: 40px;
+    font-weight: 500;
+    cursor: pointer;
+    font-size: 20px;
+    width: 200px;
+    margin: auto;
+    transition: 0.3s;
+}
+
+.content-box .form-box .input-box input[type=submit]:hover {
+    background: #2329ec;
+}
+
+.content-box .form-box .input-box p {
+    color: #32324f;
+    text-align: center;
+}
+
+.content-box .form-box .input-box p a {
+    color: #2329ec;
+    text-decoration: none;
+}
+
+.content-box .form-box .input-box p a:hover {
+    color: #0D13AD;
+    text-decoration: underline;
+}
+
+@media (max-width: 868px) {
+    .container-cadas .img-box {
+        display: none;
+    }
+    .container-cadas .content-box {
+        width: 100%;
+    }
+    .container-cadas .content-box .form-box {
+        width: 100%;
+        padding: 40px;
+        background: #DDEBF8;
+        margin: 50px;
+    } 
+    .container-cadas .content-box .form-box h3 {
+        margin: 30px 0 10px;
+    } 
+}
+
+@media (max-width: 500px) {
+    .container-cadas .content-box .form-box .remember {
+        flex-wrap: wrap;
+    }
+    .container-cadas .content-box .form-box .remember a {
+        margin-top: 20px;
+    }
+}

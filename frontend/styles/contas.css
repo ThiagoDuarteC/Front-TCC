@@ -1,0 +1,206 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+*{
+    margin: 0;
+    border: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', arial;
+}
+
+html{
+    background-color: #E3EAF2;
+}
+
+main{
+    display: flex;
+    column-gap: 4vw;
+    background-color: #E3EAF2;
+}
+
+/* Estilo da sidebar */
+.side-bar {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    border-radius: 49px;
+    width: 8vw; /* Fixar a largura */
+    height: 95vh;
+    padding: 15px;
+    margin-left: 1vw; /* Margem consistente */
+    margin-top: 3vh;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.192);
+    position: fixed; /* Fixar a posição da sidebar */
+    top: 0;
+    left: 0;
+}
+
+
+/* Estilo dos ícones (botões) */
+.side-bar img {
+    width: 4vw;
+    cursor: pointer;
+    transition: transform 0.2s; /* Transição suave */
+}
+
+/* Adiciona um efeito de hover */
+.side-bar img:hover {
+    transform: scale(1.1); /* Aumenta o tamanho ao passar o mouse */
+}
+
+.contas{
+    display: flex;
+    flex-direction: column;
+    row-gap: 5vh;
+    margin-left: 10vw; /* Adicionar margem para compensar a sidebar fixa */
+    overflow-x: hidden;
+}
+
+.contas-header{
+    width: calc(100vw - 10vw); /* Ajustar largura para compensar a sidebar */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 7vh;
+}
+
+.perfil-wrapper{
+    margin-right: 5vw;
+    font-size: 1.4rem;
+    font-weight: 600;
+}
+
+.contas-header img{
+    width: 3.5vw;
+    cursor: pointer;
+}
+
+.contas-header h1{
+    width: 280px;
+    height: 27px;
+    flex-shrink: 0;
+    color: #000; 
+    font-family: 'Montserrat', sans-serif; 
+    font-size: 46px; 
+    font-style: normal; 
+    font-weight: 600; 
+    line-height: normal;
+    margin-left: 2vw;
+}
+
+#nomeUsuarioDisplay {
+    margin-left: 10px; /* Espaçamento entre o nome e o ícone */
+}
+
+.contas-adicionar-saldo{
+    margin-left: 2vw;
+    display: flex;
+    column-gap: 5vw;
+}
+
+.adicionar-conta{   
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 20vw;
+    padding: 10px 20px;
+    background-color: #dae8f7;
+    border: 1px solid #0d12ad70;
+    border-radius: 30px;
+    box-shadow: 0 4px 3px -2px #0d12ad70;
+    cursor: pointer;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #0d13ad;
+}
+
+.adicionar-conta img{
+    width: 2vw;
+}
+
+.saldo-total{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 25vw;
+    padding: 10px 15px;
+    background-color: #dae8f7;
+    border: 1px solid #0d12ad70;
+    border-radius: 30px;
+    box-shadow: 0 4px 3px -2px #0d12ad70;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #0d13ad;
+}
+
+.saldo{
+    color: #349308e5;
+}
+
+.cards{
+    display: flex;
+    flex-wrap: wrap;
+    padding-bottom: 2vh;
+}
+
+.conta{
+    margin-left: 2vw;
+    margin-top: 2vh;
+    width: 18vw;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    row-gap: 2vh;
+    background-color: #dae8f7;
+    border: 1px solid #0d12ad70;
+    border-radius: 30px;
+    box-shadow: 0 4px 3px -2px #0d12ad70;
+    cursor: pointer;
+}
+
+.conta-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 16vw;
+}
+
+.conta-header span{
+    font-size: 1.75rem;
+    font-weight: 500;
+}
+
+.conta-header img{
+    width: 0.3vw;
+    height: 2.3vh;
+}
+
+.conta-body{
+    display: flex;
+    align-items: center;
+    column-gap: 0.75vw;
+}
+
+.conta-body img{
+    width: 2vw;
+}
+
+.conta-body span{
+    font-size: 1.25rem;
+    font-weight: 500;
+}
+
+.conta-footer{
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #349308e5;
+}
+
+
+
+
+

@@ -1,0 +1,230 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+    margin: 0;
+    border: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', Arial;
+}
+
+html{
+    background-color: #E3EAF2; /* Cor de fundo consistente */
+    width: 100%;
+    height: 100%;
+}
+
+main {
+    display: flex;
+    column-gap: 4vw;
+    background-color: #E3EAF2; /* Cor de fundo consistente */
+}
+
+/* Estilo da sidebar */
+.side-bar {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    border-radius: 49px;
+    width: 8vw; /* Fixar a largura */
+    height: 95vh;
+    padding: 15px;
+    margin-left: 1vw; /* Margem consistente */
+    margin-top: 3vh;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.192);
+    position: fixed; /* Fixar a posição da sidebar */
+    top: 0;
+    left: 0;
+}
+
+
+/* Estilo dos ícones (botões) */
+.side-bar img {
+    width: 4vw;
+    cursor: pointer;
+    transition: transform 0.2s; /* Transição suave */
+}
+
+/* Adiciona um efeito de hover */
+.side-bar img:hover {
+    transform: scale(1.1); /* Aumenta o tamanho ao passar o mouse */
+}
+
+.planejamento{
+    display: flex;
+    flex-direction: column;
+    row-gap:5vh;
+    margin-left: 10vw; /* Adicionar margem para compensar a sidebar fixa */
+}
+
+
+.planejamento-header {
+    width: calc(100vw - 10vw); /* Ajustar largura para compensar a sidebar */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 7vh;
+}
+
+.perfil-wrapper{
+    margin-right: 5vw;
+    font-size: 1.4rem;
+    font-weight: 600;
+}
+
+.planejamento-header img {
+    width: 3.5vw;
+    cursor: pointer;
+}
+
+.planejamento-header h1 {
+    width: 280px;
+    height: 27px;
+    flex-shrink: 0;
+    color: #000; 
+    font-family: 'Montserrat', sans-serif; 
+    font-size: 46px; 
+    font-style: normal; 
+    font-weight: 600; 
+    line-height: normal; 
+    margin-left: 2vw;
+}
+
+#nomeUsuarioDisplay {
+    margin-left: 10px; /* Espaçamento entre o nome e o ícone */
+}
+
+.filtro{
+    margin-left: 2vw;
+    display: flex;
+    align-items: center;
+    column-gap: 1.5vw;
+}
+
+.filtro span{
+    font-size: 1.4rem;
+    font-weight: 500;
+}
+
+.filtro-data{
+    padding: 8px 15px;
+    border-radius: 10px;
+    background-color: #f7fbff;
+}
+
+.filtro button{
+    padding: 8px 15px;
+    width: 7vw;
+    border-radius: 10px;
+    background-color: #E3EAF2;
+    border: 1px solid #0d12ad70;
+    border-radius: 33px;
+    box-shadow: 0 4px 3px -2px #0d12ad70;
+    font-weight: 500;
+}
+
+.metas{
+    display: flex;
+    column-gap: 2vw;
+}
+
+.metas-lista{
+    overflow-y: scroll;
+    width: 55vw;
+    height: 63vh;
+    margin-left: 2vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 2vh;
+    background-color: #dae8f7;
+    border: 1px solid #0d12ad70;
+    border-radius: 30px;
+    box-shadow: 0 4px 3px -2px #0d12ad70;
+}
+
+.item-lista{
+    width: 40vw;
+    padding: 2px 10px;
+    padding-right: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 3px solid #0d12adfd;
+    border-radius: 45px;
+    font-size: 1.563rem;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.item-lista:first-child{
+    margin-top: 3vh;
+}
+
+.item-lista:last-child{
+    margin-bottom: 3vh;
+}
+
+.nome-meta span{
+    color: #0d13ad;
+}
+
+.valor-meta{
+    color: #349308e5;
+}
+::-webkit-scrollbar {
+    width: 12px; /* Largura da barra vertical */
+    height: 12px; /* Altura da barra horizontal */
+}
+
+.botao-adicionar{
+    width: 4vw;
+    cursor: pointer;
+    position: absolute;
+    bottom: 10vh;
+    left: 62vw;
+}
+
+.valores{
+    width: 30vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 5vh;
+}
+
+
+.receita, .expectativa{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color:#dae8f7;
+    border: 1px solid #0d12ad70;
+    border-radius: 30px;
+    box-shadow: 0 4px 3px -2px #0d12ad70;
+    width: 25vw;
+    padding: 20px;
+    font-size: 1.563rem;
+    font-weight: 500;
+}
+
+.receita-header-valor, .expectativa-header-valor{
+    display: flex;
+    flex-direction: column;
+    row-gap: 1vh;
+}
+
+.receita-header, .expectativa-header{
+    color:#0d13ad; ;
+}
+
+.receita-valor, .expectativa-valor{
+    color: #349308e5;
+}
+
+.receitas, .expectativa img{
+    width: 4vw;
+}
