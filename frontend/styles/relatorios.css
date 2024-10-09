@@ -28,23 +28,30 @@ main {
     justify-content: space-between;
     align-items: center;
     background-color: white;
-    border-radius: 49px;
-    width: 8vw; /* Fixar a largura */
+    border-radius: 50px;
+    width: 7vw;
     height: 95vh;
     padding: 15px;
-    margin-left: 1vw; /* Margem consistente */
+    margin-left: 1vw;
     margin-top: 3vh;
     box-shadow: 2px 0 10px rgba(0, 0, 0, 0.192);
-    position: fixed; /* Fixar a posição da sidebar */
-    top: 0;
+    position: fixed;
+    top: -10px;
     left: 0;
+    row-gap: 0.1vh; /* Ajuste aqui o valor para o espaço entre os ícones */
 }
 
-/* Estilo dos ícones (botões) */
 .side-bar img {
-    width: 4vw;
+    width: 3.3vw;
     cursor: pointer;
-    transition: transform 0.2s; /* Transição suave */
+    transition: transform 0.2s;
+    margin-bottom: 0; /* Remova a margem inferior, se necessário */
+}
+.mais-icone img {
+    width: 70px; /* Ajuste a largura conforme necessário */
+    height: auto; /* Mantém a proporção */
+    cursor: pointer; /* Muda o cursor para indicar que é clicável */
+    top: -15px;
 }
 
 /* Adiciona um efeito de hover */

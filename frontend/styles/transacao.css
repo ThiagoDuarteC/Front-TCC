@@ -1,4 +1,4 @@
-@charset "UTF-8";
+@charset "UTF-8"; 
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
 * {
@@ -6,19 +6,20 @@
     border: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Montserrat', arial;
+    font-family: 'Montserrat', Arial;
 }
 
 html {
-    background-color: #E3EAF2;
+    background-color: #E3EAF2; /* Cor de fundo consistente */
 }
 
 main {
     display: flex;
     column-gap: 4vw;
-    background-color: #E3EAF2;
+    background-color: #E3EAF2; /* Cor de fundo consistente */
 }
 
+/* Estilo da sidebar */
 .side-bar {
     display: flex;
     flex-direction: column;
@@ -45,52 +46,73 @@ main {
     margin-bottom: 0; /* Remova a margem inferior, se necessário */
 }
 
-
-.side-bar img:hover {
-    transform: scale(1.1);
+.mais-icone img {
+    width: 70px; /* Ajuste a largura conforme necessário */
+    height: auto; /* Mantém a proporção */
+    cursor: pointer; /* Muda o cursor para indicar que é clicável */
+    top: -15px;
 }
 
-.dashboard {
+/* Adiciona um efeito de hover */
+.side-bar img:hover {
+    transform: scale(1.1); /* Aumenta o tamanho ao passar o mouse */
+}
+
+/* Estilo para a seção de transações */
+.transacao {
     display: flex;
     flex-direction: column;
-    margin-left: 10vw;
+    position: relative;
 }
 
-.dashboard-header {
-    width: calc(100vw - 10vw);
+.transacao-header {
+    width: calc(100vw - 10vw); /* Ajustar largura para compensar a sidebar */
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 7vh;
+    margin-top: 7vh; /* Ajuste esse valor se necessário */
+    margin-left: 10vw;
+
 }
 
-.perfil-wrapper{
-    display: flex;
+.perfil-wrapper {
     margin-right: 5vw;
     font-size: 1.4rem;
     font-weight: 600;
 }
 
-
-.dashboard-header img {
+.transacao-header img {
     width: 3.5vw;
     cursor: pointer;
 }
 
-.dashboard-content {
+.transacao-content {
     margin-top: 30px; /* ou outro valor que esteja aqui */
     padding-top: -20px; /* ajuste conforme necessário */
 }
 
-.dashboard-header h1 {
+.transacao-header h1 {
     width: 280px;
     height: 27px;
     flex-shrink: 0;
-    color: #000;
-    font-size: 35px;
-    font-weight: 600;
-    margin-left: 2vw;
+    color: #000; 
+    font-family: 'Montserrat', sans-serif; 
+    font-size: 35px; 
+    font-style: normal; 
+    font-weight: 600; 
+    line-height: normal;
+    margin-left: 2vw; /* Ajuste se necessário */
 }
+
+#nomeUsuarioDisplay {
+    margin-left: 10px; /* Espaçamento entre o nome e o ícone */
+}
+
+.transacao-container {
+    display: flex;
+    justify-content: flex-start; /* Isso posiciona o conteúdo mais para cima */
+}
+
 
 .saldos-content {
     display: flex;
@@ -98,6 +120,18 @@ main {
     width: calc(100vw - 10vw);
     margin-left: 2vw;
 }
+/* Exemplo de ajustes de responsividade */
+@media (max-width: 768px) {
+    .valores-card {
+        flex-direction: column; /* Permite empilhar elementos verticalmente */
+        align-items: flex-start; /* Alinha o conteúdo à esquerda */
+    }
+
+    .dashboard-header {
+        margin-top: 3vh; /* Diminui o espaço superior em telas pequenas */
+    }
+}
+
 
 .valores-card {
     width: 25vw;
@@ -212,112 +246,4 @@ main {
         flex-direction: column;
         align-items: flex-start;
     }
-}
-
-#nomeUsuarioDisplay {
-    margin-left: 10px; /* Espaçamento entre o nome e o ícone */
-}
-.mais-icone img {
-    width: 70px; /* Ajuste a largura conforme necessário */
-    height: auto; /* Mantém a proporção */
-    cursor: pointer; /* Muda o cursor para indicar que é clicável */
-    top: -15px;
-}
- /* Estilo do calendário */
- .calendario {
-    background-color: white;
-    border-radius: 35px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 15px;
-    width: 280px;
-    position: absolute;
-    top: 20%;
-    left: 50%;
-    transform: translateX(-50%);
-    display: none; /* Inicialmente oculto */
-}
-
-.calendario h3 {
-    text-align: center;
-    color: #100DAB;
-    left: 10px;
-}
-
-.seletor-ano {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.seta {
-    cursor: pointer;
-    margin: 0 20px;
-    color: #100DAB;
-    font-size: 20px;
-}
-
-.mes {
-    display: inline-block;
-    width: 20%;
-    text-align: center;
-    padding: 15px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.mes:hover {
-    background-color: #f0f0f0;
-}
-
-.selected {
-    background-color: #100DAB;
-}
-
-.btn {
-    width: 100%;
-    border-radius: 35px;
-}
-
-#btnCancelar {
-    background-color: transparent;
-    color: #6930c3;
-    border: 1px solid #100DAB;
-    margin-right: 20px;
-}
-
-#btnMesAtual {
-    background-color: #100DAB;
-    color: white;
-}
-
-.campo-mes-ano {
-    background-color: transparent; /* Fundo transparente */
-    border: 1px solid #100DAB; /* Borda cinza */
-    border-radius: 60px; /* Bordas arredondadas */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 6px;
-    text-align: center;
-    margin-bottom: 10px;
-    width: 185px; /* largura do campo */
-    position: relative;
-    top: -70px;
-    left: 45%; /* centraliza */
-    transform: translateX(-50%); /* centraliza */
-    color: black; /* cor do texto (preto) */
-}
-.opcao {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-}
-
-.opcao img {
-    width: 30px; /* Ajuste o tamanho conforme necessário */
-    height: auto; /* Mantém a proporção da imagem */
-    margin-right: 10px; /* Espaçamento entre a imagem e o texto */
-}
-
-.dashboard-container {
-    display: flex;
-    justify-content: flex-start; /* Isso posiciona o conteúdo mais para cima */
 }

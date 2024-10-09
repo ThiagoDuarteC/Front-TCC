@@ -17,11 +17,19 @@
             <div class="gestan-icone">
                 <img src="img/gestan-icone.png" alt="ìcone Gestan">
             </div>
+            <div class="mais-icone">
+                <a href="#" data-bs-toggle="modal" data-bs-target="#addModal">
+                    <img src="img/mais.png" alt="Ícone Mais">
+                </a>
+            </div>
             <div class="inicio-icone">
                 <a href="dashboard.html"><img src="img/inicio-icone.png" class="inicio-icone"></a>
             </div>
             <div class="contas-icone">
                 <a href="contas.html"><img src="img/contas-icone.png" ></a>
+            </div>
+            <div class="transacao-icone">
+                <a href="transacao.html"><img src="img/transação.png" alt="Ícone transações"></a>
             </div>
             <div class="planejamento-icone">
                 <a href="planejamento.html"><img src="img/planejamento-icone azul.png"></a>
@@ -29,9 +37,7 @@
             <div class="relatorios-icone pagina-atual">
                 <a href="relatorios.html"><img src="img/relatorios-icone.png"></a>
             </div>
-            <div class="config-icone">
-                <img src="img/config-icone.png">
-            </div>
+    
         </div>
         
         <div class="planejamento">
@@ -220,5 +226,27 @@
             }
         });
     </script>
+    <!-- Modal para Adicionar Despesa ou Receita -->
+<div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addModalLabel">Adicionar</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center">
+                <button type="button" class="btn btn-light" id="btnDespesa">
+                    <img src="img/despesa.png" alt="Despesa" style="width: 50px;"><br>
+                    Despesa
+                </button>
+                <button type="button" class="btn btn-light" id="btnReceita">
+                    <img src="img/receita.png" alt="Receita" style="width: 50px;"><br>
+                    Receita
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
 </body>
 </html>
