@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/historico-transacoes.css">
+    <link rel="shortcut icon" href="img/gestan-icone.png" type="image/x-icon">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <title>Histórico de Transações</title>
+</head>
+<body>
+    <main>
+        <!--Início do conteúdo da side bar-->
+        <div class="side-bar">
+            <div class="gestan-icone">
+                <img src="img/gestan-icone.png" alt="ícone Gestan">
+            </div>
+            <div class="mais-icone">
+                <a href="#" data-bs-toggle="modal" data-bs-target="#addModal">
+                    <img src="img/mais.png" alt="Ícone Mais">
+                </a>
+            </div>
+            <div class="inicio-icone">
+                <a href="dashboard.html"><img src="img/inicio-icone.png" alt="" class="inicio-icone"></a>
+            </div>
+            <div class="contas-icone">
+                <a href="contas.html"><img src="img/contas-icone.png" alt=""></a>
+            </div>
+            <div class="transacao-icone">
+                <a href="historico-transacoes.html"><img src="img/transaçãoazul.png" alt="Ícone transações"></a>
+            </div>
+            <div class="planejamento-icone">
+                <a href="planejamento.html"><img src="img/planejamento-icone.png" alt=""></a>
+            </div>
+            <div class="relatorios-icone">
+                <a href="relatorios.html"><img src="img/relatorios-icone.png" alt="Relatórios"></a>
+            </div>
+        </div>
+        <!--Fim do conteúdo da side bar-->
+
+        <!--Início do conteúdo da parte das transações, título da página, imagem e nome de usuário etc-->
+        <div class="transacoes-conteudo">
+            <header>
+                <h1>Transações</h1>
+                <div class="perfil-wrapper">
+                    <img src="img/perfil.png" alt="Perfil" class="perfil-img" data-bs-toggle="modal" data-bs-target="#perfilModal">
+                    <span id="nomeUsuarioDisplay">Usuário</span>
+                </div>
+            </header>
+
+            <div class="filtros">
+                <select class="filtro-dropdown">
+                    <option value="">Todas</option>
+                    <option value="">Receitas</option>
+                    <option value="">Despesas</option>
+                </select>
+                <div class="campo-mes-ano" id="campoMesAno">
+                    Selecione o Mês
+                </div>
+                <!--O calendário a seguir a princípio está invisível até que um botão seja apertado-->
+                <div class="calendario" id="calendarioModal">
+                    <div class="seletor-ano">
+                        <span id="anoAnterior" class="seta">&lt;</span>
+                        <span id="anoSelecionado">2024</span>
+                        <span id="anoProximo" class="seta">&gt;</span>
+                    </div>
+                    <div class="meses-grid">
+                        <div class="mes" data-mes="Janeiro">JAN</div>
+                        <div class="mes" data-mes="Fevereiro">FEV</div>
+                        <div class="mes" data-mes="Março">MAR</div>
+                        <div class="mes" data-mes="Abril">ABR</div>
+                        <div class="mes" data-mes="Maio">MAI</div>
+                        <div class="mes" data-mes="Junho">JUN</div>
+                        <div class="mes" data-mes="Julho">JUL</div>
+                        <div class="mes" data-mes="Agosto">AGO</div>
+                        <div class="mes" data-mes="Setembro">SET</div>
+                        <div class="mes" data-mes="Outubro">OUT</div>
+                        <div class="mes" data-mes="Novembro">NOV</div>
+                        <div class="mes" data-mes="Dezembro">DEZ</div>
+                    </div>
+                    <div class="d-flex justify-content-around mt-3">
+                        <button class="btn" id="btnCancelar">Cancelar</button>
+                        <button class="btn" id="btnResetar">Resetar</button>
+                        <button class="btn" id="btnMesAtual">Mês Atual</button>                        
+                    </div>
+                </div>
+            </div>
+
+            <div class="tabela-transacoes">
+                <table id="data-table">
+                    <thead>
+                        <tr>
+                            <th>Tipo</th>
+                            <th>Categoria</th>
+                            <th>Data</th>
+                            <th>Conta</th>
+                            <th>Valor</th>
+                        </tr>
+                    </thead>
+    
+                    <tbody id="table-body">
+                        <tr>
+                            <td>Despesa</td>
+                            <td>Mercado</td>
+                            <td>07/10/2024</td>
+                            <td>Bradesco</td>
+                            <td>R$ 100,00</td>
+                        </tr>
+                        <tr>
+                            <td>Receita</td>
+                            <td>Pix</td>
+                            <td>09/10/2024</td>
+                            <td>Bradesco</td>
+                            <td>R$ 200,00</td>
+                        </tr>
+                        <tr>
+                            <td>Receita</td>
+                            <td>Pix</td>
+                            <td>09/10/2024</td>
+                            <td>Bradesco</td>
+                            <td>R$ 200,00</td>
+                        </tr>
+                        <tr>
+                            <td>Receita</td>
+                            <td>Pix</td>
+                            <td>09/10/2024</td>
+                            <td>Bradesco</td>
+                            <td>R$ 200,00</td>
+                        </tr>
+                        <tr>
+                            <td>Receita</td>
+                            <td>Pix</td>
+                            <td>09/10/2024</td>
+                            <td>Bradesco</td>
+                            <td>R$ 200,00</td>
+                        </tr>                          
+                    </tbody>
+                </table>
+                <div class="paginacao">
+                    <button onclick="prevPage()"> <  </button>
+                    <span id="numero-pagina">1</span> de <span id="total-paginas">1</span>
+                    <button onclick="nextPage()"> > </button>
+                </div>
+            </div>
+        </div>
+        <!--Fim do conteúdo da parte das transações, título da página, imagem e nome de usuário etc-->
+    </main>
+
+        <!-- Início do Modal para Alterar Perfil -->
+        <div class="modal fade" id="perfilModal" tabindex="-1" aria-labelledby="perfilModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="perfilModalLabel">Alterar Perfil</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="perfilForm">
+                            <div class="mb-3">
+                                <label for="nomeUsuario" class="form-label">Alterar Nome:</label>
+                                <input type="text" class="form-control" id="nomeUsuario" placeholder="Novo nome do usuário">
+                            </div>
+                            <div class="mb-3">
+                                <label for="fotoPerfil" class="form-label">Alterar Foto de Perfil:</label>
+                                <input type="file" class="form-control" id="fotoPerfil" accept="image/*">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                        <button type="button" class="btn btn-primary" id="salvarAlteracoes">Salvar Alterações</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Fim do Modal para Alterar Perfil -->
+        
+        <script>
+            //Início do código do modal de alterar foto e nome do usuário
+            document.getElementById('salvarAlteracoes').addEventListener('click', function() {
+            // Alterar o nome do usuário
+            const nomeUsuario = document.getElementById('nomeUsuario').value;
+            document.getElementById('nomeUsuarioDisplay').textContent = nomeUsuario || 'Usuário';
+
+            // Alterar a foto do perfil
+            const fotoPerfilInput = document.getElementById('fotoPerfil');
+            if (fotoPerfilInput.files && fotoPerfilInput.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    document.querySelector('.perfil-img').src = e.target.result;
+                };
+                reader.readAsDataURL(fotoPerfilInput.files[0]);
+            }
+
+            // Fechar o modal
+            var perfilModalEl = document.querySelector('#perfilModal');
+            var perfilModal = bootstrap.Modal.getInstance(perfilModalEl);
+            if (perfilModal) {
+                perfilModal.hide();
+            } else {
+                new bootstrap.Modal(perfilModalEl).hide();
+            }
+        });
+        //Fim do código do modal de alterar foto e nome do usuário
+
+        //Início do código do modal do filtro de mês e ano
+        let dataAtual = new Date();
+            let anoAtual = dataAtual.getFullYear();
+            let mesAtual = dataAtual.toLocaleString('pt-BR', { month: 'long' });
+
+            // Função para abrir o modal do calendário
+            $('#campoMesAno').click(function() {
+                $('#calendarioModal').toggle();
+            });
+
+            // Exibir o ano atual no modal
+            $('#anoSelecionado').text(anoAtual);
+
+            // Ao clicar no botão "Mês Atual", redefine o mês e ano atuais
+            $('#btnMesAtual').click(function() {
+                mesAtual = dataAtual.toLocaleString('pt-BR', { month: 'long' });
+                anoAtual = dataAtual.getFullYear();
+                $('#campoMesAno').text(`${mesAtual.charAt(0).toUpperCase() + mesAtual.slice(1)} ${anoAtual}`);
+                $('#calendarioModal').hide();
+                $('#anoSelecionado').text(anoAtual);
+            });
+
+            // Ao clicar em um mês
+            $('.mes').click(function() {
+                let mesSelecionado = $(this).data('mes');
+                $('#campoMesAno').text(`${mesSelecionado} ${anoAtual}`);
+                $('#calendarioModal').hide();
+            });
+
+            // Navegação de anos
+            $('#anoAnterior').click(function() {
+                anoAtual--;
+                $('#anoSelecionado').text(anoAtual);
+            });
+
+            $('#anoProximo').click(function() {
+                anoAtual++;
+                $('#anoSelecionado').text(anoAtual);
+            });
+
+            //Botão Resetar
+            $('#btnResetar').click(function() {
+            // Redefinir o campoMesAno para o texto "Selecione o Mês"
+            $('#campoMesAno').text("Selecione o Mês")
+            $('#calendarioModal').fadeOut();
+        });
+
+            // Botão Cancelar
+            $('#btnCancelar').click(function() {
+                $('#calendarioModal').fadeOut();
+            });
+        //Fim do código do modal do filtro de mês e ano
+
+        //Início do código para adicionar paginação à tabela de transações
+        const rowsPerPage = 5;  // Define o número de linhas por página
+        let currentPage = 1;
+
+        function renderTable() {
+            const tableBody = document.getElementById("table-body");
+            const rows = Array.from(tableBody.getElementsByTagName("tr"));
+            const totalRows = rows.length;
+            const totalPages = Math.ceil(totalRows / rowsPerPage);  // Calcula o total de páginas
+            const start = (currentPage - 1) * rowsPerPage;
+            const end = start + rowsPerPage;
+            
+            rows.forEach((row, index) => {
+                row.style.display = (index >= start && index < end) ? "" : "none";
+            });
+    
+            // Atualiza o número da página atual e o total de páginas
+            document.getElementById("numero-pagina").innerText = currentPage;
+            document.getElementById("total-paginas").innerText = totalPages;
+        }
+
+        function nextPage() {
+            const tableBody = document.getElementById("table-body");
+            const totalRows = tableBody.getElementsByTagName("tr").length;
+            const totalPages = Math.ceil(totalRows / rowsPerPage);
+    
+            if (currentPage < totalPages) {
+                currentPage++;
+                renderTable();
+            }
+        }
+
+        function prevPage() {
+            if (currentPage > 1) {
+                currentPage--;
+                renderTable();
+            }
+        }
+        // Renderiza a tabela pela primeira vez
+        renderTable();
+        //fim do código para adicionar paginação à tabela de transações
+    </script>
+</body>
+</html>

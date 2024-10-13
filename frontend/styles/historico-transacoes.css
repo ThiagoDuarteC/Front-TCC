@@ -1,0 +1,286 @@
+@charset "UTF-8"; 
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+    margin: 0;
+    border: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', Arial;
+}
+
+html {
+    background-color: #E3EAF2; /* Cor de fundo consistente */
+}
+
+main {
+    display: flex;
+    column-gap: 4vw;
+    background-color: #E3EAF2; /* Cor de fundo consistente */
+}
+
+/* Estilo da sidebar */
+.side-bar {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    border-radius: 50px;
+    width: 7vw;
+    height: 95vh;
+    padding: 15px;
+    margin-left: 1vw;
+    margin-top: 3vh;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.192);
+    position: fixed;
+    top: -10px;
+    left: 0;
+    row-gap: 0.1vh; /* Ajuste aqui o valor para o espaço entre os ícones */
+}
+
+.side-bar img {
+    width: 3.3vw;
+    cursor: pointer;
+    transition: transform 0.2s;
+    margin-bottom: 0; /* Remova a margem inferior, se necessário */
+}
+
+.mais-icone img {
+    width: 70px; /* Ajuste a largura conforme necessário */
+    height: auto; /* Mantém a proporção */
+    cursor: pointer; /* Muda o cursor para indicar que é clicável */
+    top: -15px;
+}
+
+/* Adiciona um efeito de hover */
+.side-bar img:hover {
+    transform: scale(1.1); /* Aumenta o tamanho ao passar o mouse */
+}
+
+.transacoes-conteudo{
+    display: flex;
+    flex-direction: column;
+    row-gap: 7vh;
+    margin-left: 10vw;
+    margin-top: 5rem;
+}
+
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90vw;
+}
+
+header h1{
+    flex-shrink: 0;
+    color: #000;
+    font-size: 2.188rem;
+    font-weight: 600;
+    margin-left: 2vw;
+}
+
+header img{
+    width: 3.5vw;
+    cursor: pointer;
+}
+
+.perfil-wrapper{
+    margin-right: 5vw;
+    font-size: 1.4rem;
+    font-weight: 600;
+}
+
+.filtros{
+    display: flex;
+    column-gap: 7vw;
+}
+
+.filtros select{
+    display: flex;
+    background-color: #dae8f7;
+    padding: 10px 20px;
+    border: 1px solid #0d12ad70;
+    border-radius: 33px;
+    box-shadow: 0 4px 3px -2px #0d12ad70;
+    font-size: 1.3rem;
+    color: #100DAB;
+    font-weight: 700;
+    justify-content: center;
+    text-align: center;
+    height: 50px;
+    width: 180px;
+    margin-left: 25vw;
+    cursor: pointer;
+}
+
+.filtros option{
+    color: #100DAB;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.campo-mes-ano{
+    background-color: #dae8f7;
+    border: 1px solid #0d12ad70;
+    border-radius: 33px;
+    box-shadow: 0 4px 3px -2px #0d12ad70;
+    font-size: 1.3rem;
+    padding: 10px;
+    text-align: center;
+    color: #100DAB;
+    font-weight: 700;
+    width: 15vw;
+    cursor: pointer;
+}
+
+.calendario{
+    position: absolute;
+    right: 30vw;
+    background-color: white;
+    border-radius: 35px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    display: none;
+}
+
+.calendario h3 {
+    text-align: center;
+    color: #100DAB;
+}
+
+.seletor-ano {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.seta {
+    cursor: pointer;
+    margin: 0 20px;
+    color: #100DAB;
+    font-size: 20px;
+    font-weight: 800;
+}
+
+#anoSelecionado{
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.meses-grid{
+    display: flex;
+    flex-wrap: wrap;
+    width: 20vw;
+}
+
+.mes {
+    display: inline-block;
+    width: 5vw;
+    text-align: center;
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.mes:hover {
+    background-color: #f0f0f0;
+}
+
+.selected {
+    background-color: #100DAB;
+}
+
+.btn {
+    width: 5vw;
+    border-radius: 35px;
+    font-size: 0.3rem;
+}
+
+#btnCancelar {
+    background-color: transparent;
+    color: #6930c3;
+    border: 1px solid #100DAB;
+    margin-right: 0px;
+}
+
+#btnResetar{
+    background-color: #f00606;
+    color: white;
+}
+
+#btnMesAtual {
+    background-color: #100DAB;
+    color: white;
+}
+
+table{
+    margin-left: 10vw;
+    width: 60vw;
+    padding: 10px;
+    border-radius: 33px;
+    border-collapse: collapse;
+    border: hidden;
+    box-shadow: 0 0 0 2px #0d12ad70;
+    z-index: -1;
+}
+
+thead{
+    background-color: #c7ddf2;
+    font-size: 1.625rem;
+    color: #0D13AD;
+    font-family: 'Montserrat', Arial;
+}
+
+tr{
+    text-align: center;
+}
+
+th{
+    padding: 7px;
+}
+
+td{
+    font-size: 1.5rem;
+    font-weight: 600;
+    padding: 10px;
+}
+
+th, td{
+    border: 1px solid #0d12ad70;
+}
+
+thead tr:first-child th:first-child{
+    border-top-left-radius: 33px;
+}
+
+thead tr:first-child th:last-child{
+    border-top-right-radius: 33px;
+}
+
+tbody tr:last-child{
+    box-shadow: 3px 8px 5px -3px #0d12ad70;
+    border-bottom-left-radius: 33px;
+    border-bottom-right-radius: 33px;
+}
+tbody tr{
+    cursor: pointer;
+}
+
+.paginacao{
+    margin-top: 2vh;
+    position: absolute;
+    left: 50vw;
+    transform: translateX(-50%);
+    color: #0D13AD;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.paginacao button{
+    background-color: #e3eaf2;
+    color: #0D13AD;
+    font-weight: 700;
+    margin: 0 0.8vw;
+}

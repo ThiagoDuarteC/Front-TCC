@@ -47,6 +47,7 @@ main {
     transition: transform 0.2s;
     margin-bottom: 0; /* Remova a margem inferior, se necessário */
 }
+
 .mais-icone img {
     width: 70px; /* Ajuste a largura conforme necessário */
     height: auto; /* Mantém a proporção */
@@ -92,7 +93,7 @@ main {
     flex-shrink: 0;
     color: #000; 
     font-family: 'Montserrat', sans-serif; 
-    font-size: 46px; 
+    font-size: 35px; 
     font-style: normal; 
     font-weight: 600; 
     line-height: normal; 

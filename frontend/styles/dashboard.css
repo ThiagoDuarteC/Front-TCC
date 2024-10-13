@@ -11,6 +11,8 @@
 
 html {
     background-color: #E3EAF2;
+    width: 100%;
+    height: 100%;
 }
 
 main {
@@ -53,6 +55,7 @@ main {
 .dashboard {
     display: flex;
     flex-direction: column;
+    position: relative;
     margin-left: 10vw;
 }
 
@@ -64,8 +67,12 @@ main {
     margin-top: 7vh;
 }
 
+.dashboard-content {
+    margin-top: 30px; /* ou outro valor que esteja aqui */
+    padding-top: -20px; /* ajuste conforme necessário */
+}
+
 .perfil-wrapper{
-    display: flex;
     margin-right: 5vw;
     font-size: 1.4rem;
     font-weight: 600;
@@ -75,11 +82,6 @@ main {
 .dashboard-header img {
     width: 3.5vw;
     cursor: pointer;
-}
-
-.dashboard-content {
-    margin-top: 30px; /* ou outro valor que esteja aqui */
-    padding-top: -20px; /* ajuste conforme necessário */
 }
 
 .dashboard-header h1 {
@@ -97,6 +99,7 @@ main {
     column-gap: 4vw;
     width: calc(100vw - 10vw);
     margin-left: 2vw;
+    margin-top: -55px;
 }
 
 .valores-card {
@@ -118,7 +121,7 @@ main {
 
 .valores-card h1, span {
     font-size: 1.4rem;
-    font-weight: 600;
+    font-weight: 600; 
 }
 
 .valores-card h1 {
@@ -127,7 +130,7 @@ main {
 
 .valores-card img {
     width: 5vw;
-    height: 10vh;
+    height: 5vw;
 }
 
 .categorias-planejamentos {
@@ -136,71 +139,12 @@ main {
     margin-left: 2vw;
 }
 
-.categorias, .planejamentos {
-    width: 45.2vw; /* Corrigido para ponto */
-    display: flex;
-    flex-direction: column;
-    row-gap: 2vh;
-}
-
-.categorias h2, .planejamentos h2 {
-    display: flex;
-    width: 319px;
-    height: 25px;
-    justify-content: flex-end;
-    margin-left: 17vh;
-    flex-shrink: 0;
-    color: #000;
-    font-size: 25px;
-    font-weight: 500;
-}
-
-.despesas-categorias, .metas-planejamentos {
-    width: 39vw;
-    padding: 10px 0px;
-    row-gap: 0.5rem;
-    background-color: #dae8f7;
-    border: 1px solid #0d12ad70;
-    border-radius: 33px;
-    box-shadow: 0 4px 3px -2px #0d12ad70;
-    display: flex;
-    flex-direction: column;
-    align-self: flex-end;
-    overflow: auto;
-}
-
-.despesas-categorias h3, .metas-planejamentos h3 {
-    align-self: center;
-    font-size: 1.5rem;
-    color: #100DAB;
-}
-
-.despesa, .meta {
-    display: flex;
-    justify-content: space-between;
-    align-self: center;
-    width: 80%;
-    padding: 2px 20px;
-    border: 2px solid #0D13AD;
-    border-radius: 46px;
-}
-
 .campo-mes-ano{
     margin-top: 5vh;
 }
 
 /* Responsividade */
 @media (max-width: 768px) {
-    .saldos-content, .categorias-planejamentos {
-        flex-direction: column;
-        row-gap: 2vh;
-    }
-
-    .valores-card, .despesas-categorias, .metas-planejamentos {
-        width: 90%;
-        margin: 0 auto;
-    }
-
     .side-bar {
         width: 60px;
     }
@@ -317,7 +261,70 @@ main {
     margin-right: 10px; /* Espaçamento entre a imagem e o texto */
 }
 
-.dashboard-container {
+.chart-container {
+    width: 550px;
+    height: 320px; 
     display: flex;
-    justify-content: flex-start; /* Isso posiciona o conteúdo mais para cima */
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #0d12ad70;
+    border-radius: 33px;
+    box-shadow: 0 4px 3px -2px #0d12ad70;
+    background-color: #dae8f7;
+    padding: 20px; /* Espaçamento interno */
+    margin-left: 3.6vw;
+    font-size: 16px;
+
 }
+
+.pie-chart-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white; /* Fundo do retângulo da pizza */
+    border-radius: 20px; /* Arredondamento do retângulo da pizza */
+    padding: 20px; /* Espaçamento interno do retângulo */
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2); /* Sombra do retângulo */
+    
+}
+
+.planejamento-container {
+    width: 550px;
+    height: 320px;
+    display: flex;
+    border: 1px solid #0d12ad70;
+    border-radius: 33px;
+    box-shadow: 0 4px 3px -2px #0d12ad70;
+    background-color: #dae8f7;
+    justify-content: center;
+    padding: 20px;
+    margin-top: -23.3vw;
+    margin-left: 54.8vw;
+    font-size: 16px;
+}
+
+.titulo-grafico {
+    font-size: 1.2rem;
+    color: #100DAB;
+    text-align: center;
+    margin-top: -15vw;
+    display: flex;
+    padding: 50px;
+
+}
+/* Estilos para o contêiner do planejamento mensal */
+.planejamento-container {
+    width: 550px;
+    height: 320px; /* Ajuste a altura conforme necessário */
+    display: flex;
+    flex-direction: column; /* Alinha itens verticalmente */
+    border: 1px solid #0d12ad70;
+    border-radius: 33px;
+    box-shadow: 0 4px 3px -2px #0d12ad70;
+    background-color: #dae8f7;
+    padding: 20px; /* Espaçamento interno */
+    margin-top: -23.3vw;
+    margin-left: 54.8vw;
+    font-size: 15px;
+}
+
