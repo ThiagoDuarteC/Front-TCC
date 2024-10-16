@@ -11,6 +11,7 @@
 </head>
 <body>
     <main>
+        <!--Início da Side Bar-->
         <div class="side-bar">
             <div class="gestan-icone">
                 <img src="img/gestan-icone.png" alt="ícone Gestan">
@@ -30,12 +31,13 @@
                 <a href="historico-transacoes.html"><img src="img/transação.png" alt="Ícone transações"></a>
             </div>
             <div class="planejamento-icone">
-                <a href="planejamento.html"><img src="img/planejamento-icone.png" alt="Planejamento"></a>
+                <a href="metas.html"><img src="img/planejamento-icone.png" alt="Planejamento"></a>
             </div>
             <div class="relatorios-icone">
                 <a href="relatorios.html"><img src="img/relatorios-icone.png" alt="Relatórios"></a>
             </div>
         </div>
+        <!--Fim da Side Bar-->
         
         <div class="contas">
             <header class="contas-header">
@@ -75,6 +77,7 @@
         </div>
     </main>
 
+        <!--Aqui começam os modais-->
 
         <!-- Modal para Alterar Perfil -->
         <div class="modal fade" id="perfilModal" tabindex="-1" aria-labelledby="perfilModalLabel" aria-hidden="true">
@@ -109,76 +112,116 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h3 class="modal-title">Adicionar Conta</h3>
+                        <h2 class="modal-title">Adicionar Conta</h2>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
 
                     <div class="modal-body">
                         <div class="mb-3">
-                            <label for="nomeUsuario" class="form-label">Nome da Conta</label>
+                            <label for="nomeConta" class="form-label">Nome da Conta</label>
                             <input type="text" class="form-control" id="nomeConta" placeholder="Nome da Conta">
                         </div>
                         <div class="mb-3">
-                            <label for="valorPlanejamento" class="form-label">Saldo Atual na Conta</label>
-                            <input type="number" class="form-control" id="saldoConta" placeholder="Quantos reais? (Apenas números)">
+                            <label for="saldoConta" class="form-label">Saldo Atual na Conta</label>
+                            <input type="number" class="form-control" id="saldoConta" placeholder="Quantos reais?">
                         </div>
                     </div>
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                        <button type="button" class="btn btn-primary" id="salvarAlteracoes">Adicionar Conta</button>
+                        <button type="button" class="btn btn-primary" id="adicionarConta">Adicionar Conta</button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <script>
-            document.getElementById('salvarAlteracoes').addEventListener('click', function() {
-            // Alterar o nome do usuário
-            const nomeUsuario = document.getElementById('nomeUsuario').value;
-            document.getElementById('nomeUsuarioDisplay').textContent = nomeUsuario || 'Usuário';
-
-            // Alterar a foto do perfil
-            const fotoPerfilInput = document.getElementById('fotoPerfil');
-            if (fotoPerfilInput.files && fotoPerfilInput.files[0]) {
-                const reader = new FileReader();
-                reader.onload = function (e) {
-                    document.querySelector('.perfil-img').src = e.target.result;
-                };
-                reader.readAsDataURL(fotoPerfilInput.files[0]);
-            }
-
-            // Fechar o modal
-            var perfilModalEl = document.querySelector('#perfilModal');
-            var perfilModal = bootstrap.Modal.getInstance(perfilModalEl);
-            if (perfilModal) {
-                perfilModal.hide();
-            } else {
-                new bootstrap.Modal(perfilModalEl).hide();
-            }
-        });
-        </script>
-<!-- Modal para Adicionar Despesa ou Receita -->
-<div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="addModalLabel">Adicionar</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body text-center">
-                <button type="button" class="btn btn-light" id="btnDespesa">
-                    <img src="img/despesa.png" alt="Despesa" style="width: 50px;"><br>
-                    Despesa
-                </button>
-                <button type="button" class="btn btn-light" id="btnReceita">
-                    <img src="img/receita.png" alt="Receita" style="width: 50px;"><br>
-                    Receita
-                </button>
+        <!-- Modal para Adicionar Despesa ou Receita -->
+        <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2 class="modal-title" id="addModalLabel">Adicionar Transação</h2>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="escolha-tipo-transacoes">
+                            <label class="label-despesa">
+                                <input type="radio" name="tipo-transacao" value="despesa" id="btn-despesa" checked>
+                                Despesa
+                            </label>
+                            <label class="label-receita">
+                                <input type="radio" name="tipo-transacao" value="receita" id="btn-receita">
+                                Receita
+                            </label>
+                        </div>
+                        <div class="dados-transacoes">
+                            <label>Valor da Transação</label>
+                            <input type="number" placeholder="Quantos Reais?" class="valor-transacao">
+                            <label>Categoria</label>
+                            <!--Categorias de Despesas-->
+                            <div class="grid-categorias-despesa">
+                                <div class="categoria-opcao">
+                                    <input type="radio" id="alimentacao" name="categoria" value="alimentacao">
+                                    <label for="alimentacao">Alimentação</label>
+                                  </div>
+                                  <div class="categoria-opcao">
+                                    <input type="radio" id="transporte" name="categoria" value="transporte">
+                                    <label for="transporte">Transporte</label>
+                                  </div>
+                                  <div class="categoria-opcao">
+                                    <input type="radio" id="lazer" name="categoria" value="lazer">
+                                    <label for="lazer">Lazer</label>
+                                  </div>
+                                  <div class="categoria-opcao">
+                                    <input type="radio" id="jogos" name="categoria" value="jogos">
+                                    <label for="jogos">Jogos</label>
+                                  </div>   
+                                  <div class="categoria-opcao">
+                                    <input type="radio" id="livros" name="categoria" value="livros">
+                                    <label for="livros">Livros</label>
+                                  </div>   
+                                  <div class="categoria-opcao">
+                                    <input type="radio" id="financiamento" name="categoria" value="financiamento">
+                                    <label for="financiamento">Financiamento</label>
+                                  </div>
+                                  <div class="categoria-opcao">
+                                    <input type="radio" id="salao-de-beleza" name="categoria" value="salao-de-beleza">
+                                    <label for="salao-de-beleza">Salão de Beleza</label>
+                                  </div>  
+                            </div>     
+                            <div class="grid-categorias-receita">
+                                <div class="categoria-opcao">
+                                    <input type="radio" id="salario" name="categoria" value="salario">
+                                    <label for="salario">Salário</label>
+                                </div>
+                                <div class="categoria-opcao">
+                                    <input type="radio" id="pix" name="categoria" value="pix">
+                                    <label for="pix">Pix</label>
+                                </div>
+                                <div class="categoria-opcao">
+                                    <input type="radio" id="renda-extra" name="categoria" value="renda-extra">
+                                    <label for="renda-extra">Renda Extra</label>
+                                </div>
+                            </div>     
+                            <span class="adicionar-categoria">Adicionar Categoria</span>
+                            <input type="text" id="nova-categoria" placeholder="Digite nova categoria" style="display: none;"> <!--Inicialmente invisível-->
+                            <button id="btn-add-categoria" style="display: none;">Adicionar</button> <!--Inicialmente invisível-->
+                            <label>Conta</label>
+                            <div class="grid-conta-selecao">
+                                <div class="conta-opcao">
+                                    <input type="radio" id="bradesco" name="conta" value="bradesco">
+                                    <label for="bradesco">Bradesco</label>
+                                </div>
+                            </div>
+                            <label>Data da Transação</label>
+                            <input type="date" class="data-transacao">
+                            <button class="adicionar-transacao" id="add-transacao">Adicionar Transação</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</div>
 
+        <script src="script/contas.js"></script>
 </body>
 </html>

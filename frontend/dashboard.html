@@ -33,7 +33,7 @@
                 <a href="historico-transacoes.html"><img src="img/transação.png" alt="Ícone transações"></a>
             </div>
             <div class="planejamento-icone">
-                <a href="planejamento.html"><img src="img/planejamento-icone.png" alt="Ícone Planejamento"></a>
+                <a href="metas.html"><img src="img/planejamento-icone.png" alt="Ícone Planejamento"></a>
             </div>
             <div class="relatorios-icone pagina-atual">
                 <a href="relatorios.html"><img src="img/relatorios-icone.png" alt="Ícone Relatórios"></a>
@@ -69,29 +69,88 @@
             </div>
         </div>
 
-        <!-- Modal para Adicionar Conta-->
-        <div id="addConta" class="modal fade">
+        <!-- Modal para Adicionar Despesa ou Receita -->
+        <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h3 class="modal-title">Adicionar Conta</h3>
+                        <h2 class="modal-title" id="addModalLabel">Adicionar Transação</h2>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-
                     <div class="modal-body">
-                        <div class="mb-3">
-                            <label for="nomeUsuario" class="form-label">Nome da Conta</label>
-                            <input type="text" class="form-control" id="nomeConta" placeholder="Nome da Conta">
+                        <div class="escolha-tipo-transacoes">
+                            <label class="label-despesa">
+                                <input type="radio" name="tipo-transacao" value="despesa" id="btn-despesa" checked>
+                                Despesa
+                            </label>
+                            <label class="label-receita">
+                                <input type="radio" name="tipo-transacao" value="receita" id="btn-receita">
+                                Receita
+                            </label>
                         </div>
-                        <div class="mb-3">
-                            <label for="valorPlanejamento" class="form-label">Saldo Atual na Conta</label>
-                            <input type="number" class="form-control" id="saldoConta" placeholder="Quantos reais? (Apenas números)">
+                        <div class="dados-transacoes">
+                            <label>Valor da Transação</label>
+                            <input type="number" placeholder="Quantos Reais?" class="valor-transacao">
+                            <label>Categoria</label>
+                            <!--Categorias de Despesas-->
+                            <div class="grid-categorias-despesa">
+                                <div class="categoria-opcao">
+                                    <input type="radio" id="alimentacao" name="categoria" value="alimentacao">
+                                    <label for="alimentacao">Alimentação</label>
+                                  </div>
+                                  <div class="categoria-opcao">
+                                    <input type="radio" id="transporte" name="categoria" value="transporte">
+                                    <label for="transporte">Transporte</label>
+                                  </div>
+                                  <div class="categoria-opcao">
+                                    <input type="radio" id="lazer" name="categoria" value="lazer">
+                                    <label for="lazer">Lazer</label>
+                                  </div>
+                                  <div class="categoria-opcao">
+                                    <input type="radio" id="jogos" name="categoria" value="jogos">
+                                    <label for="jogos">Jogos</label>
+                                  </div>   
+                                  <div class="categoria-opcao">
+                                    <input type="radio" id="livros" name="categoria" value="livros">
+                                    <label for="livros">Livros</label>
+                                  </div>   
+                                  <div class="categoria-opcao">
+                                    <input type="radio" id="financiamento" name="categoria" value="financiamento">
+                                    <label for="financiamento">Financiamento</label>
+                                  </div>
+                                  <div class="categoria-opcao">
+                                    <input type="radio" id="salao-de-beleza" name="categoria" value="salao-de-beleza">
+                                    <label for="salao-de-beleza">Salão de Beleza</label>
+                                  </div>  
+                            </div>     
+                            <div class="grid-categorias-receita">
+                                <div class="categoria-opcao">
+                                    <input type="radio" id="salario" name="categoria" value="salario">
+                                    <label for="salario">Salário</label>
+                                </div>
+                                <div class="categoria-opcao">
+                                    <input type="radio" id="pix" name="categoria" value="pix">
+                                    <label for="pix">Pix</label>
+                                </div>
+                                <div class="categoria-opcao">
+                                    <input type="radio" id="renda-extra" name="categoria" value="renda-extra">
+                                    <label for="renda-extra">Renda Extra</label>
+                                </div>
+                            </div>     
+                            <span class="adicionar-categoria">Adicionar Categoria</span>
+                            <input type="text" id="nova-categoria" placeholder="Digite nova categoria" style="display: none;"> <!--Inicialmente invisível-->
+                            <button id="btn-add-categoria" style="display: none;">Adicionar</button> <!--Inicialmente invisível-->
+                            <label>Conta</label>
+                            <div class="grid-conta-selecao">
+                                <div class="conta-opcao">
+                                    <input type="radio" id="bradesco" name="conta" value="bradesco">
+                                    <label for="bradesco">Bradesco</label>
+                                </div>
+                            </div>
+                            <label>Data da Transação</label>
+                            <input type="date" class="data-transacao">
+                            <button class="adicionar-transacao" id="add-transacao">Adicionar Transação</button>
                         </div>
-                    </div>
-
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                        <button type="button" class="btn btn-primary" id="salvarAlteracoes">Adicionar Conta</button>
                     </div>
                 </div>
             </div>
@@ -160,167 +219,13 @@
                 </div>
                 <div class="d-flex justify-content-between mt-3">
                     <button class="btn" id="btnCancelar">Cancelar</button>
-                    <button class="btn" id="btnMesAtual">Mês Atual</button>
+                    <button class="btn" id="btnResetar">Resetar</button>
+                    <button class="btn" id="btnMesAtual">Mês Atual</button>    
                 </div>
             </div>
         </div>
     </main>
 
-</html>
-
-
-    <script>
-        $(document).ready(function() {
-            let dataAtual = new Date();
-            let anoAtual = dataAtual.getFullYear();
-            let mesAtual = dataAtual.toLocaleString('pt-BR', { month: 'long' });
-
-            // Função para abrir o modal do calendário
-            $('#campoMesAno').click(function() {
-                $('#calendarioModal').toggle();
-            });
-
-            // Exibir o ano atual no modal
-            $('#anoSelecionado').text(anoAtual);
-
-            // Ao clicar no botão "Mês Atual", redefine o mês e ano atuais
-            $('#btnMesAtual').click(function() {
-                mesAtual = dataAtual.toLocaleString('pt-BR', { month: 'long' }); // Atualiza para o mês atual
-                anoAtual = dataAtual.getFullYear(); // Atualiza para o ano atual
-                $('#campoMesAno').text(`${mesAtual.charAt(0).toUpperCase() + mesAtual.slice(1)} ${anoAtual}`);
-                $('#calendarioModal').hide(); // Fecha o modal após selecionar o mês atual
-                $('#anoSelecionado').text(anoAtual); // Atualiza o ano no modal
-            });
-
-            // Ao clicar em um mês
-            $('.mes').click(function() {
-                let mesSelecionado = $(this).data('mes');
-                $('#campoMesAno').text(`${mesSelecionado} ${anoAtual}`);
-                $('#calendarioModal').hide(); // Fecha o modal após selecionar um mês
-            });
-
-            // Navegação de anos
-            $('#anoAnterior').click(function() {
-                anoAtual--;
-                $('#anoSelecionado').text(anoAtual);
-            });
-
-            $('#anoProximo').click(function() {
-                anoAtual++;
-                $('#anoSelecionado').text(anoAtual);
-            });
-            $('#btnCancelar').click(function() {
-            $('#calendarioModal').fadeOut(); // Fecha o modal com animação
-        });
-        const ctx = document.getElementById('despesaReceitaChart').getContext('2d');
-        const despesaReceitaChart = new Chart(ctx, {
-            type: 'pie', // Tipo de gráfico
-            data: {
-                labels: ['Receita', 'Despesa'], // Rótulos
-                datasets: [{
-                    label: 'Despesa e Receita',
-                    data: [3000, 1500], // Valores em reais
-                    backgroundColor: [
-                        'rgba(75, 192, 192, 0.6)', // Cor da Receita
-                        'rgba(255, 0, 0, 0.6)' // Cor da Despesa (Vermelho)
-                    ],
-                    borderColor: [
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(255, 0, 0, 1)'
-                    ],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        position: 'top',
-                    },
-                    title: {
-                        display: true,
-                        text: 'Despesa e Receita' // Título do gráfico
-                    },
-                    tooltip: {
-                        callbacks: {
-                            label: function(tooltipItem) {
-                                const value = tooltipItem.raw;
-                                return `${tooltipItem.label}: R$ ${value.toLocaleString('pt-BR')}`; // Formatação dos dados em reais
-                            }
-                        }
-                    }
-                }
-            }
-        });
-        const chartCtx = document.getElementById('planejamentoMensalChart').getContext('2d');
-    const planejamentoMensalChart = new Chart(chartCtx, {
-        type: 'bar', // Tipo do gráfico
-        data: {
-            labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
-            datasets: [{
-                label: 'Planejamento Mensal (R$)',
-                data: [1200, 1900, 3000, 2500, 2000, 1500, 4000, 2200, 2800, 3200, 2700, 3500], // Valores em R$
-                backgroundColor: 'rgba(16, 13, 171, 0.6)', // Cor das barras
-                borderColor: 'rgba(16, 13, 171, 1)',
-                borderWidth: 1
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    title: {
-                        display: true,
-                        text: 'Valor (R$)'
-                    }
-                },
-                x: {
-                    title: {
-                        display: true,
-                        text: 'Meses'
-                    }
-                }
-            },
-            responsive: true,
-            plugins: {
-                legend: {
-                    display: true,
-                    position: 'top',
-                },
-                title: {
-                    display: true,
-                    text: 'Gráfico de Planejamento Mensal'
-                }
-            }
-        }
-    });
-    document.getElementById('salvarAlteracoes').addEventListener('click', function() {
-            // Alterar o nome do usuário
-            const nomeUsuario = document.getElementById('nomeUsuario').value;
-            document.getElementById('nomeUsuarioDisplay').textContent = nomeUsuario || 'Usuário';
-
-            // Alterar a foto do perfil
-            const fotoPerfilInput = document.getElementById('fotoPerfil');
-            if (fotoPerfilInput.files && fotoPerfilInput.files[0]) {
-                const reader = new FileReader();
-                reader.onload = function (e) {
-                    document.querySelector('.perfil-img').src = e.target.result;
-                };
-                reader.readAsDataURL(fotoPerfilInput.files[0]);
-            }
-
-            // Fechar o modal
-            var perfilModalEl = document.querySelector('#perfilModal');
-            var perfilModal = bootstrap.Modal.getInstance(perfilModalEl);
-            if (perfilModal) {
-                perfilModal.hide();
-            } else {
-                new bootstrap.Modal(perfilModalEl).hide();
-            }
-        });
-        });
-    </script>
-</script>
     <main>
         <div class="container mt-4">
             <div class="chart-container">
@@ -328,14 +233,13 @@
             </div>
         </div>
     </main>
-<body>
-<div class="chart-container planejamento-container">
+<div class="planejamento-container2">
     <div class="orçamento">
-        <p><strong>Orçamento Total:</strong> R$ 10.000</p>
-        <p><strong>Restam:</strong> R$ 4.500 &nbsp; <strong>Previsto:</strong> R$ 5.500</p>
+        <p><strong>Orçamento Total:</strong> R$ 10.000 &nbsp;<strong>Restam:</strong> R$ 4.500 &nbsp; <strong>Previsto:</strong> R$ 5.500</p>
     </div>
     <canvas id="planejamentoMensalChart"></canvas>
 </div>
 
+<script src="script/dashboard.js"></script>
 </body>
 </html>

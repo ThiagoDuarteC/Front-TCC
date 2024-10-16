@@ -1,13 +1,14 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles/relatorios.css">
+    <link rel="stylesheet" href="styles/metas.css">
     <link rel="shortcut icon" href="img/gestan-icone.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <title>Relatórios</title>
+    <title>Metas</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
@@ -22,65 +23,86 @@
                 </a>
             </div>
             <div class="inicio-icone">
-                <a href="dashboard.html"><img src="img/inicio-icone.png" alt="" class="inicio-icone"></a>
+                <a href="dashboard.html"><img src="img/inicio-icone.png" class="inicio-icone"></a>
             </div>
             <div class="contas-icone">
-                <a href="contas.html"><img src="img/contas-icone.png" alt=""></a>
+                <a href="contas.html"><img src="img/contas-icone.png" ></a>
             </div>
             <div class="transacao-icone">
                 <a href="historico-transacoes.html"><img src="img/transação.png" alt="Ícone transações"></a>
             </div>
             <div class="planejamento-icone">
-                <a href="metas.html"><img src="img/planejamento-icone.png" alt=""></a>
+                <a href="metas.html"><img src="img/planejamento-icone azul.png"></a>
             </div>
             <div class="relatorios-icone pagina-atual">
-                <a href="relatorios.html"><img src="img/relatorios-icone azul.png" alt=""></a>
+                <a href="relatorios.html"><img src="img/relatorios-icone.png"></a>
             </div>
+    
         </div>
-      
-        <div class="relatorios">
-            <header class="relatorios-header">
-                <h1>Relatórios</h1>
+        
+        <div class="planejamento">
+            <header class="planejamento-header">
+                <h1>Metas</h1>
                 <div class="perfil-wrapper">
                     <img src="img/perfil.png" alt="Perfil" class="perfil-img" data-bs-toggle="modal" data-bs-target="#perfilModal">
                     <span id="nomeUsuarioDisplay">Usuário</span>
-                </div>                  
+                </div>  
             </header>
-            
-            <div class="filtros">
-                <select class="filtro-dropdown">
-                    <option value="">Relatórios por categorias</option>
-                    <option value="">Relatórios por metas</option>
-                    <option value="">Relatórios por gastos</option>
-                </select>
-                <div class="filtro-data">
-                    <span class="go-back"></span>
-                    <span>Março</span>
-                    <span class="go-forward">></span>
-                </div>
-            </div>  
-            <div class="grafico-legenda">
-                <div class="grafico">
-                    <img src="img/luna.png" alt="">
-                </div>
-                <div class="legenda">
-                    <div class="legenda-item">
-                        <span class="legenda-icone"></span>
-                        <div class="legenda-texto-valor">
-                            <span class="legenda-texto">Texto da Legenda :</span>
-                            <span class="legenda-valor">R$ 24,00</span>
+
+        <form class="filtro" id="filtro-relativo">
+            <span>De:</span>
+            <input class="filtro-data" id="data-inicial" type="date">
+            <span>Até:</span>
+            <input class="filtro-data" id="data-final" type="date">
+            <button type="submit">Filtrar</button>
+            <div class="botao-adicionar" data-bs-toggle="modal" data-bs-target="#botaoadd">+</div>
+        </form>
+
+        <div class="metas">
+            <div class="metas-lista">
+                <div class="item-lista" data-bs-toggle="modal" data-bs-target="#atualizarItem" >
+                    <div class="nome-icone-meta">
+                        <img src="img/aviao-rosa.png" class="icone-meta">
+                        <div class="gambiarra">
+                            <span class="nome-meta">Férias com Amigos</span>
+                            <span class="valor-adicionado-acumulado">Acumulado: R$ 10.000</span>
                         </div>
                     </div>
-                    <div class="legenda-item">
-                        <span class="legenda-icone"></span>
-                        <div class="legenda-texto-valor">
-                            <span class="legenda-texto">Texto da Legenda :</span>
-                            <span class="legenda-valor">R$ 24,00</span>
+                    <span class="valor-meta">R$ 20.000,00</span>
+                    <div class="barra-divisora"></div>
+                </div>
+                <div class="item-lista" data-bs-toggle="modal" data-bs-target="#atualizarItem" >
+                    <div class="nome-icone-meta">
+                        <img src="img/aviao-rosa.png" class="icone-meta">
+                        <div class="gambiarra">
+                            <span class="nome-meta">Ps5</span>
+                            <span class="valor-adicionado-acumulado">Acumulado: R$ 1.000</span>
                         </div>
                     </div>
+                    <span class="valor-meta">R$ 3.400,00</span>
+                    <div class="barra-divisora"></div>
+                </div>
+            </div>
+
+
+            <div class="valores">
+                <div class="receita">
+                    <div class="receita-header-valor">
+                        <span class="receita-header">Receita ></span>
+                        <span class="receita-valor">R$ 0,00</span>
+                    </div>
+                    <img src="img/positivo.png">
+                </div>
+                <div class="expectativa">
+                    <div class="expectativa-header-valor">
+                        <span class="expectativa-header">Metas ></span>
+                        <span class="expectativa-valor">R$ 0,00</span>
+                    </div>
+                    <img src="img/cofrinho.png">
                 </div>
             </div>
         </div>
+    </div>
     </main>
 
     <!--Aqui começam os modais-->
@@ -96,11 +118,11 @@
                 <div class="modal-body">
                     <form id="perfilForm">
                         <div class="mb-3">
-                            <label for="nomeUsuario" class="form-label">Alterar Nome:</label>
+                            <label for="nomeUsuario" class="form-label">Alterar Nome</label>
                             <input type="text" class="form-control" id="nomeUsuario" placeholder="Novo nome do usuário">
                         </div>
                         <div class="mb-3">
-                            <label for="fotoPerfil" class="form-label">Alterar Foto de Perfil:</label>
+                            <label for="fotoPerfil" class="form-label">Alterar Foto de Perfil</label>
                             <input type="file" class="form-control" id="fotoPerfil" accept="image/*">
                         </div>
                     </form>
@@ -108,6 +130,73 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
                     <button type="button" class="btn btn-primary" id="salvarAlteracoes">Salvar Alterações</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Modal para Adicionar Novo Planejamento-->
+    <div id="botaoadd" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title">Adicionar Meta</h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="nomeMeta" class="form-label">Nome da Meta</label>
+                            <input type="text" class="form-control" id="nomeMeta" placeholder="O que deseja realizar?">
+                        </div>
+                        <div class="mb-3">
+                            <label for="valorMeta" class="form-label">Custo da Meta</label>
+                            <input type="number" class="form-control" id="valorMeta" placeholder="Quanto custará?">
+                        </div>
+                        <div class="mb-3">
+                            <label for="dataMeta" class="form-label">Quando ocorrerá?</label>
+                            <input type="date" class="form-control" id="dataMeta">
+                        </div>
+                    </form>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                    <button type="button" class="btn btn-primary" id="adicionarPlanejamento">Adicionar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Modal para Atualizar o Planejamento-->
+    <div id="atualizarItem" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">Atualizar Meta</h3>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="novoNomeMeta" class="form-label">Alterar Nome da Meta</label>
+                        <input type="text" class="form-control" id="novoNomeMeta" placeholder="Novo nome">
+                    </div>
+                    <div class="mb-3">
+                        <label for="novoValorMeta" class="form-label">Alterar Custo da Meta</label>
+                        <input type="number" class="form-control" id="novoValorMeta" placeholder="Novo Valor">
+                    </div>
+                    <div class="mb-3">
+                        <label for="novaDataMeta" class="form-label">Nova Data</label>
+                        <input type="date" class="form-control" id="novaDataMeta">
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                    <button type="button" class="btn btn-danger" id="excluirMeta">Excluir Meta</button>
+                    <button type="button" class="btn btn-primary" id="salvarMeta">Salvar Alterações</button>
                 </div>
             </div>
         </div>
@@ -200,7 +289,6 @@
         </div>
     </div>
 
-
-    <script src="script/relatorios.js"></script>
+    <script src="script/planejamento.js"></script>
 </body>
 </html>

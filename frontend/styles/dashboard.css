@@ -13,6 +13,7 @@ html {
     background-color: #E3EAF2;
     width: 100%;
     height: 100%;
+    overflow-x: hidden;
 }
 
 main {
@@ -173,18 +174,17 @@ main {
     border-radius: 35px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 15px;
-    width: 280px;
     position: absolute;
     top: 20%;
     left: 50%;
     transform: translateX(-50%);
-    display: none; /* Inicialmente oculto */
+    display: none;
+    z-index: 1; 
 }
 
 .calendario h3 {
     text-align: center;
     color: #100DAB;
-    left: 10px;
 }
 
 .seletor-ano {
@@ -198,13 +198,25 @@ main {
     margin: 0 20px;
     color: #100DAB;
     font-size: 20px;
+    font-weight: 800;
+}
+
+#anoSelecionado{
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.meses-grid{
+    display: flex;
+    flex-wrap: wrap;
+    width: 20vw;
 }
 
 .mes {
     display: inline-block;
-    width: 20%;
+    width: 5vw;
     text-align: center;
-    padding: 15px;
+    padding: 10px;
     cursor: pointer;
     transition: background-color 0.3s;
 }
@@ -218,15 +230,21 @@ main {
 }
 
 .btn {
-    width: 100%;
+    width: 5vw;
     border-radius: 35px;
+    font-size: 0.3rem;
 }
 
 #btnCancelar {
     background-color: transparent;
     color: #6930c3;
     border: 1px solid #100DAB;
-    margin-right: 20px;
+    margin-right: 0px;
+}
+
+#btnResetar{
+    background-color: #f00606;
+    color: white;
 }
 
 #btnMesAtual {
@@ -235,19 +253,21 @@ main {
 }
 
 .campo-mes-ano {
-    background-color: transparent; /* Fundo transparente */
-    border: 1px solid #100DAB; /* Borda cinza */
-    border-radius: 60px; /* Bordas arredondadas */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 6px;
-    text-align: center;
-    margin-bottom: 10px;
-    width: 185px; /* largura do campo */
     position: relative;
     top: -70px;
     left: 45%; /* centraliza */
     transform: translateX(-50%); /* centraliza */
-    color: black; /* cor do texto (preto) */
+    background-color: #dae8f7;
+    border: 1px solid #0d12ad70;
+    border-radius: 33px;
+    box-shadow: 0 4px 3px -2px #0d12ad70;
+    font-size: 1.3rem;
+    padding: 10px;
+    text-align: center;
+    color: #100DAB;
+    font-weight: 700;
+    width: 15vw;
+    cursor: pointer;
 }
 .opcao {
     display: flex;
@@ -259,33 +279,6 @@ main {
     width: 30px; /* Ajuste o tamanho conforme necessário */
     height: auto; /* Mantém a proporção da imagem */
     margin-right: 10px; /* Espaçamento entre a imagem e o texto */
-}
-
-.chart-container {
-    width: 550px;
-    height: 320px; 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 1px solid #0d12ad70;
-    border-radius: 33px;
-    box-shadow: 0 4px 3px -2px #0d12ad70;
-    background-color: #dae8f7;
-    padding: 20px; /* Espaçamento interno */
-    margin-left: 3.6vw;
-    font-size: 16px;
-
-}
-
-.pie-chart-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: white; /* Fundo do retângulo da pizza */
-    border-radius: 20px; /* Arredondamento do retângulo da pizza */
-    padding: 20px; /* Espaçamento interno do retângulo */
-    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2); /* Sombra do retângulo */
-    
 }
 
 .planejamento-container {
@@ -328,3 +321,193 @@ main {
     font-size: 15px;
 }
 
+/*CSS do modal de transações*/
+
+.modal-body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.escolha-tipo-transacoes{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 20vw;
+}
+
+.label-receita, .label-despesa{
+    font-size: 1.5rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.label-receita input, .label-despesa input{
+    cursor: pointer;
+    text-align: center;
+}
+
+.dados-transacoes{
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-top: 2vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.dados-transacoes label{
+    margin-top: 2vh;
+}
+
+.valor-transacao{
+    font-size: 1.3rem;
+    padding: 5px 15px;
+    border: 1px solid #0d12ad70;
+    box-shadow: 0 4px 3px -2px #0d12ad70;
+    border-radius: 20px;
+}
+
+.valor-transacao:focus{
+    outline: none;
+}
+
+.dados-transacoes input{
+    margin-top: 1vh;
+    cursor: pointer;
+}
+
+.categoria-opcao input, .categoria-opcao label{
+    cursor: pointer;
+}
+
+.grid-categorias-despesa label, .grid-categorias-receita label{
+    margin-top: 0;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.grid-categorias-despesa, .grid-categorias-receita{
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 1.5vw;
+    /*background-color: rgba(127, 255, 212, 0.432);*/
+  }
+
+.grid-conta-selecao{
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 1.5vw;
+  }
+
+.grid-conta-selecao label{
+    margin-top: 0;
+    font-size: 1rem;
+    font-weight: 500;
+  }
+
+  .conta-opcao input, .conta-opcao label{
+    cursor: pointer;
+  }
+
+.adicionar-categoria{
+    margin-top: 1.5vh;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+  }
+
+#nova-categoria{
+    font-size: 1.3rem;
+    padding: 5px 15px;
+    border: 1px solid #0d12ad70;
+    box-shadow: 0 4px 3px -2px #0d12ad70;
+    border-radius: 20px;
+  }
+
+#nova-categoria:focus{
+    outline: none;
+}
+
+#btn-add-categoria{
+    margin-top: 1vh;
+    font-size: 1rem;
+    font-weight: 500;
+    padding: 7px;
+    border-radius: 15px;
+    color: white;
+    background-color: #100DAB;
+}
+
+.data-transacao{
+    font-size: 1.3rem;
+    padding: 5px 15px;
+    border: 1px solid #0d12ad70;
+    box-shadow: 0 4px 3px -2px #0d12ad70;
+    border-radius: 20px;
+}
+
+.data-transacao:focus{
+    outline: none;
+}
+
+.adicionar-transacao{
+    margin-top: 3vh;
+    width: 10vw;
+    font-size: 1rem;
+    font-weight: 500;
+    padding: 7px;
+    border-radius: 15px;
+    color: white;
+    background-color: #100DAB;
+}
+
+/*Fim do Modal de Transações*/
+
+.chart-container {
+    width: 41vw;
+    height: 20vw; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #0d12ad70;
+    border-radius: 33px;
+    box-shadow: 0 4px 3px -2px #0d12ad70;
+    background-color: #dae8f7;
+    padding: 20px; 
+    font-size: 16px;
+    position: absolute; 
+    top: 40%; /* Ajuste conforme necessário */
+    left: 12%; /* Fica sempre à esquerda */
+    margin-top: 1%; /* Ajusta o espaçamento superior */
+}
+
+
+.planejamento-container2{
+    width: 41vw;
+    height: 20vw; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #0d12ad70;
+    border-radius: 33px;
+    box-shadow: 0 4px 3px -2px #0d12ad70;
+    background-color: #dae8f7;
+    padding: 30px; 
+    font-size: 16px;
+    position: absolute; 
+    top: 40%; 
+    left: 54%; 
+    margin-top: 1%; 
+}
+
+.pie-chart-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white; /* Fundo do retângulo da pizza */
+    border-radius: 20px; /* Arredondamento do retângulo da pizza */
+    padding: 20px; /* Espaçamento interno do retângulo */
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2); /* Sombra do retângulo */ 
+}
+  
