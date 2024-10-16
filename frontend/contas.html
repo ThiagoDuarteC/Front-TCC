@@ -60,11 +60,11 @@
             </div>
 
             <div class="cards">
-                <div class="conta">
+                <div class="conta" id="contaBradesco"> <!-- Adicione um ID exclusivo aqui -->
                     <div class="conta-header">
-                        <span class="conta-nome">Bradesco</span>
-                        <img src="img/3-pontos.png">
-                    </div>
+                        <span class="conta-nome" id="contaNome">Bradesco</span>
+                        <img src="img/3-pontos.png" alt="Opções" data-bs-toggle="modal" data-bs-target="#editarContaModal" onclick="prepararEdicao('contaBradesco')">
+                    </div>                    
                     <div class="conta-body">
                         <img src="img/carteira.png">
                         <span>Saldo Atual:</span>
@@ -74,6 +74,7 @@
                     </div>
                 </div>
             </div>
+            
         </div>
     </main>
 
@@ -107,29 +108,87 @@
             </div>
         </div>
 
-        <!-- Modal para Adicionar Conta-->
-        <div id="addConta" class="modal fade">
+        <!-- Modal para Adicionar Conta -->
+<div id="addConta" class="modal fade" tabindex="-1" aria-labelledby="addContaLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addContaLabel">Adicionar Conta</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body">
+                <form id="addContaForm">
+                    <div class="mb-3">
+                        <label for="nomeConta" class="form-label">Nome da Conta</label>
+                        <input type="text" class="form-control" id="nomeConta" placeholder="Nome da Conta">
+                    </div>
+                    <div class="mb-3">
+                        <label for="saldoConta" class="form-label">Saldo Atual na Conta</label>
+                        <input type="number" class="form-control" id="saldoConta" placeholder="Quantos reais?">
+                    </div>
+                    <div class="mb-3">
+                        <label for="tipoConta" class="form-label">Tipo de Conta</label>
+                        <select class="form-select" id="tipoConta">
+                            <option value="corrente">Corrente</option>
+                            <option value="poupanca">Poupança</option>
+                            <option value="dinheiro">Dinheiro</option>
+                            <option value="outros">Outros</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="descricao" class="form-label">Descrição (opcional)</label>
+                        <textarea class="form-control" id="descricao" rows="3" placeholder="Adicionar descrição (opcional)"></textarea>
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-primary" id="adicionarConta">Adicionar Conta</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+        <!-- Modal para Editar Conta -->
+        <div class="modal fade" id="editarContaModal" tabindex="-1" aria-labelledby="editarContaModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h2 class="modal-title">Adicionar Conta</h2>
+                        <h5 class="modal-title" id="editarContaModalLabel">Editar Conta</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-
                     <div class="modal-body">
-                        <div class="mb-3">
-                            <label for="nomeConta" class="form-label">Nome da Conta</label>
-                            <input type="text" class="form-control" id="nomeConta" placeholder="Nome da Conta">
-                        </div>
-                        <div class="mb-3">
-                            <label for="saldoConta" class="form-label">Saldo Atual na Conta</label>
-                            <input type="number" class="form-control" id="saldoConta" placeholder="Quantos reais?">
-                        </div>
+                        <form id="editarContaForm">
+                            <div class="mb-3">
+                                <label for="editarNomeConta" class="form-label">Nome do Banco</label>
+                                <input type="text" class="form-control" id="editarNomeConta" placeholder="Nome do Banco" value="Bradesco">
+                            </div>
+                            <div class="mb-3">
+                                <label for="editarSaldoConta" class="form-label">Saldo Atual</label>
+                                <input type="number" class="form-control" id="editarSaldoConta" placeholder="Saldo Atual" value="6535.00">
+                            </div>
+                            <div class="mb-3">
+                                <label for="editarTipoConta" class="form-label">Tipo de Conta</label>
+                                <select class="form-control" id="editarTipoConta">
+                                    <option value="corrente">Corrente</option>
+                                    <option value="poupanca">Poupança</option>
+                                    <option value="dinheiro">Dinheiro</option>
+                                    <option value="outros">Outros</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="editarDescricao" class="form-label">Descrição (opcional)</label>
+                                <textarea class="form-control" id="editarDescricao" rows="3" placeholder="Adicionar descrição (opcional)"></textarea>
+                            </div>
+                        </form>
                     </div>
-
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                        <button type="button" class="btn btn-primary" id="adicionarConta">Adicionar Conta</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-danger" id="excluirConta">Excluir Conta</button> <!-- Botão de Exclusão -->
+                        <button type="button" class="btn btn-primary" id="salvarEdicaoConta">Salvar Alterações</button>
+                        
                     </div>
                 </div>
             </div>

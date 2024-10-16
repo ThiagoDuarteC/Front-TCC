@@ -157,7 +157,7 @@ main{
 
 .conta{
     margin-left: 2vw;
-    margin-top: 2vh;
+    margin-top: -1vw;
     width: 18vw;
     padding: 15px;
     display: flex;
@@ -170,6 +170,17 @@ main{
     box-shadow: 0 4px 3px -2px #0d12ad70;
     cursor: pointer;
 }
+
+.icone-3-pontos {
+    padding: 15px; /* Aumenta a área de clique ao redor do ícone */
+    cursor: pointer; /* Para indicar que é clicável */
+}
+
+.icone-3-pontos img {
+    width: 18px; /* Mantém o tamanho da imagem pequeno */
+    height: auto;
+}
+
 
 .conta-header{
     display: flex;

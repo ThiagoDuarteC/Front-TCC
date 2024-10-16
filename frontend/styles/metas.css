@@ -143,16 +143,16 @@ main {
 }
 
 .botao-adicionar{
-    font-size: 1.5rem;
-    font-weight: 600;
+    font-size: 1.4rem;
+    font-weight: 400;
     padding: 8px 15px;
     text-align: center;
     background-color: #100DAB;
     color: white;
-    width: 130px;
+    width: 220px;
     border-radius: 33px;
     cursor: pointer;
-    margin-left: 3vw;
+    margin-left: 0.,9vw;
 }
 
 .metas{
