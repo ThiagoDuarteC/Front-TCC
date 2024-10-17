@@ -223,3 +223,51 @@ function prevPage() {
 renderTable();
 
 //Fim do código para adicionar paginação à tabela de transações
+
+// Obter elementos do DOM
+const addMetaBtn = document.getElementById("add-meta-btn");
+const modal = document.getElementById("modal");
+const closeModal = document.getElementsByClassName("close")[0];
+const salvarMetaBtn = document.getElementById("salvar-meta-btn");
+const novaMetaInput = document.getElementById("nova-meta");
+const metasList = document.getElementById("metas-list");
+
+// Abrir o modal
+addMetaBtn.onclick = function() {
+    modal.style.display = "block";
+}
+
+// Fechar o modal
+closeModal.onclick = function() {
+    modal.style.display = "none";
+}
+
+// Adicionar nova meta
+salvarMetaBtn.onclick = function() {
+    const novaMeta = novaMetaInput.value.trim();
+    if (novaMeta) {
+        const li = document.createElement("li");
+        li.textContent = novaMeta;
+        
+        const deleteBtn = document.createElement("button");
+        deleteBtn.textContent = "Remover";
+        deleteBtn.className = "delete-btn";
+        deleteBtn.onclick = function() {
+            metasList.removeChild(li);
+        };
+
+        li.appendChild(deleteBtn);
+        metasList.appendChild(li);
+        novaMetaInput.value = ""; // Limpar o campo
+        modal.style.display = "none"; // Fechar o modal
+    } else {
+        alert("Por favor, digite uma meta válida.");
+    }
+}
+
+// Fechar o modal ao clicar fora dele
+window.onclick = function(event) {
+    if (event.target === modal) {
+        modal.style.display = "none";
+    }
+}

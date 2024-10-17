@@ -305,21 +305,6 @@ main {
     padding: 50px;
 
 }
-/* Estilos para o contêiner do planejamento mensal */
-.planejamento-container {
-    width: 550px;
-    height: 320px; /* Ajuste a altura conforme necessário */
-    display: flex;
-    flex-direction: column; /* Alinha itens verticalmente */
-    border: 1px solid #0d12ad70;
-    border-radius: 33px;
-    box-shadow: 0 4px 3px -2px #0d12ad70;
-    background-color: #dae8f7;
-    padding: 20px; /* Espaçamento interno */
-    margin-top: -23.3vw;
-    margin-left: 54.8vw;
-    font-size: 15px;
-}
 
 /*CSS do modal de transações*/
 
@@ -480,6 +465,8 @@ main {
     top: 40%; /* Ajuste conforme necessário */
     left: 12%; /* Fica sempre à esquerda */
     margin-top: 1%; /* Ajusta o espaçamento superior */
+    cursor: pointer; /* Mudar o cursor para o ícone de mão */
+    transition: transform 0.3s ease; /* Transição suave */
 }
 
 
@@ -499,6 +486,8 @@ main {
     top: 40%; 
     left: 54%; 
     margin-top: 1%; 
+    cursor: pointer; /* Mudar o cursor para o ícone de mão */
+    transition: transform 0.3s ease; /* Transição suave */
 }
 
 .pie-chart-wrapper {
@@ -511,3 +500,10 @@ main {
     box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2); /* Sombra do retângulo */ 
 }
   
+.planejamento-container2:hover {
+    transform: scale(1.05); /* Aumenta o tamanho em 10% */
+}
+
+.chart-container:hover{
+    transform: scale(1.05);
+}

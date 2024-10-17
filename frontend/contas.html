@@ -54,23 +54,29 @@
                     <img src="img/adicionar.png">
                 </div>
                 <div class="saldo-total">
-                    <span>Saldo Total ></span>
-                    <span class="saldo">R$ 6535,00</span>
+                    <div class="saldo-total-header">
+                        <h1>Saldo Atual: </h1>
+                        <img src="img/saldo-icone.png" alt="Ícone de Saldo">
+                    </div>
+                    <div class="saldo-valor">
+                        <span id="saldoTotal">R$ 0,00</span> 
+                    </div>
                 </div>
+                
             </div>
 
-            <div class="cards">
-                <div class="conta" id="contaBradesco"> <!-- Adicione um ID exclusivo aqui -->
+            <div class="cards d-flex flex-wrap">
+                <div class="conta" id="contaBanco"> <!-- Adicione um ID exclusivo aqui -->
                     <div class="conta-header">
-                        <span class="conta-nome" id="contaNome">Bradesco</span>
-                        <img src="img/3-pontos.png" alt="Opções" data-bs-toggle="modal" data-bs-target="#editarContaModal" onclick="prepararEdicao('contaBradesco')">
+                        <span class="conta-nome" id="contaNome">Banco</span>
+                        <img src="img/3-pontos.png" alt="Opções" data-bs-toggle="modal" data-bs-target="#editarContaModal" onclick="prepararEdicao('contaBanco')">
                     </div>                    
                     <div class="conta-body">
                         <img src="img/carteira.png">
                         <span>Saldo Atual:</span>
                     </div>
                     <div class="conta-footer">
-                        <span class="saldo-atual">R$ 6535,00</span>
+                        <span class="saldo-atual">R$ 0,00</span>
                     </div>
                 </div>
             </div>
@@ -163,11 +169,11 @@
                         <form id="editarContaForm">
                             <div class="mb-3">
                                 <label for="editarNomeConta" class="form-label">Nome do Banco</label>
-                                <input type="text" class="form-control" id="editarNomeConta" placeholder="Nome do Banco" value="Bradesco">
+                                <input type="text" class="form-control" id="editarNomeConta" placeholder="Nome do Banco">
                             </div>
                             <div class="mb-3">
                                 <label for="editarSaldoConta" class="form-label">Saldo Atual</label>
-                                <input type="number" class="form-control" id="editarSaldoConta" placeholder="Saldo Atual" value="6535.00">
+                                <input type="number" class="form-control" id="editarSaldoConta" placeholder="Saldo Atual">
                             </div>
                             <div class="mb-3">
                                 <label for="editarTipoConta" class="form-label">Tipo de Conta</label>

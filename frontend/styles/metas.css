@@ -245,19 +245,40 @@ main {
 }
 
 
-.receita, .expectativa{
+.receita {
+    overflow-y: scroll;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color:#dae8f7;
+    background-color: #dae8f7;
     border: 1px solid #0d12ad70;
     border-radius: 30px;
     box-shadow: 0 4px 3px -2px #0d12ad70;
-    width: 25vw;
+    width: 25rem; /* Altere para rem */
     padding: 20px;
     font-size: 1.563rem;
     font-weight: 500;
+    margin-top: -31.5vw; /* Altere para rem */
+    margin-left: 120vw; /* Altere para rem */
 }
+.expectativa {
+    overflow-y: scroll;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #dae8f7;
+    border: 1px solid #0d12ad70;
+    border-radius: 30px;
+    box-shadow: 0 4px 3px -2px #0d12ad70;
+    width: 25rem; /* Altere para rem */
+    padding: 20px;
+    font-size: 1.563rem;
+    font-weight: 500;
+    margin-top: -1vw; /* Altere para rem */
+    margin-left: 120vw; /* Altere para rem */
+
+}
+
 
 .receita-header-valor, .expectativa-header-valor{
     display: flex;

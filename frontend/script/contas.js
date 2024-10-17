@@ -125,95 +125,123 @@ window.onload = alternarCategorias;
 
 //Fim do código que alterna entre as categorias de despesa e receita dependendo do que o usuário selecionar
 
-// salvar edição em editar contas
+// Array para armazenar as contas criadas
+let contas = [];
 
-document.getElementById("salvarEdicaoConta").addEventListener("click", function() {
-    // Obtenha os valores do modal
-    const nomeConta = document.getElementById("editarNomeConta").value;
-    const saldoConta = document.getElementById("editarSaldoConta").value;
-    const tipoConta = document.getElementById("editarTipoConta").value;
-    const descricaoConta = document.getElementById("editarDescricao").value;
+// Função para adicionar uma conta
+document.getElementById('adicionarConta').addEventListener('click', function () {
+    const nomeConta = document.getElementById('nomeConta').value;
+    const saldoConta = parseFloat(document.getElementById('saldoConta').value);
+    const tipoConta = document.getElementById('tipoConta').value;
+    const descricao = document.getElementById('descricao').value;
 
-    // Atualize os elementos da página com os novos valores
-    document.getElementById("contaNome").textContent = nomeConta;
-    document.querySelector(".saldo-atual").textContent = `R$ ${parseFloat(saldoConta).toFixed(2)}`;
+    if (nomeConta && !isNaN(saldoConta) && tipoConta) {
+        const novaConta = {
+            id: Date.now(),
+            nome: nomeConta,
+            saldo: saldoConta.toFixed(2),
+            tipo: tipoConta,
+            descricao: descricao
+        };
 
-    // Feche o modal após salvar
-    var modal = bootstrap.Modal.getInstance(document.getElementById('editarContaModal'));
-    modal.hide();
+        contas.push(novaConta);
+        renderContas();
+        document.getElementById('addContaForm').reset();
 
-    // Função para formatar o valor como dinheiro
-    function formatarDinheiro(valor) {
-        return 'R$ ' + valor.toFixed(2).replace('.', ',');
+        // Fecha o modal após salvar a conta
+        const modal = bootstrap.Modal.getInstance(document.getElementById('addConta'));
+        modal.hide();
+    } else {
+        alert('Por favor, preencha todos os campos obrigatórios corretamente.');
     }
-
-    // Exemplo de como atualizar o saldo no modal
-    function atualizarSaldo(saldo) {
-        const saldoElement = document.getElementById('saldoAtual');
-        saldoElement.textContent = 'Saldo Atual: ' + formatarDinheiro(saldo);
-    }
-
-    // Exemplo de uso
-    let saldo = 6535.00; // O saldo pode ser obtido de outra parte do seu código
-    atualizarSaldo(saldo);
-
-    // Chame a função quando precisar abrir o modal ou sempre que o saldo mudar
-
 });
 
-// adicionar contas
-document.getElementById('adicionarConta').addEventListener('click', adicionarNovaConta);
-
-function adicionarNovaConta() {
-    const nomeConta = document.getElementById('nomeConta').value;
-    const saldoConta = document.getElementById('saldoConta').value;
-
-    if (!nomeConta || !saldoConta) {
-        alert('Por favor, preencha todos os campos.');
-        return;
-    }
-
-    const novaConta = document.createElement('div');
-    novaConta.className = 'conta';
-    novaConta.innerHTML = `
-        <div class="conta-header">
-            <span class="conta-nome">${nomeConta}</span>
-            <img src="img/3-pontos.png" alt="Opções" data-bs-toggle="modal" data-bs-target="#editarContaModal">
-        </div>
-        <div class="conta-body">
-            <img src="img/carteira.png">
-            <span>Saldo Atual:</span>
-        </div>
-        <div class="conta-footer">
-            <span class="saldo-atual">R$ ${parseFloat(saldoConta).toFixed(2)}</span>
-        </div>
-    `;
-
+// Função para renderizar os cards de contas
+function renderContas() {
     const cardsContainer = document.querySelector('.cards');
-    cardsContainer.appendChild(novaConta);
-    
-    document.getElementById('addContaForm').reset();
-    const modal = bootstrap.Modal.getInstance(document.getElementById('addConta'));
-    modal.hide();
+    cardsContainer.innerHTML = '';
+
+    contas.forEach((conta) => {
+        const card = document.createElement('div');
+        card.classList.add('conta');
+        card.setAttribute('id', `conta-${conta.id}`);
+
+        card.innerHTML = `
+            <div class="conta-header">
+                <span class="conta-nome">${conta.nome}</span>
+                <img src="img/3-pontos.png" alt="Opções" data-bs-toggle="modal" data-bs-target="#editarContaModal" onclick="prepararEdicao(${conta.id})">
+            </div>
+            <div class="conta-body">
+                <img src="img/carteira.png" alt="Carteira">
+                <span>Saldo Atual:</span>
+            </div>
+            <div class="conta-footer">
+                <span class="saldo-atual">R$ ${parseFloat(conta.saldo).toFixed(2)}</span>
+            </div>
+        `;
+        cardsContainer.appendChild(card);
+    });
+
+    // Atualiza o saldo total
+    atualizarSaldoTotal();
 }
-let contaIdParaExcluir;
 
-function prepararEdicao(contaId) {
-    contaIdParaExcluir = contaId; // Armazena o ID da conta que está sendo editada
-    // Aqui você pode preencher os campos do modal com os dados da conta, se necessário
+// Função para atualizar o saldo total
+function atualizarSaldoTotal() {
+    const saldoTotal = contas.reduce((total, conta) => total + parseFloat(conta.saldo), 0).toFixed(2);
+    document.getElementById('saldoTotal').textContent = `R$ ${saldoTotal}`;
 }
 
-document.getElementById('excluirConta').addEventListener('click', function() {
-    // Fechar o modal após a exclusão
-    var modal = bootstrap.Modal.getInstance(document.getElementById('editarContaModal'));
-    modal.hide();
+// Função para validar o saldo numérico
+function validarSaldo(saldo) {
+    return !isNaN(saldo) && saldo >= 0;
+}
 
-    // Remove o card do DOM usando o ID armazenado
-    var card = document.getElementById(contaIdParaExcluir);
-    if (card) {
-        card.remove(); // Remove o card da conta
+// Função para preparar a edição de uma conta
+function prepararEdicao(id) {
+    const conta = contas.find((conta) => conta.id === id);
+
+    if (conta) {
+        document.getElementById('editarNomeConta').value = conta.nome;
+        document.getElementById('editarSaldoConta').value = conta.saldo;
+        document.getElementById('editarTipoConta').value = conta.tipo;
+        document.getElementById('editarDescricao').value = conta.descricao;
+
+        document.getElementById('salvarEdicaoConta').setAttribute('data-id', id);
+        document.getElementById('excluirConta').setAttribute('data-id', id);
     }
+}
 
-    // Limpar a referência após a exclusão
-    contaIdParaExcluir = null; 
+// Função para salvar as alterações de uma conta editada
+document.getElementById('salvarEdicaoConta').addEventListener('click', function () {
+    const id = parseInt(this.getAttribute('data-id'));
+    const contaEditada = contas.find((conta) => conta.id === id);
+
+    if (contaEditada) {
+        const saldoEditado = parseFloat(document.getElementById('editarSaldoConta').value);
+
+        if (validarSaldo(saldoEditado)) {
+            contaEditada.nome = document.getElementById('editarNomeConta').value;
+            contaEditada.saldo = saldoEditado.toFixed(2);
+            contaEditada.tipo = document.getElementById('editarTipoConta').value;
+            contaEditada.descricao = document.getElementById('editarDescricao').value;
+
+            renderContas();
+
+            const editarContaModal = bootstrap.Modal.getInstance(document.getElementById('editarContaModal'));
+            editarContaModal.hide();
+        } else {
+            alert('Por favor, insira um saldo válido.');
+        }
+    }
+});
+
+// Função para excluir uma conta
+document.getElementById('excluirConta').addEventListener('click', function () {
+    const id = parseInt(this.getAttribute('data-id'));
+    contas = contas.filter((conta) => conta.id !== id);
+    renderContas();
+
+    const editarContaModal = bootstrap.Modal.getInstance(document.getElementById('editarContaModal'));
+    editarContaModal.hide();
 });

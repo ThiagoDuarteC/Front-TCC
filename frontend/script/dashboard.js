@@ -265,4 +265,19 @@ const ctx = document.getElementById('despesaReceitaChart').getContext('2d');
         }
     });
 
-//Fim do código dos gráficos
+// clicar nos cards, direcionar pagina
+document.getElementById("saldoCard").addEventListener("click", function() {
+    window.location.href = "contas.html";
+});
+document.getElementById("receitaCard").addEventListener("click", function() {
+    window.location.href = "historico-transacoes.html";
+});
+document.getElementById("despesaCard").addEventListener("click", function() {
+    window.location.href = "historico-transacoes.html";
+});
+document.getElementById("despesaereceitaCard").addEventListener("click", function() {
+    window.location.href = "relatorios.html";
+});
+document.getElementById("planejamentoCard").addEventListener("click", function() {
+    window.location.href = "relatorios.html";
+});
