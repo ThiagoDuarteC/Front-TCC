@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="img/gestan-icone.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -13,8 +14,10 @@
     <script src="https://code.jquery.com/ui/1.12.1/locale/pt-BR.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <!-- Link CSS -->
     <link rel="stylesheet" href="styles/cadastro.css">
+    <link rel="stylesheet" href="styles/application.css">
     <title>Tela de Cadastro</title>
 </head>
 
@@ -29,22 +32,22 @@
             <img src="img/tentativa1.png" alt="Cara no banco">
         </div>
         <!-- Form Cadastro -->
-        <div class="content-box">
-            <div class="form-box">
+        <div class="content-box align-items-center">
+            <form class="form-box">
                 <h2>Cadastrar</h2>
                 <div class="line"></div>
                 <div class="input-box">
                     <span>Nome</span>
-                    <input type="text" placeholder="Nome completo">
+                    <input type="text" id="full_name" placeholder="Nome completo" required>
                 </div>
                 <div class="input-box">
                     <span>E-mail</span>
-                    <input type="email" placeholder="@mail.com">
+                    <input type="email" id="email" placeholder="@mail.com" required>
                 </div>
 
                 <div class="input-box">
                     <span>Senha</span>
-                    <input type="password" placeholder="******">
+                    <input type="password" id="password" placeholder="******" required>
                 </div>
 
                 <!-- <div class="input-box">
@@ -59,9 +62,10 @@
                 <div class="input-box">
                     <p>Já possui uma Conta? <a href="index.html">Entrar</a></p>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 </body>
 <script src="script/cadastro.js"></script>
+<script src="script/application.js"></script>
 </html>

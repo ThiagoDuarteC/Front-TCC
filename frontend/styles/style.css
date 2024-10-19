@@ -42,21 +42,24 @@ body{
     width: 50%;
     height: 100%;
     background-color: #DDEBF8;
-    padding: 20px;
-    padding-bottom: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
 }
 
 .img-box img {
-    width: 100%;
-    height: 100%;
+    width: 70%;
+    min-width: 450px;
 }
 
 .content-box {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: center; 
     width: 50%;
-    height: 100%;
+    height: 100%; 
+    padding-bottom: 6rem;
+    box-sizing: border-box;
 }
 
 .content-box .form-box {
@@ -81,13 +84,13 @@ body{
 }
 
 .content-box .form-box .input-box {
-    margin-bottom: 20px;
+    margin-bottom: 1.25rem;
 }
 
 .content-box .form-box .input-box input {
     width: 100%;
     padding: 10px;
-    margin: 10px;
+    margin: 10px 10px 10px 0px;
     outline: none;
     font-weight: 400;
     border: none;
