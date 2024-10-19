@@ -16,22 +16,22 @@ toastr.options = {
     "hideMethod": "fadeOut"
 };
 
-$(document).ready(function() {
-    const token = localStorage.getItem('token');
-    const currentPage = window.location.pathname;
+// $(document).ready(function() {
+//     const token = localStorage.getItem('token');
+//     const currentPage = window.location.pathname;
     
-    const publicPages = ['/index.html', '/cadastro.html', '/esqueceusenha.html', '/'];
+//     const publicPages = ['/index.html', '/cadastro.html', '/esqueceusenha.html', '/'];
     
-    const protectedPages = ['/dashboard.html', '/contas.html', '/historico-transacoes.html', '/metas.html', '/relatorios.html'];
+//     const protectedPages = ['/dashboard.html', '/contas.html', '/historico-transacoes.html', '/metas.html', '/relatorios.html'];
 
-    if (token) {
-        if (publicPages.some(page => currentPage.endsWith(page))) {
-            window.location.href = '/frontend/dashboard.html';
-        }
-    } else {
-        if (protectedPages.some(page => currentPage.endsWith(page))) {
-            window.location.href = '/frontend/';
-        }
-    }
-});
+//     if (token) {
+//         if (publicPages.some(page => currentPage.endsWith(page))) {
+//             window.location.href = '/frontend/dashboard.html';
+//         }
+//     } else {
+//         if (protectedPages.some(page => currentPage.endsWith(page))) {
+//             window.location.href = '/frontend/';
+//         }
+//     }
+// });
 
