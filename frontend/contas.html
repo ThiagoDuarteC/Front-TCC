@@ -69,7 +69,7 @@
                 <div class="conta" id="contaBanco"> <!-- Adicione um ID exclusivo aqui -->
                     <div class="conta-header">
                         <span class="conta-nome" id="contaNome">Banco</span>
-                        <img src="img/3-pontos.png" alt="Opções" data-bs-toggle="modal" data-bs-target="#editarContaModal" onclick="prepararEdicao('contaBanco')">
+                        <img src="img/3-pontos.png" alt="Opções" data-bs-toggle="modal" data-bs-target="#editarContaModal" onclick="prepararEdicao('contaId')">
                     </div>                    
                     <div class="conta-body">
                         <img src="img/carteira.png">
@@ -114,24 +114,50 @@
             </div>
         </div>
 
-        <!-- Modal para Adicionar Conta -->
-<div id="addConta" class="modal fade" tabindex="-1" aria-labelledby="addContaLabel" aria-hidden="true">
+        <!-- Modal adicionar contas de banco-->
+<div class="modal fade" id="addConta" tabindex="-1" aria-labelledby="addContaLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="addContaLabel">Adicionar Conta</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-
             <div class="modal-body">
                 <form id="addContaForm">
                     <div class="mb-3">
-                        <label for="nomeConta" class="form-label">Nome da Conta</label>
-                        <input type="text" class="form-control" id="nomeConta" placeholder="Nome da Conta">
+                        <label for="nomeConta" class="form-label">Selecione o Banco:</label>
+                        <select id="nomeConta" onchange="updateIcon()">
+                            <option value="Selecione">Selecione</option>
+                            <option value="Banco do Brasil">Banco do Brasil</option>
+                            <option value="Caixa Econômica">Caixa Econômica</option>
+                            <option value="Itaú">Itaú</option>
+                            <option value="Santander">Santander</option>
+                            <option value="Nubank">Nubank</option>
+                            <option value="Bradesco">Bradesco</option>
+                            <option value="Inter">Inter</option>
+                            <option value="PicPay">PicPay</option>
+                            <option value="Safra">Safra</option>
+                            <option value="PagBank">PagBank</option>
+                            <option value="C6 Bank">C6 Bank</option>
+                            <option value="Outro Banco">Outro banco</option>
+                        </select>
+                        <!-- Imagens dos bancos -->
+                        <img id="iconBanco1" src="img/banco-do-brasil.png" alt="Ícone Banco do Brasil" class="bank-icon" width="40" height="40" style="display: none;">
+                        <img id="iconBanco2" src="img/caixa-economica.png" alt="Ícone Caixa Econômica" class="bank-icon" width="40" height="40" style="display: none;">
+                        <img id="iconBanco3" src="img/itaú.png" alt="Ícone Itaú" class="bank-icon" width="40" height="40" style="display: none;">
+                        <img id="iconBanco4" src="img/santander.png" alt="Ícone Santander" class="bank-icon" width="40" height="40" style="display: none;">
+                        <img id="iconBanco5" src="img/nubank.png" alt="Ícone Nubank" class="bank-icon" width="40" height="40" style="display: none;">
+                        <img id="iconBanco6" src="img/bradesco.png" alt="Ícone Bradesco" class="bank-icon" width="40" height="40" style="display: none;">
+                        <img id="iconBanco7" src="img/banco-inter.png" alt="Ícone Inter" class="bank-icon" width="40" height="40" style="display: none;">
+                        <img id="iconBanco8" src="img/picpay.png" alt="Ícone PicPay" class="bank-icon" width="40" height="40" style="display: none;">
+                        <img id="iconBanco9" src="img/banco-safra.png" alt="Ícone Safra" class="bank-icon" width="40" height="40" style="display: none;">
+                        <img id="iconBanco10" src="img/pag-bank.png" alt="Ícone PagBank" class="bank-icon" width="40" height="40" style="display: none;">
+                        <img id="iconBanco11" src="img/c6-bank.png" alt="Ícone C6 Bank" class="bank-icon" width="40" height="40" style="display: none;">
+                        <img id="iconBanco12" src="img/outro-banco.png" alt="Ícone Outro banco" class="bank-icon" width="40" height="40" style="display: none;"> 
                     </div>
                     <div class="mb-3">
                         <label for="saldoConta" class="form-label">Saldo Atual na Conta</label>
-                        <input type="number" class="form-control" id="saldoConta" placeholder="Quantos reais?">
+                        <input type="number" class="form-control" id="saldoConta" placeholder="R$0,00">
                     </div>
                     <div class="mb-3">
                         <label for="tipoConta" class="form-label">Tipo de Conta</label>
@@ -143,62 +169,92 @@
                         </select>
                     </div>
                     <div class="mb-3">
-                        <label for="descricao" class="form-label">Descrição (opcional)</label>
+                        <label for="descricao" class="form-label">Descrição</label>
                         <textarea class="form-control" id="descricao" rows="3" placeholder="Adicionar descrição (opcional)"></textarea>
                     </div>
                 </form>
             </div>
-
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                <button type="button" class="btn btn-primary" id="adicionarConta">Adicionar Conta</button>
+                <button type="button" class="btn btn-primary" id="salvarConta">Salvar Conta</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal editar conta de banco -->
+<div class="modal fade" id="editarContaModal" tabindex="-1" aria-labelledby="editarContaLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editarContaLabel">Editar Conta</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="editarContaForm">
+                    <!-- Nome do banco -->
+                    <div class="mb-3">
+                        <label for="editarNomeConta" class="form-label">Selecione o Banco:</label>
+                        <select id="editarNomeConta" onchange="updateEditIcon()">
+                            <option value="Selecione">Selecione</option>
+                            <option value="Banco do Brasil">Banco do Brasil</option>
+                            <option value="Caixa Econômica">Caixa Econômica</option>
+                            <option value="Itaú">Itaú</option>
+                            <option value="Santander">Santander</option>
+                            <option value="Nubank">Nubank</option>
+                            <option value="Bradesco">Bradesco</option>
+                            <option value="Inter">Inter</option>
+                            <option value="PicPay">PicPay</option>
+                            <option value="Safra">Safra</option>
+                            <option value="PagBank">PagBank</option>
+                            <option value="C6 Bank">C6 Bank</option>
+                            <option value="Outro Banco">Outro banco</option>
+                        </select>
+                        <!-- Ícones dos bancos -->
+                            <img id="iconBancoEdit1" src="img/banco-do-brasil.png" alt="Ícone Banco do Brasil" class="bank-icon" width="40" height="40" style="display: none;">
+                            <img id="iconBancoEdit2" src="img/caixa-economica.png" alt="Ícone Caixa Econômica" class="bank-icon" width="40" height="40" style="display: none;">
+                            <img id="iconBancoEdit3" src="img/itaú.png" alt="Ícone Itaú" class="bank-icon" width="40" height="40" style="display: none;">
+                            <img id="iconBancoEdit4" src="img/santander.png" alt="Ícone Santander" class="bank-icon" width="40" height="40" style="display: none;">
+                            <img id="iconBancoEdit5" src="img/nubank.png" alt="Ícone Nubank" class="bank-icon" width="40" height="40" style="display: none;">
+                            <img id="iconBancoEdit6" src="img/bradesco.png" alt="Ícone Bradesco" class="bank-icon" width="40" height="40" style="display: none;">
+                            <img id="iconBancoEdit7" src="img/banco-inter.png" alt="Ícone Inter" class="bank-icon" width="40" height="40" style="display: none;">
+                            <img id="iconBancoEdit8" src="img/picpay.png" alt="Ícone PicPay" class="bank-icon" width="40" height="40" style="display: none;">
+                            <img id="iconBancoEdit9" src="img/banco-safra.png" alt="Ícone Safra" class="bank-icon" width="40" height="40" style="display: none;">
+                            <img id="iconBancoEdit10" src="img/pag-bank.png" alt="Ícone PagBank" class="bank-icon" width="40" height="40" style="display: none;">
+                            <img id="iconBancoEdit11" src="img/c6-bank.png" alt="Ícone C6 Bank" class="bank-icon" width="40" height="40" style="display: none;">
+                            <img id="iconBancoEdit12" src="img/outro-banco.png" alt="Ícone Outro banco" class="bank-icon" width="40" height="40" style="display: none;"> 
+                    </div>
+                    <!-- Saldo atual -->
+                    <div class="mb-3">
+                        <label for="editarSaldoConta" class="form-label">Saldo Atual na Conta</label>
+                        <input type="number" class="form-control" id="editarSaldoConta" placeholder="R$0,00">
+                    </div>
+                    <!-- Tipo de conta -->
+                    <div class="mb-3">
+                        <label for="editarTipoConta" class="form-label">Tipo de Conta</label>
+                        <select class="form-select" id="editarTipoConta">
+                            <option value="corrente">Corrente</option>
+                            <option value="poupanca">Poupança</option>
+                            <option value="dinheiro">Dinheiro</option>
+                            <option value="outros">Outros</option>
+                        </select>
+                    </div>
+                    <!-- Descrição -->
+                    <div class="mb-3">
+                        <label for="editarDescricao" class="form-label">Descrição</label>
+                        <textarea class="form-control" id="editarDescricao" rows="3" placeholder="Adicionar descrição (opcional)"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" id="excluirConta">Excluir Conta</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" id="salvarEdicaoConta">Salvar Alterações</button>
             </div>
         </div>
     </div>
 </div>
 
-        <!-- Modal para Editar Conta -->
-        <div class="modal fade" id="editarContaModal" tabindex="-1" aria-labelledby="editarContaModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="editarContaModalLabel">Editar Conta</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form id="editarContaForm">
-                            <div class="mb-3">
-                                <label for="editarNomeConta" class="form-label">Nome do Banco</label>
-                                <input type="text" class="form-control" id="editarNomeConta" placeholder="Nome do Banco">
-                            </div>
-                            <div class="mb-3">
-                                <label for="editarSaldoConta" class="form-label">Saldo Atual</label>
-                                <input type="number" class="form-control" id="editarSaldoConta" placeholder="Saldo Atual">
-                            </div>
-                            <div class="mb-3">
-                                <label for="editarTipoConta" class="form-label">Tipo de Conta</label>
-                                <select class="form-control" id="editarTipoConta">
-                                    <option value="corrente">Corrente</option>
-                                    <option value="poupanca">Poupança</option>
-                                    <option value="dinheiro">Dinheiro</option>
-                                    <option value="outros">Outros</option>
-                                </select>
-                            </div>
-                            <div class="mb-3">
-                                <label for="editarDescricao" class="form-label">Descrição (opcional)</label>
-                                <textarea class="form-control" id="editarDescricao" rows="3" placeholder="Adicionar descrição (opcional)"></textarea>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="button" class="btn btn-danger" id="excluirConta">Excluir Conta</button> <!-- Botão de Exclusão -->
-                        <button type="button" class="btn btn-primary" id="salvarEdicaoConta">Salvar Alterações</button>
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
 
         <!-- Modal para Adicionar Despesa ou Receita -->
         <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">

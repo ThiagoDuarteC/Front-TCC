@@ -99,7 +99,9 @@ main{
     margin-left: 2vw;
 
 }
-
+.conta-nome{
+    font-size: 35px; 
+}
 #nomeUsuarioDisplay {
     margin-left: 10px; /* Espaçamento entre o nome e o ícone */
 }
@@ -146,6 +148,8 @@ main{
     font-size: 1.4rem;
     font-weight: 500;
     color: #0d13ad;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 .saldo-total-header {
@@ -153,19 +157,24 @@ main{
     justify-content: flex-start; /* Alinha o ícone e o texto à esquerda */
     align-items: center;
     width: 100%; /* Faz o header ocupar a largura total */
+    white-space: nowrap;
 }
 
 .saldo-total-header img {
-    width: 3.5vw; /* Ajusta o tamanho do ícone */
-    margin-right: 1px; /* Espaçamento entre ícone e texto */
-    margin-left: 11.5vw; /* Ajusta o alinhamento horizontal do ícone */
-    margin-top: 0.5vw; /* Espaçamento acima do ícone */
+    display: flex;
+    position: absolute;
+    width: 4vw; /* Ajusta o tamanho do ícone */
+    margin-left: 19vw; /* Ajusta o alinhamento horizontal do ícone */
+    margin-top: 2.6vw; /* Espaçamento acima do ícone */
+    overflow: hidden;
+    white-space: nowrap;
+    
 }
 
 .saldo-total-header h1 {
     font-size: 1.4rem;
     margin: 0;
-    margin-top: -2vw; /* Alinha o texto mais para cima */
+    margin-top: 0.5vw; /* Alinha o texto mais para cima */
     font-weight: 600;
 
 }
@@ -174,7 +183,7 @@ main{
     font-size: 1.4rem;
     font-weight: 600;
     color: #349308e5;
-    margin-top: -25px;
+    margin-top: 1px;
 }
 
 
@@ -227,7 +236,7 @@ main{
 }
 
 .conta-header span{
-    font-size: 1.75rem;
+    font-size: 1.4rem;
     font-weight: 500;
 }
 
@@ -252,7 +261,7 @@ main{
 }
 
 .conta-footer{
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     font-weight: 500;
     color: #349308e5;
 }
@@ -411,4 +420,9 @@ main{
     border-radius: 15px;
     color: white;
     background-color: #100DAB;
+}
+
+.bank-icon {
+    vertical-align: middle; /* Alinha o ícone verticalmente no centro em relação ao texto */
+    margin-top: -4px; /* Ajuste a margem superior para subir o ícone */
 }
