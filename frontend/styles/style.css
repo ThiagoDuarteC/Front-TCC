@@ -1,38 +1,36 @@
 @charset "UTF-8";
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
-:root {
-    --font-corpo: 'Montserrat', Arial;
+:root{
+    --font-corpo: 'Montserrat',Arial;
 }
-
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: var(--font-corpo);
 }
-
-body {
+body{
     background-color: #DDEBF8;
     overflow: hidden;
 }
 
-.logo {
+.logo{
     position: relative;
     height: 50px;
     background-color: #0D13AD;
     padding: 30px;
+    
 }
-
-.logo > img {
+.logo > img{
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%,-50%);
     width: 100px;
     height: auto;
+    
 }
-
 .container-login {
     position: relative;
     width: 100%;
@@ -46,14 +44,11 @@ body {
     background-color: #DDEBF8;
     padding: 20px;
     padding-bottom: 30px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 .img-box img {
-    max-width: 100%;
-    height: auto;
+    width: 100%;
+    height: 100%;
 }
 
 .content-box {
@@ -65,19 +60,18 @@ body {
 }
 
 .content-box .form-box {
-    width: 50%;
+    width: 50%; 
 }
 
 .content-box .form-box h2 {
-    color: #0c0f5e;
+    color:#0c0f5e;
     font-weight: 600;
     font-size: 2em;
     text-transform: uppercase;
     padding-bottom: 5px;
     text-align: center;
 }
-
-.line {
+.line{
     display: block;
     width: 130px;
     height: 2px;
@@ -134,7 +128,7 @@ body {
     background: #2329ec;
 }
 
-.content-box .form-box .remember {
+.content-box .form-box .remember{
     margin-bottom: 20px;
     color: #32324f;
     font-weight: 400;
@@ -143,13 +137,11 @@ body {
     display: flex;
     justify-content: space-between;
 }
-
-.content-box .form-box .remember a {
+.content-box .form-box .remember a{
     text-decoration: none;
     color: #2329ec;
 }
-
-.content-box .form-box .remember a:hover {
+.content-box .form-box .remember a:hover{
     color: #0D13AD;
 }
 
@@ -157,40 +149,39 @@ body {
     color: #32324f;
     text-align: center;
 }
-
-.content-box .form-box .input-box p a {
+.content-box .form-box .input-box p a{
     color: #2329ec;
     text-decoration: none;
 }
 
-.content-box .form-box .input-box p a:hover {
+.content-box .form-box .input-box p a:hover{
     color: #0D13AD;
     text-decoration: underline;
 }
 
-@media (max-width: 868px) {
-    .container-login .img-box {
+@media (max-width:868px) {
+    .container-login .img-box{
         display: none;
     }
-    .container-login .content-box {
+    .container-login .content-box{
         width: 100%;
     }
-    .container-login .content-box .form-box {
+    .container-login .content-box .form-box{
         width: 100%;
         padding: 40px;
         background: #DDEBF8;
         margin: 50px;
-    }
-    .container-login .content-box .form-box h3 {
+    } 
+    .container-login .content-box .form-box h3{
         margin: 30px 0 10px;
-    }
+    } 
 }
-
-@media (max-width: 500px) {
-    .container-login .content-box .form-box .remember {
+@media (max-width:500px) {
+    .container-login .content-box .form-box .remember{
         flex-wrap: wrap;
     }
-    .container-login .content-box .form-box .remember a {
+    .container-login .content-box .form-box .remember a{
         margin-top: 20px;
     }
+    
 }
