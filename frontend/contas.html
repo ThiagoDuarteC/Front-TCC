@@ -31,23 +31,23 @@
             </div>
             <div class="mais-icone">
                 <a href="#" data-bs-toggle="modal" data-bs-target="#addModal">
-                    <img src="img/mais.png" alt="Ícone Mais">
+                    <img class="img-hover" src="img/mais.png" alt="Ícone Mais">
                 </a>
             </div>
             <div class="inicio-icone">
-                <a href="dashboard.html"><img src="img/inicio-icone.png" alt="Início"></a>
+                <a href="dashboard.html"><img class="img-hover" src="img/inicio-icone.png" alt="Início"></a>
             </div>
             <div class="contas-icone pagina-atual">
-                <a href="contas.html"><img src="img/contas-icone azul.png" alt="Contas"></a>
+                <a href="contas.html"><img class="img-hover" src="img/contas-icone azul.png" alt="Contas"></a>
             </div>
             <div class="transacao-icone">
-                <a href="historico-transacoes.html"><img src="img/transação.png" alt="Ícone transações"></a>
+                <a href="historico-transacoes.html"><img class="img-hover" src="img/transação.png" alt="Ícone transações"></a>
             </div>
             <div class="planejamento-icone">
-                <a href="metas.html"><img src="img/planejamento-icone.png" alt="Planejamento"></a>
+                <a href="metas.html"><img class="img-hover" src="img/planejamento-icone.png" alt="Planejamento"></a>
             </div>
             <div class="relatorios-icone">
-                <a href="relatorios.html"><img src="img/relatorios-icone.png" alt="Relatórios"></a>
+                <a href="relatorios.html"><img class="img-hover" src="img/relatorios-icone.png" alt="Relatórios"></a>
             </div>
         </div>
         <!--Fim da Side Bar-->
@@ -79,22 +79,7 @@
 
             </div>
 
-            <div class="cards d-flex flex-wrap">
-                <div class="conta" id="contaBanco"> <!-- Adicione um ID exclusivo aqui -->
-                    <div class="conta-header">
-                        <span class="conta-nome" id="contaNome">Banco</span>
-                        <img src="img/3-pontos.png" alt="Opções" data-bs-toggle="modal"
-                            data-bs-target="#editarContaModal" onclick="prepararEdicao('contaId')">
-                    </div>
-                    <div class="conta-body">
-                        <img src="img/carteira.png">
-                        <span>Saldo Atual:</span>
-                    </div>
-                    <div class="conta-footer">
-                        <span class="saldo-atual">R$ 0,00</span>
-                    </div>
-                </div>
-            </div>
+            <div class="cards d-flex flex-wrap"><!--Inserção dos cards--></div>
 
         </div>
     </main>
@@ -221,9 +206,13 @@
                     <h5 class="modal-title" id="editarContaLabel">Editar Conta</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-                    <form id="editarContaForm">
-                        <!-- Nome do banco -->
+                <form id="editarContaForm">
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <input type="hidden" id="editarIdConta">
+                            <label for="editarNomeConta" class="form-label">Nome da Conta:</label>
+                            <input type="text" class="form-control" id="editarNomeConta" placeholder="Nome">
+                        </div>
                         <div class="mb-3">
                             <label for="editarNomeBanco" class="form-label">Selecione o Banco:</label>
                             <select id="editarNomeBanco" onchange="updateEditIcon()">
@@ -288,13 +277,13 @@
                             <textarea class="form-control" id="editarDescricao" rows="3"
                                 placeholder="Adicionar descrição (opcional)"></textarea>
                         </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" id="excluirConta">Excluir Conta</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-primary" id="salvarEdicaoConta">Salvar Alterações</button>
-                </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" id="excluirConta">Excluir Conta</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <input value="Salvar Alterações" type="submit" class="btn btn-primary" id="salvarEdicaoConta">
+                    </div>
+                </form>
             </div>
         </div>
     </div>

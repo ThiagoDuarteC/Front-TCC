@@ -49,7 +49,7 @@ main {
 }
 
 
-.side-bar img:hover {
+.side-bar .img-hover:hover {
     transform: scale(1.1);
 }
 
@@ -114,10 +114,6 @@ main {
     box-shadow: 0 4px 3px -2px #0d12ad70;
     background-color: #dae8f7;
     transition: transform 0.3s ease;
-}
-
-.valores-card:hover {
-    transform: scale(1.05);
 }
 
 .valores-card h1, span {
@@ -498,12 +494,4 @@ main {
     border-radius: 20px; /* Arredondamento do retângulo da pizza */
     padding: 20px; /* Espaçamento interno do retângulo */
     box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2); /* Sombra do retângulo */ 
-}
-  
-.planejamento-container2:hover {
-    transform: scale(1.05); /* Aumenta o tamanho em 10% */
-}
-
-.chart-container:hover{
-    transform: scale(1.05);
 }

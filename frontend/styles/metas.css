@@ -54,7 +54,7 @@ main {
     top: -15px;
 }
 /* Adiciona um efeito de hover */
-.side-bar img:hover {
+.side-bar .img-hover:hover {
     transform: scale(1.1); /* Aumenta o tamanho ao passar o mouse */
 }
 
