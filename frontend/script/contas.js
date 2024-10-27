@@ -15,7 +15,10 @@ $(document).ready(function () {
                         <div id="conta-${conta.id}" class="conta">
                             <div class="conta-header">
                                 <span class="conta-nome">${conta.name}</span>
-                                <img src="img/3-pontos.png" alt="Opções" data-bs-toggle="modal" data-bs-target="#editarContaModal" onclick="prepararEdicao(${conta.id})">
+                                <div>
+                                    <i class="fa-solid fa-trash blue-color" onclick="excluirConta(${conta.id})"></i>
+                                    <i class="fa-solid fa-pen blue-color ms-1" alt="Opções" data-bs-toggle="modal" data-bs-target="#editarContaModal" onclick="prepararEdicao(${conta.id})"></i>
+                                </div>
                             </div>
                             <div class="conta-body">
                                 <img src="img/carteira.png" alt="Carteira">
@@ -76,23 +79,39 @@ $(document).ready(function () {
         const saldoConta = $('#editarSaldoConta')
 
         $.ajax({
-        url: `http://127.0.0.1:3000/accounts/${conta_id.val()}`, 
-        method: 'PUT',
-        data: {
-            name: nomeConta.val(),
-            bank_name: nomeBanco.val(),
-            initial_balance: saldoConta.val()
-        },
-        success: function (data) {
-            toastr.success('Conta atualizada com sucesso!');
-            $('#editarContaModal').modal('hide');
-            $('#addContaForm')[0].reset();
-            $('#nomeBanco').val('Selecione');
-            load_accounts();
-        },
-        error: function (xhr) {
-            toastr.error(xhr.responseJSON.errors[0]);
-        }
-    });
+            url: `http://127.0.0.1:3000/accounts/${conta_id.val()}`,
+            method: 'PUT',
+            data: {
+                name: nomeConta.val(),
+                bank_name: nomeBanco.val(),
+                initial_balance: saldoConta.val()
+            },
+            success: function (data) {
+                toastr.success('Conta atualizada com sucesso!');
+                $('#editarContaModal').modal('hide');
+                $('#addContaForm')[0].reset();
+                $('#nomeBanco').val('Selecione');
+                load_accounts();
+            },
+            error: function (xhr) {
+                toastr.error(xhr.responseJSON.errors[0]);
+            }
+        });
     })
+
+    excluirConta = function (conta_id) {
+        if(confirm('Gostaria de excluir a conta?')) {
+            $.ajax({
+                url: `http://127.0.0.1:3000/accounts/${conta_id}`,
+                method: 'DELETE',
+                success: function (data) {
+                    toastr.success('Conta excluida com sucesso!');
+                    load_accounts();
+                },
+                error: function (xhr) {
+                    toastr.error(xhr.responseJSON.errors[0]);
+                }
+            });
+        }
+    }
 })
