@@ -71,59 +71,7 @@
         </form>
 
         <div class="metas">
-            <div class="metas-lista">
-                <!-- Meta 1 -->
-                <div class="item-lista" data-bs-toggle="modal" data-bs-target="#atualizarItem">
-                    <div class="nome-icone-meta">
-                        <img src="img/viagem.png" style="width: 65px; height: 65px;" class="icone-meta">
-                        <div class="gambiarra">
-                            <span class="nome-meta">Férias com Amigos</span>
-                            <span class="valor-adicionado-acumulado">Acumulado: R$ 10.000</span>
-                        </div>
-                    </div>
-                    <span class="valor-meta">R$ 20.000,00</span>
-                    <div class="barra-divisora"></div>
-                </div>
-                
-                <!-- Meta 2 -->
-                <div class="item-lista" data-bs-toggle="modal" data-bs-target="#atualizarItem">
-                    <div class="nome-icone-meta">
-                        <img src="img/compras.png" style="width: 65px; height: 65px;"class="icone-meta">
-                        <div class="gambiarra">
-                            <span class="nome-meta">Ps5</span>
-                            <span class="valor-adicionado-acumulado">Acumulado: R$ 1.000</span>
-                        </div>
-                    </div>
-                    <span class="valor-meta">R$ 5.400,00</span>
-                    <div class="barra-divisora"></div>
-                </div>
-        
-                <!-- Meta 3 -->
-                <div class="item-lista" data-bs-toggle="modal" data-bs-target="#atualizarItem">
-                    <div class="nome-icone-meta">
-                        <img src="img/educação.png" style="width: 65px; height: 65px;"class="icone-meta"> <!-- Imagem diferente -->
-                        <div class="gambiarra">
-                            <span class="nome-meta">Curso em Vídeo</span>
-                            <span class="valor-adicionado-acumulado">Acumulado: R$ 50</span>
-                        </div>
-                    </div>
-                    <span class="valor-meta">R$ 300,00</span>
-                    <div class="barra-divisora"></div>
-                </div>
-        
-                <!-- Meta 4 -->
-                <div class="item-lista" data-bs-toggle="modal" data-bs-target="#atualizarItem">
-                    <div class="nome-icone-meta">
-                        <img src="img/alimentação.png" style="width: 65px; height: 65px;"class="icone-meta"> <!-- Imagem diferente -->
-                        <div class="gambiarra">
-                            <span class="nome-meta">Lanche com os amigos</span>
-                            <span class="valor-adicionado-acumulado">Acumulado: R$ 10</span>
-                        </div>
-                    </div>
-                    <span class="valor-meta">R$ 100,00</span>
-                    <div class="barra-divisora"></div>
-                </div>
-            </div>
+            <div class="metas-lista"></div>
         </div>
         
 
@@ -182,16 +130,19 @@
     <div id="botaoadd" class="modal fade">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h2 class="modal-title">Adicionar Meta</h2>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-
-                <div class="modal-body">
-                    <form>
+                <form id="addMetaForm">
+                    <div class="modal-header">
+                        <h2 class="modal-title">Adicionar Meta</h2>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
                         <div class="mb-3">
                             <label for="nomeMeta" class="form-label">Nome da Meta</label>
                             <input type="text" class="form-control" id="nomeMeta" placeholder="O que deseja realizar?">
+                        </div>
+                        <div class="mb-3">
+                            <label for="nomeMeta" class="form-label">Descrição da Meta</label>
+                            <textarea class="form-control" id="descricaoMeta" placeholder="O que deseja realizar?"></textarea>
                         </div>
                         <div class="mb-3">
                             <label for="valorMeta" class="form-label">Custo da Meta</label>
@@ -201,13 +152,12 @@
                             <label for="dataMeta" class="form-label">Quando ocorrerá?</label>
                             <input type="date" class="form-control" id="dataMeta">
                         </div>
-                    </form>
-                </div>
-
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                    <button type="button" class="btn btn-primary" id="adicionarPlanejamento">Adicionar</button>
-                </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                        <input type="submit" value="Adicionar" class="btn btn-primary">
+                    </div>
+                </form>
             </div>
         </div>
     </div>

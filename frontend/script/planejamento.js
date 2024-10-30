@@ -1,142 +1,112 @@
-//Início do código que altera a imagem e nome do perfil
-
-document.getElementById('salvarAlteracoes').addEventListener('click', function() {
-    const nomeUsuario = document.getElementById('nomeUsuario').value;
-    document.getElementById('nomeUsuarioDisplay').textContent = nomeUsuario || 'Usuário';
-
-    const fotoPerfilInput = document.getElementById('fotoPerfil');
-    if (fotoPerfilInput.files && fotoPerfilInput.files[0]) {
-        const reader = new FileReader();
-        reader.onload = function (e) {
-            document.querySelector('.perfil-img').src = e.target.result;
-        };
-        reader.readAsDataURL(fotoPerfilInput.files[0]);
-    }
-
-    var perfilModalEl = document.querySelector('#perfilModal');
-    var perfilModal = bootstrap.Modal.getInstance(perfilModalEl);
-    if (perfilModal) {
-        perfilModal.hide();
-    } else {
-        new bootstrap.Modal(perfilModalEl).hide();
+$.ajaxSetup({
+    headers: {
+        'Authorization': 'Bearer ' + localStorage.getItem('token')
     }
 });
 
-//Fim do código que altera a imagem e nome do perfil
+$(document).ready(function () {
 
-//Início do código que impede que a data inicial seja maior que a data final
-
-document.getElementById('filtro-relativo').addEventListener('submit', function(event) {
-    const startDate = new Date(document.getElementById('data-inicial').value);
-    const endDate = new Date(document.getElementById('data-final').value);
-    
-    if (startDate > endDate) {
-        alert("A data inicial não pode ser maior que a data final.");
-        document.getElementById('startDate').value = "";
-        document.getElementById('endDate').value = "";
-        event.preventDefault(); // Impede o envio do formulário
-    }
-});
-
-//Fim do código que impede que a data inicial seja maior que a data final
-
-//Início do Código que cria categorias para despesas e receitas dentro do modal
-
-const adicionarCategoriaSpan = document.querySelector('.adicionar-categoria');
-const novaCategoriaInput = document.getElementById('nova-categoria');
-const btnAddCategoria = document.getElementById('btn-add-categoria');
-const categoriaDespesa = document.querySelector('.grid-categorias-despesa');
-const categoriaReceita = document.querySelector('.grid-categorias-receita');
-
-const btnDespesas = document.getElementById('btn-despesa');
-const btnReceitas = document.getElementById('btn-receita');
-
-let inputVisivel = false; 
-
-function formatarTexto(texto) {
-    return texto
-    .normalize('NFD')  // Normaliza caracteres acentuados
-    .replace(/[\u0300-\u036f]/g, '')  // Remove acentos
-    .toLowerCase()  // Converte para minúsculas
-    .replace(/\s+/g, '-');  // Substitui espaços por hífens
-}
-
-adicionarCategoriaSpan.addEventListener('click', () => {
-    inputVisivel = !inputVisivel; // Alterna o estado de visibilidade
-    
-    if (inputVisivel) {
-    novaCategoriaInput.style.display = 'inline-block';
-    btnAddCategoria.style.display = 'inline-block';
-    } else {
-    novaCategoriaInput.style.display = 'none';
-    btnAddCategoria.style.display = 'none';
-    }
-});
-
-btnAddCategoria.addEventListener('click', () => {
-    const novaCategoriaNome = novaCategoriaInput.value.trim();
-
-    if (novaCategoriaNome === '') {
-    alert('Por favor, insira um nome para a nova categoria.');
-    return;
+    load_goals = function () {
+        $.get('http://127.0.0.1:3000/goals')
+            .done(function (data) {
+                $('.metas-lista').html('');
+                data.forEach((meta) => {
+                    let line = `
+                        <div class="item-lista" id="${meta.id}" data-bs-toggle="modal" data-bs-target="#atualizarItem">
+                            <div class="nome-icone-meta">
+                                <img src="img/${meta.icon_name}.png" style="width: 65px; height: 65px;" class="icone-meta">
+                                <div class="gambiarra">
+                                    <span class="nome-meta">${meta.name}</span>
+                                    <span class="valor-adicionado-acumulado">Acumulado: ${meta.current_value}</span>
+                                </div>
+                            </div>
+                            <span class="valor-meta">${meta.value}</span>
+                            <div class="barra-divisora"></div>
+                        </div>
+                    `;
+                    $('.metas-lista').append(line);
+                });
+            })
+            .fail(function (xhr) {
+                toastr.error(xhr.responseJSON.errors[0]);
+            });
     }
 
-    const categoriaId = formatarTexto(novaCategoriaNome);  // Formata o texto para id e value
+    load_goals();
 
-    
-    const novaCategoriaDiv = document.createElement('div');
-    novaCategoriaDiv.classList.add('categoria-opcao');
+    $('#addMetaForm').submit(function (e) {
+        e.preventDefault();
+        const nomeMeta = $('#nomeMeta')
+        const descricaoMeta = $('#descricaoMeta')
+        const valorMeta = $('#valorMeta')
+        const dataMeta = $('#dataMeta')
 
-    novaCategoriaDiv.innerHTML = `
-    <input type="radio" id="${categoriaId}" name="categoria" value="${categoriaId}">
-    <label for="${categoriaId}">${novaCategoriaNome.charAt(0).toUpperCase() + novaCategoriaNome.slice(1)}</label>
-    `;
+        $.post('http://127.0.0.1:3000/goals', { name: nomeMeta.val(), description: descricaoMeta.val(), value: valorMeta.val(), deadline: dataMeta.val() })
+            .done(function (data) {
+                toastr.success(data.success[0]);
+                $('#botaoadd').modal('hide')
+                $('#addMetaForm').reset()
+                load_goals();
+            })
+            .fail(function (xhr) {
+                toastr.error(xhr.responseJSON.errors[0]);
+            });
+    })
 
-   
-    if (btnDespesa.checked) {
-
-    categoriasDespesa.appendChild(novaCategoriaDiv);
-    } else if (btnReceita.checked) {
-   
-    categoriasReceita.appendChild(novaCategoriaDiv);
-    } else {
-    alert('Por favor, selecione se é uma despesa ou receita antes de adicionar a categoria.');
-    return;
+    prepararEdicao = function (conta_id) {
+        $.get(`http://127.0.0.1:3000/goals/${conta_id}`)
+            .done(function (data) {
+                $('#editarIdConta').val(data.id)
+                $('#editarNomeConta').val(data.name)
+                $('#editarNomeBanco').val(data.bank_name)
+                $('#editarSaldoConta').val(data.initial_balance)
+            })
+            .fail(function (xhr) {
+                toastr.error(xhr.responseJSON.errors[0]);
+            });
     }
 
-   
-    novaCategoriaInput.value = '';
-    novaCategoriaInput.style.display = 'none';
-    btnAddCategoria.style.display = 'none';
-    inputVisivel = false; // Resetar o estado de visibilidade
-});
+    $('#editarContaForm').submit(function (e) {
+        e.preventDefault();
+        const conta_id = $('#editarIdConta')
+        const nomeConta = $('#editarNomeConta')
+        const nomeBanco = $('#editarNomeBanco')
+        const saldoConta = $('#editarSaldoConta')
 
-//Fim do Código que cria categorias para despesas e receitas dentro do modal
+        $.ajax({
+            url: `http://127.0.0.1:3000/goals/${conta_id.val()}`,
+            method: 'PUT',
+            data: {
+                name: nomeConta.val(),
+                bank_name: nomeBanco.val(),
+                initial_balance: saldoConta.val()
+            },
+            success: function (data) {
+                toastr.success('Conta atualizada com sucesso!');
+                $('#editarContaModal').modal('hide');
+                $('#addContaForm')[0].reset();
+                $('#nomeBanco').val('Selecione');
+                load_goals();
+            },
+            error: function (xhr) {
+                toastr.error(xhr.responseJSON.errors[0]);
+            }
+        });
+    })
 
-//Início do código que alterna entre as categorias de despesa e receita dependendo do que o usuário selecionar
-
-const btnDespesa = document.getElementById('btn-despesa');
-const btnReceita = document.getElementById('btn-receita');
-const categoriasDespesa = document.querySelector('.grid-categorias-despesa');
-const categoriasReceita = document.querySelector('.grid-categorias-receita');
-
-function alternarCategorias() {
-    if (btnDespesa.checked) {
-    categoriasDespesa.style.opacity = '1';
-    categoriasDespesa.style.position = 'relative';
-    categoriasReceita.style.opacity = '0';
-    categoriasReceita.style.position = 'absolute';
-    } else if (btnReceita.checked) {
-    categoriasDespesa.style.opacity = '0';
-    categoriasDespesa.style.position = 'absolute';
-    categoriasReceita.style.opacity = '1';
-    categoriasReceita.style.position = 'relative';
+    excluirConta = function (conta_id) {
+        if(confirm('Gostaria de excluir a conta?')) {
+            $.ajax({
+                url: `http://127.0.0.1:3000/goals/${conta_id}`,
+                method: 'DELETE',
+                success: function (data) {
+                    toastr.success('Conta excluida com sucesso!');
+                    load_goals();
+                },
+                error: function (xhr) {
+                    toastr.error(xhr.responseJSON.errors[0]);
+                }
+            });
+        }
     }
-}
-
-btnDespesa.addEventListener('change', alternarCategorias);
-btnReceita.addEventListener('change', alternarCategorias);
-
-window.onload = alternarCategorias;
-
-//Fim do código que alterna entre as categorias de despesa e receita dependendo do que o usuário selecionar
+})
