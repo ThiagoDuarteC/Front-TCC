@@ -455,3 +455,24 @@ main {
     color: white;
     background-color: #100DAB;
 }
+
+.select-icons label {
+    cursor: pointer;
+    display: inline-block;
+    margin: 10px;
+    text-align: center;
+}
+
+.select-icons input[type="radio"] {
+    display: none;
+}
+
+.select-icons label i {
+    font-size: 24px;
+    color: #333;
+    transition: color 0.3s ease;
+}
+
+.select-icons input[type="radio"]:checked + i {
+    color: #007bff;
+}

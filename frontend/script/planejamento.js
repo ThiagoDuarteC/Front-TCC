@@ -14,7 +14,9 @@ $(document).ready(function () {
                     let line = `
                         <div class="item-lista" id="${meta.id}" data-bs-toggle="modal" data-bs-target="#atualizarItem">
                             <div class="nome-icone-meta">
-                                <img src="img/${meta.icon_name}.png" style="width: 65px; height: 65px;" class="icone-meta">
+                                <div class="d-flex justify-content-center align-items-center rounded-circle" style="width: 64px; height: 64px; background-color: ${meta.background_color}">
+                                    <img src="img/${meta.icon_name}.png" style="width: 45px; height: 45px;" class="icone-meta">
+                                </div>
                                 <div class="gambiarra">
                                     <span class="nome-meta">${meta.name}</span>
                                     <span class="valor-adicionado-acumulado">Acumulado: ${meta.current_value}</span>
@@ -39,13 +41,15 @@ $(document).ready(function () {
         const nomeMeta = $('#nomeMeta')
         const descricaoMeta = $('#descricaoMeta')
         const valorMeta = $('#valorMeta')
+        const corMeta = $('#corMeta')
         const dataMeta = $('#dataMeta')
+        const selectedIcon = $('input[name="icon"]:checked')
 
-        $.post('http://127.0.0.1:3000/goals', { name: nomeMeta.val(), description: descricaoMeta.val(), value: valorMeta.val(), deadline: dataMeta.val() })
+        $.post('http://127.0.0.1:3000/goals', { name: nomeMeta.val(), description: descricaoMeta.val(), value: valorMeta.val(), background_color: corMeta.val(), icon_name: selectedIcon.val(), deadline: dataMeta.val() })
             .done(function (data) {
                 toastr.success(data.success[0]);
                 $('#botaoadd').modal('hide')
-                $('#addMetaForm').reset()
+                document.getElementById('addMetaForm').reset()
                 load_goals();
             })
             .fail(function (xhr) {
