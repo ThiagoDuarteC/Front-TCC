@@ -6,6 +6,16 @@ $.ajaxSetup({
 
 $(document).ready(function () {
 
+    function formatMoney(value) {
+        value = value.replace(/\D/g, '');
+    
+        value = (value / 100).toFixed(2)
+                            .replace('.', ',')
+                            .replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+    
+        return 'R$ ' + value
+    }
+
     load_goals = function () {
         $.get('http://127.0.0.1:3000/goals')
             .done(function (data) {
@@ -14,15 +24,15 @@ $(document).ready(function () {
                     let line = `
                         <div class="item-lista" id="${meta.id}" data-bs-toggle="modal" data-bs-target="#atualizarItem">
                             <div class="nome-icone-meta">
-                                <div class="d-flex justify-content-center align-items-center rounded-circle" style="width: 64px; height: 64px; background-color: ${meta.background_color}">
-                                    <img src="img/${meta.icon_name}.png" style="width: 45px; height: 45px;" class="icone-meta">
+                                <div class="d-flex justify-content-center align-items-center rounded-circle" style="width: 60px; height: 60px; background-color: ${meta.background_color}">
+                                    <i class="fas ${meta.icon_name}" style="font-size: 28px" class="icone-meta"></i>
                                 </div>
                                 <div class="gambiarra">
                                     <span class="nome-meta">${meta.name}</span>
                                     <span class="valor-adicionado-acumulado">Acumulado: ${meta.current_value}</span>
                                 </div>
                             </div>
-                            <span class="valor-meta">${meta.value}</span>
+                            <span class="valor-meta">${formatMoney(meta.value)}</span>
                             <div class="barra-divisora"></div>
                         </div>
                     `;
@@ -40,12 +50,12 @@ $(document).ready(function () {
         e.preventDefault();
         const nomeMeta = $('#nomeMeta')
         const descricaoMeta = $('#descricaoMeta')
-        const valorMeta = $('#valorMeta')
         const corMeta = $('#corMeta')
         const dataMeta = $('#dataMeta')
-        const selectedIcon = $('input[name="icon"]:checked')
+        const iconMeta = $('input[name="iconMeta"]:checked')
+        const valorMeta = $('#valorMeta').val().replace('R$', '').replace(/\./g, '').replace(',', '.').trim();
 
-        $.post('http://127.0.0.1:3000/goals', { name: nomeMeta.val(), description: descricaoMeta.val(), value: valorMeta.val(), background_color: corMeta.val(), icon_name: selectedIcon.val(), deadline: dataMeta.val() })
+        $.post('http://127.0.0.1:3000/goals', { name: nomeMeta.val(), description: descricaoMeta.val(), value: valorMeta, background_color: corMeta.val(), icon_name: iconMeta.val(), deadline: dataMeta.val() })
             .done(function (data) {
                 toastr.success(data.success[0]);
                 $('#botaoadd').modal('hide')

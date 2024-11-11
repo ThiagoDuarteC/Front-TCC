@@ -16,7 +16,23 @@ toastr.options = {
     "hideMethod": "fadeOut"
 };
 
-// $(document).ready(function() {
+function formatMoney(value) {
+    value = value.replace(/\D/g, '');
+
+    value = (value / 100).toFixed(2)
+                        .replace('.', ',')
+                        .replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+
+    return 'R$ ' + value
+}
+
+$(document).ready(function() {
+    $('.moneyInput').on('input', function() {
+        let value = $(this).val();
+
+        $(this).val(formatMoney(value));
+    });
+
 //     const token = localStorage.getItem('token');
 //     const currentPage = window.location.pathname;
     
@@ -33,5 +49,5 @@ toastr.options = {
 //             window.location.href = '/frontend/';
 //         }
 //     }
-// });
+});
 
