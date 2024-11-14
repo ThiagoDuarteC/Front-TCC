@@ -197,31 +197,65 @@
     <div id="atualizarItem" class="modal fade">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h3 class="modal-title">Atualizar Meta</h3>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-
-                <div class="modal-body">
-                    <div class="mb-3">
-                        <label for="novoNomeMeta" class="form-label">Alterar Nome da Meta</label>
-                        <input type="text" class="form-control" id="novoNomeMeta" placeholder="Novo nome">
+                <form id="editarMetaForm">
+                    <div class="modal-header">
+                        <h2 class="modal-title">Atualizar Meta</h2>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="mb-3">
-                        <label for="novoValorMeta" class="form-label">Alterar Custo da Meta</label>
-                        <input type="text" class="form-control moneyInput" id="novoValorMeta" placeholder="Novo Valor">
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <input type="hidden" id="editarIdMeta">
+                            <label for="novoNomeMeta" class="form-label">Nome da Meta</label>
+                            <input type="text" class="form-control" id="novoNomeMeta" placeholder="O que deseja realizar?">
+                        </div>
+                        <div class="mb-3">
+                            <label for="novaDescricaoMeta" class="form-label">Descrição da Meta</label>
+                            <textarea class="form-control" id="novaDescricaoMeta" placeholder="O que deseja realizar?"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="novoValorMeta" class="form-label">Custo da Meta</label>
+                            <input type="text" class="form-control moneyInput" id="novoValorMeta" placeholder="Quanto custará?">
+                        </div>
+                        <div class="mb-3">
+                            <label for="novaCorMeta" class="form-label">Escolha a Cor da Meta</label>
+                            <input type="color" class="form-control" id="novaCorMeta" value="#d4d2d2" placeholder="Quanto custará?">
+                        </div>
+                        <div class="select-icons">
+                            <label>
+                                <input type="radio" name="novoIconMeta" value="fa-plane">
+                                <i class="fas fa-plane"></i>
+                            </label>
+                            <label>
+                                <input type="radio" name="novoIconMeta" value="fa-house">
+                                <i class="fas fa-house"></i>
+                            </label>
+                            <label>
+                                <input type="radio" name="novoIconMeta" value="fa-car">
+                                <i class="fas fa-car"></i>
+                            </label>
+                            <label>
+                                <input type="radio" name="novoIconMeta" value="fa-book">
+                                <i class="fas fa-book"></i>
+                            </label>
+                            <label>
+                                <input type="radio" name="novoIconMeta" value="fa-heart">
+                                <i class="fas fa-heart"></i>
+                            </label>
+                            <label>
+                                <input type="radio" name="novoIconMeta" value="fa-shopping-bag">
+                                <i class="fas fa-shopping-bag"></i>
+                            </label>
+                        </div>
+                        <div class="mb-3">
+                            <label for="novaDataMeta" class="form-label">Quando ocorrerá?</label>
+                            <input type="date" class="form-control" id="novaDataMeta">
+                        </div>
                     </div>
-                    <div class="mb-3">
-                        <label for="novaDataMeta" class="form-label">Nova Data</label>
-                        <input type="date" class="form-control" id="novaDataMeta">
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                        <input type="submit" value="Adicionar" class="btn btn-primary">
                     </div>
-                </div>
-
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                    <button type="button" class="btn btn-danger" id="excluirMeta">Excluir Meta</button>
-                    <button type="button" class="btn btn-primary" id="salvarMeta">Salvar Alterações</button>
-                </div>
+                </form>
             </div>
         </div>
     </div>

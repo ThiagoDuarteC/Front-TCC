@@ -7,13 +7,13 @@ $.ajaxSetup({
 $(document).ready(function () {
 
     function formatMoney(value) {
-        value = value.replace(/\D/g, '');
-    
-        value = (value / 100).toFixed(2)
-                            .replace('.', ',')
-                            .replace(/\B(?=(\d{3})+(?!\d))/g, '.');
-    
-        return 'R$ ' + value
+        value = value.toString().replace(/[^\d.-]/g, '');
+
+        value = parseFloat(value).toFixed(2)
+            .replace('.', ',')
+            .replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+
+        return 'R$ ' + value;
     }
 
     load_goals = function () {
@@ -22,7 +22,7 @@ $(document).ready(function () {
                 $('.metas-lista').html('');
                 data.forEach((meta) => {
                     let line = `
-                        <div class="item-lista" id="${meta.id}" data-bs-toggle="modal" data-bs-target="#atualizarItem">
+                        <div class="item-lista" id="${meta.id}">
                             <div class="nome-icone-meta">
                                 <div class="d-flex justify-content-center align-items-center rounded-circle" style="width: 60px; height: 60px; background-color: ${meta.background_color}">
                                     <i class="fas ${meta.icon_name}" style="font-size: 28px" class="icone-meta"></i>
@@ -33,6 +33,10 @@ $(document).ready(function () {
                                 </div>
                             </div>
                             <span class="valor-meta">${formatMoney(meta.value)}</span>
+                            <div>
+                                <i class="fa-solid fa-pen blue-color me-2" alt="Opções" data-bs-toggle="modal" data-bs-target="#atualizarItem" onclick="prepararEdicao(${meta.id})" role="button"></i>
+                                <i class="fa-solid fa-trash blue-color" onclick="excluirMeta(${meta.id})" role="button"></i>
+                            </div>
                             <div class="barra-divisora"></div>
                         </div>
                     `;
@@ -55,7 +59,14 @@ $(document).ready(function () {
         const iconMeta = $('input[name="iconMeta"]:checked')
         const valorMeta = $('#valorMeta').val().replace('R$', '').replace(/\./g, '').replace(',', '.').trim();
 
-        $.post('http://127.0.0.1:3000/goals', { name: nomeMeta.val(), description: descricaoMeta.val(), value: valorMeta, background_color: corMeta.val(), icon_name: iconMeta.val(), deadline: dataMeta.val() })
+        $.post('http://127.0.0.1:3000/goals', {
+            name: nomeMeta.val(),
+            description: descricaoMeta.val(),
+            value: valorMeta,
+            background_color: corMeta.val(),
+            icon_name: iconMeta.val(),
+            deadline: dataMeta.val()
+        })
             .done(function (data) {
                 toastr.success(data.success[0]);
                 $('#botaoadd').modal('hide')
@@ -67,39 +78,47 @@ $(document).ready(function () {
             });
     })
 
-    prepararEdicao = function (conta_id) {
-        $.get(`http://127.0.0.1:3000/goals/${conta_id}`)
+    prepararEdicao = function (meta_id) {
+        $.get(`http://127.0.0.1:3000/goals/${meta_id}`)
             .done(function (data) {
-                $('#editarIdConta').val(data.id)
-                $('#editarNomeConta').val(data.name)
-                $('#editarNomeBanco').val(data.bank_name)
-                $('#editarSaldoConta').val(data.initial_balance)
+                $('#editarIdMeta').val(data.id)
+                $('#novoNomeMeta').val(data.name)
+                $('#novaDescricaoMeta').val(data.description)
+                $('#novaCorMeta').val(data.background_color)
+                $('#novaDataMeta').val(data.deadline)
+                $(`input[name="novoIconMeta"][value="${data.icon_name}"]`).prop('checked', true);
+                $('#novoValorMeta').val(formatMoney(data.value))
             })
             .fail(function (xhr) {
                 toastr.error(xhr.responseJSON.errors[0]);
             });
     }
 
-    $('#editarContaForm').submit(function (e) {
+    $('#editarMetaForm').submit(function (e) {
         e.preventDefault();
-        const conta_id = $('#editarIdConta')
-        const nomeConta = $('#editarNomeConta')
-        const nomeBanco = $('#editarNomeBanco')
-        const saldoConta = $('#editarSaldoConta')
+        const meta_id = $('#editarIdMeta')
+        const nomeMeta = $('#novoNomeMeta')
+        const descricaoMeta = $('#novaDescricaoMeta')
+        const corMeta = $('#novaCorMeta')
+        const dataMeta = $('#novaDataMeta')
+        const iconMeta = $('input[name="novoIconMeta"]:checked')
+        const valorMeta = $('#novoValorMeta').val().replace('R$', '').replace(/\./g, '').replace(',', '.').trim();
 
         $.ajax({
-            url: `http://127.0.0.1:3000/goals/${conta_id.val()}`,
+            url: `http://127.0.0.1:3000/goals/${meta_id.val()}`,
             method: 'PUT',
             data: {
-                name: nomeConta.val(),
-                bank_name: nomeBanco.val(),
-                initial_balance: saldoConta.val()
+                name: nomeMeta.val(),
+                description: descricaoMeta.val(),
+                value: valorMeta,
+                background_color: corMeta.val(),
+                icon_name: iconMeta.val(),
+                deadline: dataMeta.val()
             },
             success: function (data) {
-                toastr.success('Conta atualizada com sucesso!');
-                $('#editarContaModal').modal('hide');
-                $('#addContaForm')[0].reset();
-                $('#nomeBanco').val('Selecione');
+                toastr.success('Meta atualizada com sucesso!');
+                $('#atualizarItem').modal('hide');
+                $('#addMetaForm')[0].reset();
                 load_goals();
             },
             error: function (xhr) {
@@ -108,13 +127,13 @@ $(document).ready(function () {
         });
     })
 
-    excluirConta = function (conta_id) {
-        if(confirm('Gostaria de excluir a conta?')) {
+    excluirMeta = function (meta_id) {
+        if (confirm('Gostaria de excluir a meta?')) {
             $.ajax({
-                url: `http://127.0.0.1:3000/goals/${conta_id}`,
+                url: `http://127.0.0.1:3000/goals/${meta_id}`,
                 method: 'DELETE',
                 success: function (data) {
-                    toastr.success('Conta excluida com sucesso!');
+                    toastr.success('Meta excluida com sucesso!');
                     load_goals();
                 },
                 error: function (xhr) {
