@@ -25,7 +25,7 @@ $(document).ready(function () {
                                 <span>Saldo Atual:</span>
                             </div>
                             <div class="conta-footer">
-                                <span class="saldo-atual">R$ ${parseFloat(conta.initial_balance).toFixed(2)}</span>
+                                <span class="saldo-atual">${formatMoney(conta.initial_balance)}</span>
                             </div>
                         </div>
                     `;
@@ -43,13 +43,13 @@ $(document).ready(function () {
         e.preventDefault();
         const nomeConta = $('#nomeConta')
         const nomeBanco = $('#nomeBanco')
-        const saldoConta = $('#saldoConta')
+        const saldoConta = $('#saldoConta').val().replace('R$', '').replace(/\./g, '').replace(',', '.').trim();
 
-        $.post('http://127.0.0.1:3000/accounts', { name: nomeConta.val(), bank_name: nomeBanco.val(), initial_balance: saldoConta.val() })
+        $.post('http://127.0.0.1:3000/accounts', { name: nomeConta.val(), bank_name: nomeBanco.val(), initial_balance: saldoConta })
             .done(function (data) {
                 toastr.success(data.success[0]);
                 $('#addConta').modal('hide')
-                $('#addContaForm').reset()
+                $('#addContaForm')[0].reset()
                 $('#nomeBanco').val('Selecione')
                 load_accounts();
             })
@@ -64,7 +64,7 @@ $(document).ready(function () {
                 $('#editarIdConta').val(data.id)
                 $('#editarNomeConta').val(data.name)
                 $('#editarNomeBanco').val(data.bank_name)
-                $('#editarSaldoConta').val(data.initial_balance)
+                $('#editarSaldoConta').val(formatMoney(data.initial_balance))
             })
             .fail(function (xhr) {
                 toastr.error(xhr.responseJSON.errors[0]);
@@ -76,7 +76,7 @@ $(document).ready(function () {
         const conta_id = $('#editarIdConta')
         const nomeConta = $('#editarNomeConta')
         const nomeBanco = $('#editarNomeBanco')
-        const saldoConta = $('#editarSaldoConta')
+        const saldoConta = $('#editarSaldoConta').val().replace('R$', '').replace(/\./g, '').replace(',', '.').trim();
 
         $.ajax({
             url: `http://127.0.0.1:3000/accounts/${conta_id.val()}`,
@@ -84,7 +84,7 @@ $(document).ready(function () {
             data: {
                 name: nomeConta.val(),
                 bank_name: nomeBanco.val(),
-                initial_balance: saldoConta.val()
+                initial_balance: saldoConta
             },
             success: function (data) {
                 toastr.success('Conta atualizada com sucesso!');
@@ -100,7 +100,7 @@ $(document).ready(function () {
     })
 
     excluirConta = function (conta_id) {
-        if(confirm('Gostaria de excluir a conta?')) {
+        if (confirm('Gostaria de excluir a conta?')) {
             $.ajax({
                 url: `http://127.0.0.1:3000/accounts/${conta_id}`,
                 method: 'DELETE',

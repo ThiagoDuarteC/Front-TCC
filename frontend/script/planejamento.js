@@ -6,16 +6,6 @@ $.ajaxSetup({
 
 $(document).ready(function () {
 
-    function formatMoney(value) {
-        value = value.toString().replace(/[^\d.-]/g, '');
-
-        value = parseFloat(value).toFixed(2)
-            .replace('.', ',')
-            .replace(/\B(?=(\d{3})+(?!\d))/g, '.');
-
-        return 'R$ ' + value;
-    }
-
     load_goals = function () {
         $.get('http://127.0.0.1:3000/goals')
             .done(function (data) {

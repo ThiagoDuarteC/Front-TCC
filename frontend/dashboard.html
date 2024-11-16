@@ -66,7 +66,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                        <button type="button" class="btn btn-primary" id="salvarAlteracoes">Salvar Alterações</button>
+                        <button type="button" class="btn btn-primary" id="salvarAlteracoes">Salvar</button>
                     </div>
                 </div>
             </div>
@@ -80,81 +80,36 @@
                         <h2 class="modal-title" id="addModalLabel">Adicionar Transação</h2>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="modal-body">
-                        <div class="escolha-tipo-transacoes">
-                            <label class="label-despesa">
-                                <input type="radio" name="tipo-transacao" value="despesa" id="btn-despesa" checked>
-                                Despesa
-                            </label>
-                            <label class="label-receita">
-                                <input type="radio" name="tipo-transacao" value="receita" id="btn-receita">
-                                Receita
-                            </label>
-                        </div>
-                        <div class="dados-transacoes">
-                            <label>Valor da Transação</label>
-                            <input type="number" placeholder="Quantos Reais?" class="valor-transacao">
-                            <label>Categoria</label>
-                            <!--Categorias de Despesas-->
-                            <div class="grid-categorias-despesa">
-                                <div class="categoria-opcao">
-                                    <input type="radio" id="alimentacao" name="categoria" value="alimentacao">
-                                    <label for="alimentacao">Alimentação</label>
-                                  </div>
-                                  <div class="categoria-opcao">
-                                    <input type="radio" id="transporte" name="categoria" value="transporte">
-                                    <label for="transporte">Transporte</label>
-                                  </div>
-                                  <div class="categoria-opcao">
-                                    <input type="radio" id="lazer" name="categoria" value="lazer">
-                                    <label for="lazer">Lazer</label>
-                                  </div>
-                                  <div class="categoria-opcao">
-                                    <input type="radio" id="jogos" name="categoria" value="jogos">
-                                    <label for="jogos">Jogos</label>
-                                  </div>   
-                                  <div class="categoria-opcao">
-                                    <input type="radio" id="livros" name="categoria" value="livros">
-                                    <label for="livros">Livros</label>
-                                  </div>   
-                                  <div class="categoria-opcao">
-                                    <input type="radio" id="financiamento" name="categoria" value="financiamento">
-                                    <label for="financiamento">Financiamento</label>
-                                  </div>
-                                  <div class="categoria-opcao">
-                                    <input type="radio" id="salao-de-beleza" name="categoria" value="salao-de-beleza">
-                                    <label for="salao-de-beleza">Salão de Beleza</label>
-                                  </div>  
-                            </div>     
-                            <div class="grid-categorias-receita">
-                                <div class="categoria-opcao">
-                                    <input type="radio" id="salario" name="categoria" value="salario">
-                                    <label for="salario">Salário</label>
-                                </div>
-                                <div class="categoria-opcao">
-                                    <input type="radio" id="pix" name="categoria" value="pix">
-                                    <label for="pix">Pix</label>
-                                </div>
-                                <div class="categoria-opcao">
-                                    <input type="radio" id="renda-extra" name="categoria" value="renda-extra">
-                                    <label for="renda-extra">Renda Extra</label>
-                                </div>
-                            </div>     
-                            <span class="adicionar-categoria">Adicionar Categoria</span>
-                            <input type="text" id="nova-categoria" placeholder="Digite nova categoria" style="display: none;"> <!--Inicialmente invisível-->
-                            <button id="btn-add-categoria" style="display: none;">Adicionar</button> <!--Inicialmente invisível-->
-                            <label>Conta</label>
-                            <div class="grid-conta-selecao">
-                                <div class="conta-opcao">
-                                    <input type="radio" id="bradesco" name="conta" value="bradesco">
-                                    <label for="bradesco">Bradesco</label>
-                                </div>
+                    <form id="criarTransacao">
+                        <div class="modal-body">
+                            <div class="escolha-tipo-transacoes">
+                                <label class="label-despesa">
+                                    <input type="radio" name="tipo-transacao" value="despesa" id="btn-despesa" checked>
+                                    Despesa
+                                </label>
+                                <label class="label-receita">
+                                    <input type="radio" name="tipo-transacao" value="receita" id="btn-receita">
+                                    Receita
+                                </label>
                             </div>
-                            <label>Data da Transação</label>
-                            <input type="date" class="data-transacao">
-                            <button class="adicionar-transacao" id="add-transacao">Adicionar Transação</button>
+                            <div class="dados-transacoes">
+                                <label>Valor da Transação</label>
+                                <input type="text" placeholder="Quantos Reais?" class="valor-transacao moneyInput">
+                                <label>Categoria</label>
+                                <select placeholder="Quantos Reais?" class="form-control mt-1"><option>Selecione uma categoria</option></select>
+
+                                <label>Conta Bancaria</label>
+                                <select placeholder="Quantos Reais?" class="form-control mt-1"><option>Selecione uma conta</option></select>
+
+                                <label>Meta (opcional)</label>
+                                <select placeholder="Quantos Reais?" class="form-control mt-1"><option>Selecione uma meta</option></select>
+
+                                <label>Data da Transação</label>
+                                <input type="date" class="data-transacao">
+                                <button class="adicionar-transacao" id="add-transacao">Adicionar Transação</button>
+                            </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -169,13 +124,8 @@
                 </div>
             </header>
 
-            <!-- Campo de mês e ano -->
-            <div class="campo-mes-ano" id="campoMesAno">
-                Selecione Mês
-            </div>
-
             <!-- Conteúdo do dashboard, saldos, receitas, gastos, etc. -->
-            <div class="saldos-content">
+            <div class="saldos-content mt-5">
                 <div class="valores-card" id="saldoCard">
                     <div class="valores">
                         <h1>Saldo Atual ></h1>

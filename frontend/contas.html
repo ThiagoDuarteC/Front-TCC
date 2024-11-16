@@ -109,7 +109,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                    <button type="button" class="btn btn-primary" id="salvarAlteracoes">Salvar Alterações</button>
+                    <button type="button" class="btn btn-primary" id="salvarAlteracoes">Salvar</button>
                 </div>
             </div>
         </div>
@@ -174,7 +174,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="saldoConta" class="form-label">Saldo Atual na Conta</label>
-                            <input type="number" class="form-control" id="saldoConta" placeholder="R$0,00">
+                            <input type="text" class="form-control moneyInput" id="saldoConta" placeholder="R$0,00">
                         </div>
                         <div class="mb-3">
                             <label for="tipoConta" class="form-label">Tipo de Conta</label>
@@ -260,7 +260,7 @@
                         <!-- Saldo atual -->
                         <div class="mb-3">
                             <label for="editarSaldoConta" class="form-label">Saldo Atual na Conta</label>
-                            <input type="number" class="form-control" id="editarSaldoConta" placeholder="R$0,00">
+                            <input type="text" class="form-control moneyInput" id="editarSaldoConta" placeholder="R$0,00">
                         </div>
                         <!-- Tipo de conta -->
                         <div class="mb-3">
@@ -282,7 +282,7 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" id="excluirConta">Excluir Conta</button>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <input value="Salvar Alterações" type="submit" class="btn btn-primary" id="salvarEdicaoConta">
+                        <input value="Salvar" type="submit" class="btn btn-primary" id="salvarEdicaoConta">
                     </div>
                 </form>
             </div>
@@ -311,7 +311,7 @@
                     </div>
                     <div class="dados-transacoes">
                         <label>Valor da Transação</label>
-                        <input type="number" placeholder="Quantos Reais?" class="valor-transacao">
+                        <input type="text" placeholder="Quantos Reais?" class="valor-transacao moneyInput">
                         <label>Categoria</label>
                         <!--Categorias de Despesas-->
                         <div class="grid-categorias-despesa">
