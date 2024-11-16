@@ -39,6 +39,19 @@ function formatMoney(value) {
     return 'R$ ' + value;
 }
 
+function preencherSelect(selectId, options, placeholderText = 'Selecione uma opção') {
+    const select = $(selectId);
+    select.empty();
+
+    select.append(new Option(placeholderText, '', true, true)).prop('disabled', true);
+
+    options.forEach(option => {
+        select.append(new Option(option.name, option.id));
+    });
+
+    select.prop('disabled', false);
+}
+
 $(document).ready(function () {
     $('.moneyInput').on('input', function () {
         let value = $(this).val();
@@ -46,55 +59,65 @@ $(document).ready(function () {
         $(this).val(formatInputMoney(value));
     });
 
-    //     const token = localStorage.getItem('token');
-    //     const currentPage = window.location.pathname;
+    // const token = localStorage.getItem('token');
+    // const currentPage = window.location.pathname;
 
-    //     const publicPages = ['/index.html', '/cadastro.html', '/esqueceusenha.html', '/'];
+    // const publicPages = ['/index.html', '/cadastro.html', '/esqueceusenha.html', '/'];
 
-    //     const protectedPages = ['/dashboard.html', '/contas.html', '/historico-transacoes.html', '/metas.html', '/relatorios.html'];
+    // const protectedPages = ['/dashboard.html', '/contas.html', '/historico-transacoes.html', '/metas.html', '/relatorios.html'];
 
-    //     if (token) {
-    //         if (publicPages.some(page => currentPage.endsWith(page))) {
-    //             window.location.href = '/frontend/dashboard.html';
-    //         }
-    //     } else {
-    //         if (protectedPages.some(page => currentPage.endsWith(page))) {
-    //             window.location.href = '/frontend/';
-    //         }
+    // if (token) {
+    //     if (publicPages.some(page => currentPage.endsWith(page))) {
+    //         window.location.href = '/frontend/dashboard.html';
     //     }
+    // } else {
+    //     if (protectedPages.some(page => currentPage.endsWith(page))) {
+    //         window.location.href = '/frontend/';
+    //     }
+    // }
 
 
     // TRANSAÇõES
 
     $('#criarTransacao').submit(function (e) {
         e.preventDefault();
+        const categoria = $('#selectCategoria').val()
+        const conta = $('#selectConta').val()
+        const meta = $('#selectMeta').val()
+        const valorTransacao = $('#valorTransacao').val().replace('R$', '').replace(/\./g, '').replace(',', '.').trim();
+        const tipoTransacao = $('input[name="tipoTransacao"]:checked').val()
+        const dataTransacao = $('#dataTransacao').val()
 
 
-        $.post('http://127.0.0.1:3000/transactions', { name: nomeConta.val(), bank_name: nomeBanco.val(), initial_balance: saldoConta.val() })
+        $.post('http://127.0.0.1:3000/transactions', { category_id: categoria, account_id: conta, goal_id: meta, value: valorTransacao, transaction_type: tipoTransacao, transaction_date: dataTransacao })
             .done(function (data) {
                 toastr.success(data.success[0]);
-                $('#addConta').modal('hide')
-                $('#addContaForm').reset()
-                $('#nomeBanco').val('Selecione')
-                load_accounts();
+                $('#addModal').modal('hide')
+                // Precisa executar algo aqui
             })
             .fail(function (xhr) {
                 toastr.error(xhr.responseJSON.errors[0]);
             });
     })
 
-    
+
     preparar_transacao = function () {
         $.get('http://127.0.0.1:3000/transactions/load_info')
-        .done(function (data) {
-            console.log(data)
-        })
-        .fail(function (xhr) {
-            toastr.error(xhr.responseJSON.errors[0]);
-        });
+            .done(function (data) {
+                $('#criarTransacao')[0].reset()
+                const today = new Date().toISOString().split('T')[0];
+                $('.data-transacao').val(today);
+                preencherSelect('#selectCategoria', data.categories, 'Selecione uma categoria');
+                preencherSelect('#selectConta', data.accounts, 'Selecione uma conta');
+                preencherSelect('#selectMeta', data.goals, 'Selecione uma meta');
+
+            })
+            .fail(function (xhr) {
+                toastr.error(xhr.responseJSON.errors[0]);
+            });
     }
-    
-    $('.mais-icone').click(preparar_transacao())
+
+    $('.mais-icone').click(() => { preparar_transacao() })
 
 });
 

@@ -84,29 +84,31 @@
                         <div class="modal-body">
                             <div class="escolha-tipo-transacoes">
                                 <label class="label-despesa">
-                                    <input type="radio" name="tipo-transacao" value="despesa" id="btn-despesa" checked>
-                                    Despesa
+                                    <input type="radio" name="tipoTransacao" value="debit" id="btn-despesa" checked>
+                                    <span>Despesa</span>
                                 </label>
                                 <label class="label-receita">
-                                    <input type="radio" name="tipo-transacao" value="receita" id="btn-receita">
-                                    Receita
+                                    <input type="radio" name="tipoTransacao" value="credit" id="btn-receita">
+                                    <span>Receita</span>
                                 </label>
                             </div>
                             <div class="dados-transacoes">
                                 <label>Valor da Transação</label>
-                                <input type="text" placeholder="Quantos Reais?" class="valor-transacao moneyInput">
+                                <input type="text" placeholder="Quantos Reais?" class="valor-transacao moneyInput" id="valorTransacao">
+
                                 <label>Categoria</label>
-                                <select placeholder="Quantos Reais?" class="form-control mt-1"><option>Selecione uma categoria</option></select>
+                                <select class="form-control mt-1" id="selectCategoria"></select>
 
                                 <label>Conta Bancaria</label>
-                                <select placeholder="Quantos Reais?" class="form-control mt-1"><option>Selecione uma conta</option></select>
+                                <select class="form-control mt-1" id="selectConta"></select>
 
                                 <label>Meta (opcional)</label>
-                                <select placeholder="Quantos Reais?" class="form-control mt-1"><option>Selecione uma meta</option></select>
+                                <select class="form-control mt-1" id="selectMeta"></select>
 
                                 <label>Data da Transação</label>
-                                <input type="date" class="data-transacao">
-                                <button class="adicionar-transacao" id="add-transacao">Adicionar Transação</button>
+                                <input type="date" class="data-transacao" id="dataTransacao">
+
+                                <input type="submit" class="adicionar-transacao mt-4" value="Adicionar Transação">
                             </div>
                         </div>
                     </form>
