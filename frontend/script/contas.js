@@ -10,7 +10,7 @@ $(document).ready(function () {
         $.get('http://127.0.0.1:3000/accounts')
             .done(function (data) {
                 $('.cards').html('');
-                data.forEach((conta) => {
+                data.accounts.forEach((conta) => {
                     let card = `
                         <div id="conta-${conta.id}" class="conta">
                             <div class="conta-header">
@@ -25,12 +25,13 @@ $(document).ready(function () {
                                 <span>Saldo Atual:</span>
                             </div>
                             <div class="conta-footer">
-                                <span class="saldo-atual">${formatMoney(conta.initial_balance)}</span>
+                                <span class="saldo-atual">${formatMoney(conta.balance)}</span>
                             </div>
                         </div>
                     `;
                     $('.cards').append(card);
                 });
+                $('#saldoTotal').text(formatMoney(data.total_balance))
             })
             .fail(function (xhr) {
                 toastr.error(xhr.responseJSON.errors[0]);

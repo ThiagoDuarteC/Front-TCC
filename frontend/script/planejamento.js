@@ -10,7 +10,7 @@ $(document).ready(function () {
         $.get('http://127.0.0.1:3000/goals')
             .done(function (data) {
                 $('.metas-lista').html('');
-                data.forEach((meta) => {
+                data.goals.forEach((meta) => {
                     let line = `
                         <div class="item-lista" id="${meta.id}">
                             <div class="nome-icone-meta">
@@ -19,7 +19,7 @@ $(document).ready(function () {
                                 </div>
                                 <div class="gambiarra">
                                     <span class="nome-meta">${meta.name}</span>
-                                    <span class="valor-adicionado-acumulado">Acumulado: ${meta.current_value}</span>
+                                    <span class="valor-adicionado-acumulado">Acumulado: ${formatMoney(meta.balance)}</span>
                                 </div>
                             </div>
                             <span class="valor-meta">${formatMoney(meta.value)}</span>
@@ -32,6 +32,9 @@ $(document).ready(function () {
                     `;
                     $('.metas-lista').append(line);
                 });
+
+                $('.receita-valor').text(formatMoney(data.total_balance))
+                $('.expectativa-valor').text(formatMoney(data.total_goals))
             })
             .fail(function (xhr) {
                 toastr.error(xhr.responseJSON.errors[0]);

@@ -1,3 +1,10 @@
+$.ajaxSetup({
+    headers: {
+        'Authorization': 'Bearer ' + localStorage.getItem('token')
+    }
+});
+
+
 //Início do código que altera a imagem e nome do perfil
 
 document.getElementById('salvarAlteracoes').addEventListener('click', function() {
@@ -23,6 +30,20 @@ document.getElementById('salvarAlteracoes').addEventListener('click', function()
 });
 
 //Fim do código que altera a imagem e nome do perfil
+
+load_data = function() {
+    $.get('http://127.0.0.1:3000/dashboard')
+            .done(function (data) {
+                $('#saldoCard span').text(formatMoney(data.current_balance))
+                $('#receitaCard span').text(formatMoney(data.credit_balance))
+                $('#despesaCard span').text(formatMoney(data.debit_balance))
+            })
+            .fail(function (xhr) {
+                toastr.error(xhr.responseJSON.errors[0]);
+            });
+}
+
+load_data()
 
 
 //Início do código dos gráficos
