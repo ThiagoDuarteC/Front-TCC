@@ -105,7 +105,7 @@ $(document).ready(function () {
         $.get('http://127.0.0.1:3000/transactions/load_info')
             .done(function (data) {
                 $('#criarTransacao')[0].reset()
-                const today = new Date().toISOString().split('T')[0];
+                const today = new Date().toLocaleDateString('en-CA');
                 $('.data-transacao').val(today);
                 preencherSelect('#selectCategoria', data.categories, 'Selecione uma categoria');
                 preencherSelect('#selectConta', data.accounts, 'Selecione uma conta');

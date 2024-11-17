@@ -226,22 +226,21 @@ header img{
     color: white;
 }
 
-table{
+.tabela-transacoes {
     margin-left: 10vw;
     width: 60vw;
-    padding: 10px;
+    max-height: 501px;
     border-radius: 33px;
-    border-collapse: collapse;
-    border: hidden;
     box-shadow: 0 0 0 2px #0d12ad70;
-    z-index: -1;
+    overflow-y: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 }
 
-thead{
-    background-color: #c7ddf2;
-    font-size: 1.625rem;
-    color: #0D13AD;
-    font-family: 'Montserrat', Arial;
+table{
+    width: 100%; /* Ajusta a largura da tabela ao contêiner */
+    border-collapse: collapse;
+    border: hidden;
 }
 
 tr{
@@ -249,7 +248,14 @@ tr{
 }
 
 th{
+    background-color: #c7ddf2;
+    font-size: 1.625rem;
+    color: #0D13AD;
+    font-family: 'Montserrat', Arial;
+    position: sticky;
+    top: 0;
     padding: 7px;
+    z-index: 1;
 }
 
 td{
