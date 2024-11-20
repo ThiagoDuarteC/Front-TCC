@@ -99,10 +99,6 @@ header img{
     font-weight: 600;
 }
 
-#nomeUsuarioDisplay {
-    margin-left: 10px; /* Espaçamento entre o nome e o ícone */
-}
-
 .filtros{
     display: flex;
     column-gap: 7vw;

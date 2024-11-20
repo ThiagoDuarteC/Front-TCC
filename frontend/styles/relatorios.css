@@ -100,10 +100,6 @@ main {
     margin-left: 2vw;
 }
 
-#nomeUsuarioDisplay {
-    margin-left: 10px; /* Espaçamento entre o nome e o ícone */
-}
-
 .saldos-content {
     display: flex;
     column-gap: 4vw;

@@ -53,28 +53,35 @@ function preencherSelect(selectId, options, placeholderText = 'Selecione uma op�
 }
 
 $(document).ready(function () {
+    $('.fa-sign-out-alt').on('click', function(){
+        if (confirm('Tem certeza?')) {
+            localStorage.removeItem('token')
+            window.location.reload()
+        }
+    })
+
     $('.moneyInput').on('input', function () {
         let value = $(this).val();
 
         $(this).val(formatInputMoney(value));
     });
 
-    // const token = localStorage.getItem('token');
-    // const currentPage = window.location.pathname;
+    const token = localStorage.getItem('token');
+    const currentPage = window.location.pathname;
 
-    // const publicPages = ['/index.html', '/cadastro.html', '/esqueceusenha.html', '/'];
+    const publicPages = ['/index.html', '/cadastro.html', '/esqueceusenha.html', '/'];
 
-    // const protectedPages = ['/dashboard.html', '/contas.html', '/historico-transacoes.html', '/metas.html', '/relatorios.html'];
+    const protectedPages = ['/dashboard.html', '/contas.html', '/historico-transacoes.html', '/metas.html', '/relatorios.html'];
 
-    // if (token) {
-    //     if (publicPages.some(page => currentPage.endsWith(page))) {
-    //         window.location.href = '/frontend/dashboard.html';
-    //     }
-    // } else {
-    //     if (protectedPages.some(page => currentPage.endsWith(page))) {
-    //         window.location.href = '/frontend/';
-    //     }
-    // }
+    if (token) {
+        if (publicPages.some(page => currentPage.endsWith(page))) {
+            window.location.href = '/frontend/dashboard.html';
+        }
+    } else {
+        if (protectedPages.some(page => currentPage.endsWith(page))) {
+            window.location.href = '/frontend/';
+        }
+    }
 
 
     // TRANSAÇõES
@@ -93,7 +100,7 @@ $(document).ready(function () {
             .done(function (data) {
                 toastr.success(data.success[0]);
                 $('#addModal').modal('hide')
-                // Precisa executar algo aqui
+                window.location.reload()
             })
             .fail(function (xhr) {
                 toastr.error(xhr.responseJSON.errors[0]);
@@ -110,7 +117,6 @@ $(document).ready(function () {
                 preencherSelect('#selectCategoria', data.categories, 'Selecione uma categoria');
                 preencherSelect('#selectConta', data.accounts, 'Selecione uma conta');
                 preencherSelect('#selectMeta', data.goals, 'Selecione uma meta');
-
             })
             .fail(function (xhr) {
                 toastr.error(xhr.responseJSON.errors[0]);

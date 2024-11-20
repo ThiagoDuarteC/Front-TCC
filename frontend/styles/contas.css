@@ -102,9 +102,6 @@ main{
 .conta-nome{
     font-size: 35px; 
 }
-#nomeUsuarioDisplay {
-    margin-left: 10px; /* Espaçamento entre o nome e o ícone */
-}
 
 .contas-adicionar-saldo{
     margin-left: 2vw;

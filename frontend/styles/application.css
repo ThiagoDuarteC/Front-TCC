@@ -179,3 +179,12 @@
 .data-transacao:focus{
     outline: none;
 }
+
+#nomeUsuarioDisplay {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.fa-sign-out-alt {
+    cursor: pointer;
+}
