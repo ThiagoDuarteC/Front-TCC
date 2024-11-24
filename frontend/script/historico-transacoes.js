@@ -85,11 +85,55 @@ $('#btnCancelar').click(function () {
 
 //Fim do código do modal do filtro de mês e ano
 
+prepararEdicao = function (transacao_id) {
+    $.get(`http://127.0.0.1:3000/transactions/${transacao_id}`)
+        .done(function (data) {
+            preencherSelect('#editarSelectCategoria', data.categories, 'Selecione uma categoria');
+            preencherSelect('#editarSelectConta', data.accounts, 'Selecione uma conta');
+            preencherSelect('#editarSelectMeta', data.goals, 'Selecione uma meta');
+            $('#editarIdTransação').val(data.transaction.id)
+            $('#editarSelectCategoria').val(data.transaction.category_id)
+            $('#editarSelectConta').val(data.transaction.account_id)
+            $('#editarSelectMeta').val(data.transaction.goal_id)
+            $('#editarValorTransacao').val(formatMoney(data.transaction.value))
+            $(`input[name="editarTipoTransacao"][value="${data.transaction.transaction_type}"]`).prop('checked', true);
+            $('#editarDataTransacao').val(data.transaction.transaction_date)
+        })
+        .fail(function (xhr) {
+            toastr.error(xhr.responseJSON.errors[0]);
+        });
+}
+
+$('#editarTransacao').submit(function (e) {
+    e.preventDefault();
+    const transação_id = $('#editarIdTransação')
+    const categoria = $('#editarSelectCategoria').val()
+    const conta = $('#editarSelectConta').val()
+    const meta = $('#editarSelectMeta').val()
+    const valorTransacao = $('#editarValorTransacao').val().replace('R$', '').replace(/\./g, '').replace(',', '.').trim();
+    const tipoTransacao = $('input[name="editarTipoTransacao"]:checked').val()
+    const dataTransacao = $('#editarDataTransacao').val()
+
+    
+    $.ajax({
+        url: `http://127.0.0.1:3000/transactions/${transação_id.val()}`,
+        method: 'PUT',
+        data: { category_id: categoria, account_id: conta, goal_id: meta, value: valorTransacao, transaction_type: tipoTransacao, transaction_date: dataTransacao },
+        success: function (data) {
+            toastr.success('Transação atualizada com sucesso!');
+            $('#altModal').modal('hide')
+            $('#editarTransacao')[0].reset();
+            load_transacoes();
+        },
+        error: function (xhr) {
+            toastr.error(xhr.responseJSON.errors[0]);
+        }
+    });
+})
 
 load_transacoes = function () {
     $.get('http://127.0.0.1:3000/transactions')
         .done(function (data) {
-            console.log(data)
             $('#table-body').html('');
             data.forEach((transacao) => {
                 let transactionTypeContent = transacao.transaction_type === 'credit'
@@ -99,7 +143,7 @@ load_transacoes = function () {
                 let formattedDate = new Date(transacao.transaction_date + 'T00:00:00').toLocaleDateString('pt-BR');
 
                 let line = `
-                        <tr data-bs-toggle="modal" data-bs-target="#altModal">
+                        <tr data-bs-toggle="modal" data-bs-target="#altModal" onclick="prepararEdicao(${transacao.id})">
                             ${transactionTypeContent}
                             <td id="categoria">${transacao.category.name}</td>
                             <td id="data">${formattedDate}</td>

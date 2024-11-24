@@ -156,26 +156,42 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h2 class="modal-title" id="addModalLabel">Alterar Transação</h2>
+                        <h2 class="modal-title" id="addModalLabel">Adicionar Transação</h2>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="modal-body">
-                        <div class="escolha-novo-tipo-transacoes">
-                            <label class="label-despesa">
-                                <input type="radio" name="tipo-transacao" value="novaDespesa" id="btn-nova-despesa" checked>
-                                Despesa
-                            </label>
-                            <label class="label-receita">
-                                <input type="radio" name="tipo-transacao" value="novaReceita" id="btn-nova-receita">
-                                Receita
-                            </label>
+                    <form id="editarTransacao">
+                        <input type="hidden" id="editarIdTransação">
+                        <div class="modal-body">
+                            <div class="escolha-tipo-transacoes">
+                                <label class="label-despesa">
+                                    <input type="radio" name="editarTipoTransacao" value="debit" id="btn-despesa" checked>
+                                    <span>Despesa</span>
+                                </label>
+                                <label class="label-receita">
+                                    <input type="radio" name="editarTipoTransacao" value="credit" id="btn-receita">
+                                    <span>Receita</span>
+                                </label>
+                            </div>
+                            <div class="dados-transacoes">
+                                <label>Valor da Transação</label>
+                                <input type="text" placeholder="Quantos Reais?" class="valor-transacao moneyInput" id="editarValorTransacao">
+
+                                <label>Categoria</label>
+                                <select class="form-control mt-1" id="editarSelectCategoria"></select>
+
+                                <label>Conta Bancaria</label>
+                                <select class="form-control mt-1" id="editarSelectConta"></select>
+
+                                <label>Meta (opcional)</label>
+                                <select class="form-control mt-1" id="editarSelectMeta"></select>
+
+                                <label>Data da Transação</label>
+                                <input type="date" class="data-transacao" id="editarDataTransacao">
+
+                                <input type="submit" class="adicionar-transacao mt-4" value="Editar Transação">
+                            </div>
                         </div>
-                        <div class="novos-dados-transacoes">
-                            <label>Novo Valor da Transação</label>
-                            <input type="text" placeholder="Quantos Reais?" class="valor-transacao moneyInput">
-                            <!--Modal para alterar despesa ainda está em construção-->
-                        </div>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -224,7 +240,7 @@
             </div>
         </div>
         
-    <script src="script/historico-transacoes.js"></script>
     <script src="script/application.js"></script>
+    <script src="script/historico-transacoes.js"></script>
 </body>
 </html>
