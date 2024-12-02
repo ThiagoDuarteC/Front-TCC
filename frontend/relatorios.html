@@ -59,35 +59,21 @@
             
             <div class="filtros">
                 <select class="filtro-dropdown">
-                    <option value="">Relatórios por categorias</option>
-                    <option value="">Relatórios por metas</option>
-                    <option value="">Relatórios por gastos</option>
+                    <option value="category_by_credit">Categoria por Receita</option>
+                    <option value="category_by_debit">Categoria por Despesa</option>
+                    <option value="balance_per_account">Saldo por Conta</option>
                 </select>
-                <div class="filtro-data">
+                <!-- <div class="filtro-data">
                     <span class="go-back"></span>
                     <span>Março</span>
                     <span class="go-forward">></span>
-                </div>
+                </div> -->
             </div>  
             <div class="grafico-legenda">
                 <div class="grafico">
-                    <img src="img/luna.png" alt="">
+                    <canvas id="report" style="margin: 0 auto; width: 50%; height: 50%;"></canvas>
                 </div>
                 <div class="legenda">
-                    <div class="legenda-item">
-                        <span class="legenda-icone"></span>
-                        <div class="legenda-texto-valor">
-                            <span class="legenda-texto">Texto da Legenda :</span>
-                            <span class="legenda-valor">R$ 24,00</span>
-                        </div>
-                    </div>
-                    <div class="legenda-item">
-                        <span class="legenda-icone"></span>
-                        <div class="legenda-texto-valor">
-                            <span class="legenda-texto">Texto da Legenda :</span>
-                            <span class="legenda-valor">R$ 24,00</span>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>

@@ -1,3 +1,9 @@
+$.ajaxSetup({
+    headers: {
+        'Authorization': 'Bearer ' + localStorage.getItem('token')
+    }
+});
+
 //Início do código que altera a imagem e nome do perfil
 
 document.getElementById('salvarAlteracoes').addEventListener('click', function() {
@@ -24,103 +30,177 @@ document.getElementById('salvarAlteracoes').addEventListener('click', function()
 
 //Fim do código que altera a imagem e nome do perfil
 
-//Início do Código que cria categorias para despesas e receitas dentro do modal
+$(document).ready(function(){
 
-const adicionarCategoriaSpan = document.querySelector('.adicionar-categoria');
-const novaCategoriaInput = document.getElementById('nova-categoria');
-const btnAddCategoria = document.getElementById('btn-add-categoria');
-const categoriaDespesa = document.querySelector('.grid-categorias-despesa');
-const categoriaReceita = document.querySelector('.grid-categorias-receita');
+    load_report($('.filtro-dropdown').val())
 
-const btnDespesas = document.getElementById('btn-despesa');
-const btnReceitas = document.getElementById('btn-receita');
+    $('.filtro-dropdown').change(function(){
+        report_container.destroy();
+        load_report($('.filtro-dropdown').val())
+    })
+    
+})
 
-let inputVisivel = false; 
+var report_container
 
-function formatarTexto(texto) {
-    return texto
-    .normalize('NFD')  // Normaliza caracteres acentuados
-    .replace(/[\u0300-\u036f]/g, '')  // Remove acentos
-    .toLowerCase()  // Converte para minúsculas
-    .replace(/\s+/g, '-');  // Substitui espaços por hífens
+const colors = [
+    'rgba(75, 192, 192, 0.9)',
+    'rgba(255, 99, 132, 0.9)',
+    'rgba(255, 205, 86, 0.9)',
+    'rgba(54, 162, 235, 0.9)',
+    'rgba(153, 102, 255, 0.9)',
+    'rgba(255, 159, 64, 0.9)',
+    'rgba(201, 203, 207, 0.9)',
+    'rgba(0, 128, 128, 0.9)',
+    'rgba(255, 69, 0, 0.9)',
+    'rgba(139, 69, 19, 0.9)',
+    'rgba(0, 255, 127, 0.9)',
+    'rgba(70, 130, 180, 0.9)',
+    'rgba(238, 130, 238, 0.9)',
+    'rgba(124, 252, 0, 0.9)',
+    'rgba(220, 20, 60, 0.9)' 
+];
+
+load_report = function (route) {
+    $.get(`http://127.0.0.1:3000/reports/${route}`)
+        .done(function (data) {
+            let labels, values, legendas
+            if (route == 'balance_per_account') {
+                legendas = data.accounts
+                labels = data.accounts.map(account => account.name);
+                values = data.accounts.map(account => parseFloat(account.value));
+                console.log(labels, values)
+            } else{
+                legendas = data.categories
+                labels = data.categories.map(category => category.name);
+                values = data.categories.map(category => parseFloat(category.value));
+            }
+            window[route](labels, values)
+            generate_legenda(legendas, colors)
+        })
+        .fail(function (xhr) {
+            toastr.error(xhr.responseJSON.errors[0]);
+        });
 }
 
-adicionarCategoriaSpan.addEventListener('click', () => {
-    inputVisivel = !inputVisivel; // Alterna o estado de visibilidade
-    
-    if (inputVisivel) {
-    novaCategoriaInput.style.display = 'inline-block';
-    btnAddCategoria.style.display = 'inline-block';
-    } else {
-    novaCategoriaInput.style.display = 'none';
-    btnAddCategoria.style.display = 'none';
-    }
-});
-
-btnAddCategoria.addEventListener('click', () => {
-    const novaCategoriaNome = novaCategoriaInput.value.trim();
-
-    if (novaCategoriaNome === '') {
-    alert('Por favor, insira um nome para a nova categoria.');
-    return;
-    }
-
-    const categoriaId = formatarTexto(novaCategoriaNome);  // Formata o texto para id e value
-
-    
-    const novaCategoriaDiv = document.createElement('div');
-    novaCategoriaDiv.classList.add('categoria-opcao');
-
-    novaCategoriaDiv.innerHTML = `
-    <input type="radio" id="${categoriaId}" name="categoria" value="${categoriaId}">
-    <label for="${categoriaId}">${novaCategoriaNome.charAt(0).toUpperCase() + novaCategoriaNome.slice(1)}</label>
-    `;
-
-   
-    if (btnDespesa.checked) {
-
-    categoriasDespesa.appendChild(novaCategoriaDiv);
-    } else if (btnReceita.checked) {
-   
-    categoriasReceita.appendChild(novaCategoriaDiv);
-    } else {
-    alert('Por favor, selecione se é uma despesa ou receita antes de adicionar a categoria.');
-    return;
-    }
-
-   
-    novaCategoriaInput.value = '';
-    novaCategoriaInput.style.display = 'none';
-    btnAddCategoria.style.display = 'none';
-    inputVisivel = false; // Resetar o estado de visibilidade
-});
-
-//Fim do Código que cria categorias para despesas e receitas dentro do modal
-
-//Início do código que alterna entre as categorias de despesa e receita dependendo do que o usuário selecionar
-
-const btnDespesa = document.getElementById('btn-despesa');
-const btnReceita = document.getElementById('btn-receita');
-const categoriasDespesa = document.querySelector('.grid-categorias-despesa');
-const categoriasReceita = document.querySelector('.grid-categorias-receita');
-
-function alternarCategorias() {
-    if (btnDespesa.checked) {
-    categoriasDespesa.style.opacity = '1';
-    categoriasDespesa.style.position = 'relative';
-    categoriasReceita.style.opacity = '0';
-    categoriasReceita.style.position = 'absolute';
-    } else if (btnReceita.checked) {
-    categoriasDespesa.style.opacity = '0';
-    categoriasDespesa.style.position = 'absolute';
-    categoriasReceita.style.opacity = '1';
-    categoriasReceita.style.position = 'relative';
-    }
+generate_legenda = function (legendas) {
+    $('.legenda').html('');
+    legendas.forEach((item, index) => {
+        let legenda_item = `
+            <div class="legenda-item">
+                <span class="legenda-icone" style="background-color: ${colors[index % colors.length]}"></span>
+                <div class="legenda-texto-valor">
+                    <span class="legenda-texto">${item.name}:</span>
+                    <span class="legenda-valor">${formatMoney(item.value)}</span>
+                </div>
+            </div>
+        `;
+        $('.legenda').append(legenda_item);
+    });
 }
 
-btnDespesa.addEventListener('change', alternarCategorias);
-btnReceita.addEventListener('change', alternarCategorias);
+category_by_credit = function (labels, values){
+    const ctx = document.getElementById('report').getContext('2d');
+    report_container = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: labels,
+            datasets: [{
+                data: values,
+                backgroundColor: colors,
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'top',
+                },
+                title: {
+                    display: true,
+                    text: 'Categoria por Receita'
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function (tooltipItem) {
+                            const value = tooltipItem.raw;
+                            return `${tooltipItem.label}: R$ ${value.toLocaleString('pt-BR')}`;
+                        }
+                    }
+                }
+            }
+        }
+    });
+}
 
-window.onload = alternarCategorias;
+category_by_debit = function (labels, values){
+    const ctx = document.getElementById('report').getContext('2d');
+    report_container = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: labels,
+            datasets: [{
+                data: values,
+                backgroundColor: colors,
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'top',
+                },
+                title: {
+                    display: true,
+                    text: 'Categoria por Despesa'
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function (tooltipItem) {
+                            const value = tooltipItem.raw;
+                            return `${tooltipItem.label}: R$ ${value.toLocaleString('pt-BR')}`;
+                        }
+                    }
+                }
+            }
+        }
+    });
+}
 
-//Fim do código que alterna entre as categorias de despesa e receita dependendo do que o usuário selecionar
+balance_per_account = function (labels, values){
+    const ctx = document.getElementById('report').getContext('2d');
+    report_container = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: labels,
+            datasets: [{
+                data: values,
+                backgroundColor: colors,
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'top',
+                },
+                title: {
+                    display: true,
+                    text: 'Categoria por Receita'
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function (tooltipItem) {
+                            const value = tooltipItem.raw;
+                            return `${tooltipItem.label}: R$ ${value.toLocaleString('pt-BR')}`;
+                        }
+                    }
+                }
+            }
+        }
+    });
+}
+
