@@ -143,12 +143,16 @@ load_transacoes = function () {
                 let formattedDate = new Date(transacao.transaction_date + 'T00:00:00').toLocaleDateString('pt-BR');
 
                 let line = `
-                        <tr data-bs-toggle="modal" data-bs-target="#altModal" onclick="prepararEdicao(${transacao.id})">
+                        <tr>
                             ${transactionTypeContent}
                             <td id="categoria">${transacao.category.name}</td>
                             <td id="data">${formattedDate}</td>
                             <td id="conta">${transacao.account.name}</td>
                             <td id="valor">${formatMoney(transacao.value)}</td>
+                            <td>
+                                <i class="fa-solid fa-pen blue-color" style="font-size: 1.2rem;" onclick="prepararEdicao(${transacao.id})" data-bs-toggle="modal" data-bs-target="#altModal">
+                                <i class="fa-solid fa-trash blue-color" style="font-size: 1.2rem" onclick="excluirTransacao(${transacao.id})">
+                            </td>
                         </tr>
                     `;
                 $('#table-body').append(line);
@@ -163,3 +167,19 @@ load_transacoes = function () {
 }
 
 load_transacoes()
+
+excluirTransacao = function (transacao_id) {
+    if (confirm('Gostaria de excluir a transação?')) {
+        $.ajax({
+            url: `http://127.0.0.1:3000/transactions/${transacao_id}`,
+            method: 'DELETE',
+            success: function (data) {
+                toastr.success('Transação excluida com sucesso!');
+                load_transacoes();
+            },
+            error: function (xhr) {
+                toastr.error(xhr.responseJSON.errors[0]);
+            }
+        });
+    }
+}

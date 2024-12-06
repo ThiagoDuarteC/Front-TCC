@@ -53,7 +53,7 @@ function preencherSelect(selectId, options, placeholderText = 'Selecione uma op�
 }
 
 $(document).ready(function () {
-    $('.fa-sign-out-alt').on('click', function(){
+    $('.fa-sign-out-alt').on('click', function () {
         if (confirm('Tem certeza?')) {
             localStorage.removeItem('token')
             window.location.reload()
@@ -83,6 +83,15 @@ $(document).ready(function () {
         }
     }
 
+    // USUÁRIO
+
+    $.get('http://127.0.0.1:3000/users/get_user')
+            .done(function (data) {
+                $('#nomeUsuarioDisplay').text(data.name)
+            })
+            .fail(function (xhr) {
+                toastr.error(xhr.responseJSON.errors[0]);
+            });
 
     // TRANSAÇõES
 

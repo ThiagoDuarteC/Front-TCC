@@ -277,7 +277,8 @@ tbody tr:last-child{
     border-bottom-left-radius: 33px;
     border-bottom-right-radius: 33px;
 }
-tbody tr{
+
+.fa-solid{
     cursor: pointer;
 }
 
