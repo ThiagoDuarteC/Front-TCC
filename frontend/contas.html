@@ -131,7 +131,7 @@
                             <input type="text" class="form-control" id="nomeConta" placeholder="Nome">
                         </div>
                         <div class="mb-3">
-                            <label for="nomeBanco" class="form-label">Selecione o Banco:</label>
+                            <label for="nomeBanco" class="form-label">Selecione o Banco:</label> <br>
                             <select id="nomeBanco" onchange="updateIcon()">
                                 <option value="Selecione">Selecione</option>
                                 <option value="Banco do Brasil">Banco do Brasil</option>
@@ -147,49 +147,10 @@
                                 <option value="C6 Bank">C6 Bank</option>
                                 <option value="Outro Banco">Outro banco</option>
                             </select>
-                            <!-- Imagens dos bancos -->
-                            <img id="iconBanco1" src="img/banco-do-brasil.png" alt="Ícone Banco do Brasil"
-                                class="bank-icon" width="40" height="40" style="display: none;">
-                            <img id="iconBanco2" src="img/caixa-economica.png" alt="Ícone Caixa Econômica"
-                                class="bank-icon" width="40" height="40" style="display: none;">
-                            <img id="iconBanco3" src="img/itaú.png" alt="Ícone Itaú" class="bank-icon" width="40"
-                                height="40" style="display: none;">
-                            <img id="iconBanco4" src="img/santander.png" alt="Ícone Santander" class="bank-icon"
-                                width="40" height="40" style="display: none;">
-                            <img id="iconBanco5" src="img/nubank.png" alt="Ícone Nubank" class="bank-icon" width="40"
-                                height="40" style="display: none;">
-                            <img id="iconBanco6" src="img/bradesco.png" alt="Ícone Bradesco" class="bank-icon"
-                                width="40" height="40" style="display: none;">
-                            <img id="iconBanco7" src="img/banco-inter.png" alt="Ícone Inter" class="bank-icon"
-                                width="40" height="40" style="display: none;">
-                            <img id="iconBanco8" src="img/picpay.png" alt="Ícone PicPay" class="bank-icon" width="40"
-                                height="40" style="display: none;">
-                            <img id="iconBanco9" src="img/banco-safra.png" alt="Ícone Safra" class="bank-icon"
-                                width="40" height="40" style="display: none;">
-                            <img id="iconBanco10" src="img/pag-bank.png" alt="Ícone PagBank" class="bank-icon"
-                                width="40" height="40" style="display: none;">
-                            <img id="iconBanco11" src="img/c6-bank.png" alt="Ícone C6 Bank" class="bank-icon" width="40"
-                                height="40" style="display: none;">
-                            <img id="iconBanco12" src="img/outro-banco.png" alt="Ícone Outro banco" class="bank-icon"
-                                width="40" height="40" style="display: none;">
                         </div>
                         <div class="mb-3">
                             <label for="saldoConta" class="form-label">Saldo Atual na Conta</label>
                             <input type="text" class="form-control moneyInput" id="saldoConta" placeholder="R$0,00">
-                        </div>
-                        <div class="mb-3">
-                            <label for="tipoConta" class="form-label">Tipo de Conta</label>
-                            <select class="form-select" id="tipoConta">
-                                <option value="corrente">Corrente</option>
-                                <option value="poupanca">Poupança</option>
-                                <option value="dinheiro">Dinheiro</option>
-                                <option value="outros">Outros</option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="descricao" class="form-label">Descrição</label>
-                            <textarea class="form-control" id="descricao" rows="3"
-                                placeholder="Adicionar descrição (opcional)"></textarea>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -216,7 +177,7 @@
                             <input type="text" class="form-control" id="editarNomeConta" placeholder="Nome">
                         </div>
                         <div class="mb-3">
-                            <label for="editarNomeBanco" class="form-label">Selecione o Banco:</label>
+                            <label for="editarNomeBanco" class="form-label">Selecione o Banco:</label> <br>
                             <select id="editarNomeBanco" onchange="updateEditIcon()">
                                 <option value="Selecione">Selecione</option>
                                 <option value="Banco do Brasil">Banco do Brasil</option>
@@ -232,52 +193,11 @@
                                 <option value="C6 Bank">C6 Bank</option>
                                 <option value="Outro Banco">Outro banco</option>
                             </select>
-                            <!-- Ícones dos bancos -->
-                            <img id="iconBancoEdit1" src="img/banco-do-brasil.png" alt="Ícone Banco do Brasil"
-                                class="bank-icon" width="40" height="40" style="display: none;">
-                            <img id="iconBancoEdit2" src="img/caixa-economica.png" alt="Ícone Caixa Econômica"
-                                class="bank-icon" width="40" height="40" style="display: none;">
-                            <img id="iconBancoEdit3" src="img/itaú.png" alt="Ícone Itaú" class="bank-icon" width="40"
-                                height="40" style="display: none;">
-                            <img id="iconBancoEdit4" src="img/santander.png" alt="Ícone Santander" class="bank-icon"
-                                width="40" height="40" style="display: none;">
-                            <img id="iconBancoEdit5" src="img/nubank.png" alt="Ícone Nubank" class="bank-icon"
-                                width="40" height="40" style="display: none;">
-                            <img id="iconBancoEdit6" src="img/bradesco.png" alt="Ícone Bradesco" class="bank-icon"
-                                width="40" height="40" style="display: none;">
-                            <img id="iconBancoEdit7" src="img/banco-inter.png" alt="Ícone Inter" class="bank-icon"
-                                width="40" height="40" style="display: none;">
-                            <img id="iconBancoEdit8" src="img/picpay.png" alt="Ícone PicPay" class="bank-icon"
-                                width="40" height="40" style="display: none;">
-                            <img id="iconBancoEdit9" src="img/banco-safra.png" alt="Ícone Safra" class="bank-icon"
-                                width="40" height="40" style="display: none;">
-                            <img id="iconBancoEdit10" src="img/pag-bank.png" alt="Ícone PagBank" class="bank-icon"
-                                width="40" height="40" style="display: none;">
-                            <img id="iconBancoEdit11" src="img/c6-bank.png" alt="Ícone C6 Bank" class="bank-icon"
-                                width="40" height="40" style="display: none;">
-                            <img id="iconBancoEdit12" src="img/outro-banco.png" alt="Ícone Outro banco"
-                                class="bank-icon" width="40" height="40" style="display: none;">
                         </div>
                         <!-- Saldo atual -->
                         <div class="mb-3">
                             <label for="editarSaldoConta" class="form-label">Saldo Atual na Conta</label>
                             <input type="text" class="form-control moneyInput" id="editarSaldoConta" placeholder="R$0,00">
-                        </div>
-                        <!-- Tipo de conta -->
-                        <div class="mb-3">
-                            <label for="editarTipoConta" class="form-label">Tipo de Conta</label>
-                            <select class="form-select" id="editarTipoConta">
-                                <option value="corrente">Corrente</option>
-                                <option value="poupanca">Poupança</option>
-                                <option value="dinheiro">Dinheiro</option>
-                                <option value="outros">Outros</option>
-                            </select>
-                        </div>
-                        <!-- Descrição -->
-                        <div class="mb-3">
-                            <label for="editarDescricao" class="form-label">Descrição</label>
-                            <textarea class="form-control" id="editarDescricao" rows="3"
-                                placeholder="Adicionar descrição (opcional)"></textarea>
                         </div>
                     </div>
                     <div class="modal-footer">
